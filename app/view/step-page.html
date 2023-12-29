@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Step {%BLOGTITLE%}</title>
+
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script> -->
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
+
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/dist/draggable.css" />
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            .clearer {
+                clear: both;
+            }
+
+            .container {
+                max-width: 1199px;
+                margin: auto;
+            }
+            #draggable-list {
+                display: flex;
+                list-style-type: none;
+                padding: 0;
+                margin: 20px;
+            }
+
+            .draggable-item {
+                background-color: #f0f0f0;
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin: 5px;
+                cursor: move;
+            }
+
+            .sidebarFloat {
+                float: right;
+            }
+
+            .sidebarFloat .toggleBar {
+                display: flex;
+                justify-content: space-between;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="history-heading">Install LED Pod Lights on a Off-Road Truck Jeeptall</h1>
+            <div class="sidebarFloat">
+                <h3 class="toggleBar">
+                    Steps
+                    <span
+                        ><a href="#reorderSteps" class="rearrange-steps-button">
+                            <i class="fa fa-retweet"></i> Rearrange
+                        </a></span
+                    >
+                </h3>
+                <div id="draggable-list">
+                    <div class="draggable-item" data-id="item1">Item 1</div>
+                    <div class="draggable-item" data-id="item2">Item 2</div>
+                    <div class="draggable-item" data-id="item3">Item 3</div>
+                    <!-- Add more items as needed -->
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <div class="contentFLoat" style="float: left">
+                <!-- <h4>TinyMCE Quick Start Guide</h4> -->
+                <form method="post">
+                    <textarea id="mytextarea">Hello, World!</textarea>
+                </form>
+            </div>
+        </div>
+
+        <script
+            src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
+            referrerpolicy="origin"></script>
+
+        <script
+            src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
+            referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                selector: '#mytextarea',
+                toolbar:
+                    'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+                    'alignleft aligncenter alignright alignjustify | ' +
+                    'bullist numlist checklist outdent indent | removeformat | a11ycheck code table help',
+                menubar: false,
+            });
+
+            // Comments
+            fetch('/your-server-endpoint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ content: content }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Content saved successfully:', data);
+                })
+                .catch(error => {
+                    console.error('Error saving content:', error);
+                });
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const draggableList = new Draggable.Sortable(document.querySelectorAll('#draggable-list'), {
+                    draggable: '.draggable-item',
+                    mirror: {
+                        constrainDimensions: true,
+                    },
+                });
+
+                draggableList.on('sortable:stop', event => {
+                    // Handle the drop event as needed
+                    const draggedItem = event.data.dragEvent.source;
+                    const itemId = draggedItem.getAttribute('data-id');
+                    console.log('Dropped item with ID:', itemId);
+                });
+            });
+        </script>
+    </body>
+</html>
