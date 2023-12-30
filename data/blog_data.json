@@ -1,497 +1,213 @@
 {
-    "blogId": "657e6ae5817b8b95953fa2b1",
+    "blogId": "657e6ae5817b8b95953fa2ac",
+    "user_information": {
+        "_id": "658d89893a00e3e5b5209abc",
+        "member_since": "2022-01-01",
+        "password": "samplepassword",
+        "user_name": "sampleuser",
+        "total_guides": "5",
+        "__v": 0
+    },
+    "blog_information": {
+        "_id": "657e6ae5817b8b95953fa2ac",
+        "blog_title": "How To Clean Car Floor Mats",
+        "last_updated": "2023-12-17T03:28:37.224Z",
+        "__v": 4,
+        "conclusion": "<p>Put the floor mats back into the car (or truck) once they've finished drying.</p>",
+        "difficulty": "Very easy",
+        "introduction": "<p>Judging by the looks, my wife's floor mats haven't been cleaned since the car rolled off the showroom floor in 2000. I created this guide based on a tried-and-true technique that my mother showed me when I was a wee lass.</p>\n\n<p>There may or may not be better techniques out there, but I know this one works with common household items on-hand.</p>",
+        "time": 600
+    },
+    "summary_comments": [
+        {
+            "_id": "658d89893a00e3e5b5209abe",
+            "comment_content": "This is a sample comment.",
+            "user_id": "658d89893a00e3e5b5209abc",
+            "dateCreated": "2023-12-28T14:43:21.875Z",
+            "__v": 0,
+            "user_information": {
+                "_id": "658d89893a00e3e5b5209abc",
+                "member_since": "2022-01-01",
+                "password": "samplepassword",
+                "user_name": "sampleuser",
+                "total_guides": "5",
+                "__v": 0
+            }
+        },
+        {
+            "_id": "658e81ecbcdfd9edfeeabd2a",
+            "comment_content": "This is a sample comment2.",
+            "user_id": "658d89893a00e3e5b5209abc",
+            "dateCreated": "2023-12-28T14:43:21.875Z",
+            "__v": 0,
+            "user_information": {
+                "_id": "658d89893a00e3e5b5209abc",
+                "member_since": "2022-01-01",
+                "password": "samplepassword",
+                "user_name": "sampleuser",
+                "total_guides": "5",
+                "__v": 0
+            }
+        }
+    ],
     "steps": [
         {
-            "stepId": "658bf0e514edd9039ddc7b39",
+            "stepId": "658bf0e414edd9039ddc7b18",
             "step_number": [1],
             "step_imgs": [
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/oZg3sLlWij2DALVT.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/1vPalD5rfTEehGXY.thumbnail",
                     "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b3a"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/IOPe6A5VMBpYtACK.thumbnail",
-                    "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b3b"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/Kk2qwdbFaJwqFcO4.thumbnail",
-                    "img_number": 3,
-                    "_id": "658bf0e514edd9039ddc7b3c"
+                    "_id": "658bf0e414edd9039ddc7b19"
                 }
             ],
             "step_content": [
                 {
-                    "icon": "icon_caution",
+                    "icon": "black",
                     "content_div_number": 1,
-                    "content_div": "Before you begin, switch the ignition <strong>off</strong> and remove the key.",
-                    "_id": "658bf0e514edd9039ddc7b3d"
+                    "content_div": "Soak the floor mat generously with water.",
+                    "_id": "658bf0e414edd9039ddc7b1a"
                 },
                 {
-                    "icon": "black",
+                    "icon": "icon_note",
                     "content_div_number": 2,
-                    "content_div": "Make sure the transmission is in Park (or first gear if you have a manual gearbox) and that the parking brake is engaged.",
-                    "_id": "658bf0e514edd9039ddc7b3e"
+                    "content_div": "I used <a href=\"http://www.amazon.com/dp/B002Z8E52Y?tag=ifixitam-20\" rel=\"nofollow noopener noreferrer\">this power washer</a> for the procedure, but it's totally unnecessary. You can just use a regular water hose.",
+                    "_id": "658bf0e414edd9039ddc7b1b"
                 },
                 {
-                    "icon": "icon_caution",
+                    "icon": "black",
                     "content_div_number": 3,
-                    "content_div": "Put on work gloves and safety goggles if you have them available.",
-                    "_id": "658bf0e514edd9039ddc7b3f"
-                },
-                {
-                    "icon": "black",
-                    "content_div_number": 4,
-                    "content_div": "In addition to being dirty, the battery contains corrosive agents and may release flammable gases.",
-                    "_id": "658bf0e514edd9039ddc7b40"
-                },
-                {
-                    "icon": "black",
-                    "content_div_number": 5,
-                    "content_div": "Gloves can also help protect you from an unpleasant shock if you accidentally mishandle the battery.",
-                    "_id": "658bf0e514edd9039ddc7b41"
+                    "content_div": "Bonus: if you're doing it right, a rainbow will manifest itself to congratulate you.",
+                    "_id": "658bf0e414edd9039ddc7b1c"
                 }
             ]
         },
         {
-            "stepId": "658bf0e514edd9039ddc7b42",
+            "stepId": "658bf0e414edd9039ddc7b1d",
             "step_number": [2],
             "step_imgs": [
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/K4jRXMu6umgMRuYh.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/4B262PsCxKaDZWbF.thumbnail",
                     "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b43"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/6YCs2JSsfZMKiyUL.thumbnail",
-                    "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b44"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/ecfDxabshWDQxyXr.thumbnail",
-                    "img_number": 3,
-                    "_id": "658bf0e514edd9039ddc7b45"
+                    "_id": "658bf0e414edd9039ddc7b1e"
                 }
             ],
             "step_content": [
                 {
-                    "icon": "icon_note",
+                    "icon": "black",
                     "content_div_number": 1,
-                    "content_div": "<em>Most motor vehicle batteries are located in the engine bay, under the hood (a.k.a. bonnet). If your battery is located elsewhere, <strong><a href=\"https://www.ifixit.com/Guide/How+to+Disconnect+a+Car+or+Truck+Battery/66802#s136007\">skip to Step 5</a>.</strong> </em>",
-                    "_id": "658bf0e514edd9039ddc7b46"
+                    "content_div": "Spread your favorite granule-based, eco-friendly laundry detergent onto the entire area of the floor mat.",
+                    "_id": "658bf0e414edd9039ddc7b1f"
                 },
                 {
                     "icon": "black",
                     "content_div_number": 2,
-                    "content_div": "<em>If you're not sure, simply continue reading.</em>",
-                    "_id": "658bf0e514edd9039ddc7b47"
+                    "content_div": "Why eco-friendly? This soapy gray water will go down the curb and into your favorite creek. So be nice to it!",
+                    "_id": "658bf0e414edd9039ddc7b20"
                 },
                 {
-                    "icon": "black",
+                    "icon": "icon_note",
                     "content_div_number": 3,
-                    "content_div": "Pull the hood release lever. It's usually located inside the car, near the steering wheel.",
-                    "_id": "658bf0e514edd9039ddc7b48"
+                    "content_div": "You don't have to use a whole bunch, as the stuff is quite soapy. Just have enough sprinkled so that most of the mat is covered.",
+                    "_id": "658bf0e414edd9039ddc7b21"
                 }
             ]
         },
         {
-            "stepId": "658bf0e514edd9039ddc7b49",
+            "stepId": "658bf0e414edd9039ddc7b22",
             "step_number": [3],
             "step_imgs": [
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/DId2cy3nTENMXaMg.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/1WSTrMRoYKaWJ6SS.thumbnail",
                     "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b4a"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/i5FevGAhtoPaLIPf.thumbnail",
-                    "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b4b"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/FVNMsZQA3BcSooRL.thumbnail",
-                    "img_number": 3,
-                    "_id": "658bf0e514edd9039ddc7b4c"
+                    "_id": "658bf0e414edd9039ddc7b23"
                 }
             ],
             "step_content": [
                 {
                     "icon": "black",
                     "content_div_number": 1,
-                    "content_div": "Raise the hood by simultaneously lifting and pressing up on the hood latch release (usually located beneath the front edge of the hood, near the center or center-right).",
-                    "_id": "658bf0e514edd9039ddc7b4d"
+                    "content_div": "Scrub like crazy with a push broom. As you can see in the photo, I'm preventing the mat from moving by standing on an edge.",
+                    "_id": "658bf0e414edd9039ddc7b24"
+                },
+                {
+                    "icon": "black",
+                    "content_div_number": 2,
+                    "content_div": "Brush in a couple of different directions so you agitate all the contaminants from various angles.",
+                    "_id": "658bf0e414edd9039ddc7b25"
+                },
+                {
+                    "icon": "icon_note",
+                    "content_div_number": 3,
+                    "content_div": "No push broom (or other stiff brush) handy? No problem! Take your shoes and socks off, and scrub with your feet. Just be careful to not slip off the mat. You <strong>do not</strong> want to rub your feet up against concrete, or whatever surface the mat is on.",
+                    "_id": "658bf0e414edd9039ddc7b26"
+                },
+                {
+                    "icon": "black",
+                    "content_div_number": 4,
+                    "content_div": "As a bonus, you will have the cleanest feet in the tri-state area after this procedure.",
+                    "_id": "658bf0e414edd9039ddc7b27"
                 }
             ]
         },
         {
-            "stepId": "658bf0e514edd9039ddc7b4e",
+            "stepId": "658bf0e414edd9039ddc7b28",
             "step_number": [4],
             "step_imgs": [
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/XInxTFLFWPOCFXpB.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/EZxV3qTLh6Ou6c1J.thumbnail",
                     "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b4f"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/EXMOmCWigyRRQYK3.thumbnail",
-                    "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b50"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/aiVbXwyVgWPoXMNb.thumbnail",
-                    "img_number": 3,
-                    "_id": "658bf0e514edd9039ddc7b51"
+                    "_id": "658bf0e414edd9039ddc7b29"
                 }
             ],
             "step_content": [
                 {
-                    "icon": "icon_note",
+                    "icon": "black",
                     "content_div_number": 1,
-                    "content_div": "At this point, depending on the vehicle, your hood may raise and support itself automatically.",
-                    "_id": "658bf0e514edd9039ddc7b52"
+                    "content_div": "Thoroughly wash off the soap:",
+                    "_id": "658bf0e414edd9039ddc7b2a"
                 },
                 {
                     "icon": "black",
                     "content_div_number": 2,
-                    "content_div": "If not, use one hand to hold the hood open temporarily while securing the hood with the prop rod:",
-                    "_id": "658bf0e514edd9039ddc7b53"
+                    "content_div": "Start on one edge of the floor mat and push the soap all the way across the mat.",
+                    "_id": "658bf0e414edd9039ddc7b2b"
                 },
                 {
                     "icon": "black",
                     "content_div_number": 3,
-                    "content_div": "Lift one end of the prop rod up or out to release it from the front area of the engine bay.",
-                    "_id": "658bf0e514edd9039ddc7b54"
-                },
-                {
-                    "icon": "black",
-                    "content_div_number": 4,
-                    "content_div": "Swing the end of the prop rod up and slide it into the cutout on the underside of the hood.",
-                    "_id": "658bf0e514edd9039ddc7b55"
-                },
-                {
-                    "icon": "icon_caution",
-                    "content_div_number": 5,
-                    "content_div": "Make sure the hood is well secured before you let go with your other hand, or it may fall and injure you.",
-                    "_id": "658bf0e514edd9039ddc7b56"
+                    "content_div": "Repeat the rinsing until juices run clear, so to speak.",
+                    "_id": "658bf0e414edd9039ddc7b2c"
                 }
             ]
         },
         {
-            "stepId": "658bf0e514edd9039ddc7b57",
+            "stepId": "658bf0e414edd9039ddc7b2d",
             "step_number": [5],
             "step_imgs": [
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/akXrFeoNKseVoFaP.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/kcMOAQZxDFbPCCnP.thumbnail",
                     "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b58"
+                    "_id": "658bf0e414edd9039ddc7b2e"
                 },
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/rW3J5afOCZFrKDco.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/RCFMRG4bOlJbKD1P.thumbnail",
                     "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b59"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/enUeABsbJLNvwTXx.thumbnail",
-                    "img_number": 3,
-                    "_id": "658bf0e514edd9039ddc7b5a"
+                    "_id": "658bf0e414edd9039ddc7b2f"
                 }
             ],
             "step_content": [
                 {
-                    "icon": "red",
+                    "icon": "black",
                     "content_div_number": 1,
-                    "content_div": "Locate the battery. It's normally rectangular and roughly 8-14&quot; across.",
-                    "_id": "658bf0e514edd9039ddc7b5b"
+                    "content_div": "Repeat for all of the other floor mats in the car.",
+                    "_id": "658bf0e414edd9039ddc7b30"
                 },
                 {
                     "icon": "icon_note",
                     "content_div_number": 2,
-                    "content_div": "The battery may be easy to spot, or it may lie under a plastic cover—usually marked with positive (+) and/or negative (-) symbols.",
-                    "_id": "658bf0e514edd9039ddc7b5c"
-                },
-                {
-                    "icon": "black",
-                    "content_div_number": 3,
-                    "content_div": "On some models, the battery may be located in the trunk—usually under or behind the trunk lining. Look around or consult your owner's manual.",
-                    "_id": "658bf0e514edd9039ddc7b5d"
-                }
-            ]
-        },
-        {
-            "stepId": "658bf0e514edd9039ddc7b5e",
-            "step_number": [6],
-            "step_imgs": [
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/bRMXN2cWGuh2weKM.thumbnail",
-                    "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b5f"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/NSlBvZQLpUiBsUbQ.thumbnail",
-                    "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b60"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/1TNBTQI4gS5PwS4x.thumbnail",
-                    "img_number": 3,
-                    "_id": "658bf0e514edd9039ddc7b61"
-                }
-            ],
-            "step_content": [
-                {
-                    "icon": "black",
-                    "content_div_number": 1,
-                    "content_div": "Using a correctly sized wrench or socket, loosen the nut/bolt securing the cable on the <strong>negative</strong> battery terminal.",
-                    "_id": "658bf0e514edd9039ddc7b62"
-                },
-                {
-                    "icon": "icon_caution",
-                    "content_div_number": 2,
-                    "content_div": "Always disconnect the negative cable <strong>first</strong> (before removing the positive cable).",
-                    "_id": "658bf0e514edd9039ddc7b63"
-                },
-                {
-                    "icon": "icon_note",
-                    "content_div_number": 3,
-                    "content_div": "The negative terminal may be marked with a minus (-) symbol, or it may be unmarked. The positive terminal is almost always marked with a plus (+) symbol, often in red.",
-                    "_id": "658bf0e514edd9039ddc7b64"
-                },
-                {
-                    "icon": "black",
-                    "content_div_number": 4,
-                    "content_div": "If the nut or bolt spins without loosening, it may be necessary to counter-hold the opposite side with a second wrench or socket.",
-                    "_id": "658bf0e514edd9039ddc7b65"
-                }
-            ]
-        },
-        {
-            "stepId": "658bf0e514edd9039ddc7b66",
-            "step_number": [7],
-            "step_imgs": [
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/PbOvOfnlkMXruXwn.thumbnail",
-                    "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b67"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/NBPXeAYLVhj1ShNa.thumbnail",
-                    "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b68"
-                }
-            ],
-            "step_content": [
-                {
-                    "icon": "black",
-                    "content_div_number": 1,
-                    "content_div": "Remove the cable from the negative battery terminal.",
-                    "_id": "658bf0e514edd9039ddc7b69"
-                },
-                {
-                    "icon": "icon_note",
-                    "content_div_number": 2,
-                    "content_div": "When connecting the battery, it is advised to roughen up the battery terminals and clean the cable clamp beforehand.",
-                    "_id": "658bf0e514edd9039ddc7b6a"
-                },
-                {
-                    "icon": "icon_reminder",
-                    "content_div_number": 3,
-                    "content_div": "Upon reconnecting the battery, make sure to seal the pole connections with an appropriate terminal grease or terminal spray.",
-                    "_id": "658bf0e514edd9039ddc7b6b"
-                }
-            ]
-        },
-        {
-            "stepId": "658bf0e514edd9039ddc7b6c",
-            "step_number": [8],
-            "step_imgs": [
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/jHvH4PYlEX6eUDUA.thumbnail",
-                    "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b6d"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/5qX1g2SF53RG5yfY.thumbnail",
-                    "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b6e"
-                }
-            ],
-            "step_content": [
-                {
-                    "icon": "icon_caution",
-                    "content_div_number": 1,
-                    "content_div": "Prevent the cable from making accidental contact with the terminal by pushing it aside and/or wrapping the cable clamp with a dry rag.",
-                    "_id": "658bf0e514edd9039ddc7b6f"
-                }
-            ]
-        },
-        {
-            "stepId": "658bf0e514edd9039ddc7b70",
-            "step_number": [9],
-            "step_imgs": [
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/MuQsIxv4CdoSoqwA.thumbnail",
-                    "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b71"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/gggeKsXW4AMwBoOK.thumbnail",
-                    "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b72"
-                }
-            ],
-            "step_content": [
-                {
-                    "icon": "black",
-                    "content_div_number": 1,
-                    "content_div": "Remove the insulating cover from the positive battery terminal (if one is present).",
-                    "_id": "658bf0e514edd9039ddc7b73"
-                }
-            ]
-        },
-        {
-            "stepId": "658bf0e514edd9039ddc7b74",
-            "step_number": [10],
-            "step_imgs": [
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/u4Wde1mqsioWhSKa.thumbnail",
-                    "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b75"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/vf5jBZIg5OhADgNA.thumbnail",
-                    "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b76"
-                }
-            ],
-            "step_content": [
-                {
-                    "icon": "black",
-                    "content_div_number": 1,
-                    "content_div": "Using a correctly sized wrench or socket, loosen the nut/bolt securing the cable on the <strong>positive</strong> battery terminal.",
-                    "_id": "658bf0e514edd9039ddc7b77"
-                },
-                {
-                    "icon": "icon_note",
-                    "content_div_number": 2,
-                    "content_div": "If the nut or bolt spins without loosening, it may be necessary to counter-hold the opposite side with a second wrench or socket.",
-                    "_id": "658bf0e514edd9039ddc7b78"
-                }
-            ]
-        },
-        {
-            "stepId": "658bf0e514edd9039ddc7b79",
-            "step_number": [11],
-            "step_imgs": [
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/qRnBFYPtXY2KXJ5M.thumbnail",
-                    "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b7a"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/x5bXbLMG2L24IM2L.thumbnail",
-                    "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b7b"
-                }
-            ],
-            "step_content": [
-                {
-                    "icon": "black",
-                    "content_div_number": 1,
-                    "content_div": "Remove the cable from the positive battery terminal.",
-                    "_id": "658bf0e514edd9039ddc7b7c"
-                },
-                {
-                    "icon": "icon_reminder",
-                    "content_div_number": 2,
-                    "content_div": "During reassembly, be sure to reconnect and tighten the positive cable clamp <strong>first</strong> (before the negative cable clamp).",
-                    "_id": "658bf0e514edd9039ddc7b7d"
-                }
-            ]
-        },
-        {
-            "stepId": "658bf0e514edd9039ddc7b7e",
-            "step_number": [12],
-            "step_imgs": [
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/wj2bwFuEpLVFGEgT.thumbnail",
-                    "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b7f"
-                }
-            ],
-            "step_content": [
-                {
-                    "icon": "red",
-                    "content_div_number": 1,
-                    "content_div": "Remove any bolts securing the battery.",
-                    "_id": "658bf0e514edd9039ddc7b80"
-                }
-            ]
-        },
-        {
-            "stepId": "658bf0e514edd9039ddc7b81",
-            "step_number": [13],
-            "step_imgs": [
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/ukLjmrhonoYvXMNO.thumbnail",
-                    "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b82"
-                }
-            ],
-            "step_content": [
-                {
-                    "icon": "black",
-                    "content_div_number": 1,
-                    "content_div": "Remove any bars or brackets securing the battery.",
-                    "_id": "658bf0e514edd9039ddc7b83"
-                }
-            ]
-        },
-        {
-            "stepId": "658bf0e514edd9039ddc7b84",
-            "step_number": [14],
-            "step_imgs": [
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/crjwxcRyOZpSO5M5.thumbnail",
-                    "img_number": 1,
-                    "_id": "658bf0e514edd9039ddc7b85"
-                },
-                {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/rhPYT3WGCEgACFP6.thumbnail",
-                    "img_number": 2,
-                    "_id": "658bf0e514edd9039ddc7b86"
-                }
-            ],
-            "step_content": [
-                {
-                    "icon": "black",
-                    "content_div_number": 1,
-                    "content_div": "Remove the battery.",
-                    "_id": "658bf0e514edd9039ddc7b87"
-                },
-                {
-                    "icon": "icon_caution",
-                    "content_div_number": 2,
-                    "content_div": "A typical car battery can weigh 50 pounds or more, so lift carefully and get help if needed. Do <strong>not</strong> drop the battery, as this can release dangerous chemicals.",
-                    "_id": "658bf0e514edd9039ddc7b88"
-                },
-                {
-                    "icon": "icon_reminder",
-                    "content_div_number": 3,
-                    "content_div": "If your battery cable clamps look dirty and/or corroded, clean them up with a wire brush and a mixture of water and baking soda before installing your new battery.",
-                    "_id": "658bf0e514edd9039ddc7b89"
-                },
-                {
-                    "icon": "icon_reminder",
-                    "content_div_number": 4,
-                    "content_div": "To prevent corrosion in the future, coat the new battery's terminals with a little dielectric grease or petroleum jelly.",
-                    "_id": "658bf0e514edd9039ddc7b8a"
-                },
-                {
-                    "icon": "icon_caution",
-                    "content_div_number": 5,
-                    "content_div": "<strong>Don't throw the old battery in the trash.</strong> Many auto parts stores and service stations will accept old batteries for free safe disposal.",
-                    "_id": "658bf0e514edd9039ddc7b8b"
+                    "content_div": "Bonus tip: If you want extra-clean sneakers, now's the time to scrub them as well! just detach the broom from the handle, or use a wet sock to agitate the dirt on each sneaker.",
+                    "_id": "658bf0e414edd9039ddc7b31"
                 }
             ]
         }

@@ -37,7 +37,7 @@
                             <div class="blog-nav">
                                 <div class="main-nav">
                                     <a href="/homepage">Home</a>
-                                    <a href="/guides">Guides</a>
+                                    <a href="http://127.0.0.1:5500/app/view/template-guides.html">Guides</a>
                                 </div>
                                 <a class="blog-edit-btn" href="/edit">
                                     <span class="icon"><i class="fa-solid fa-pen-to-square"></i></span>
@@ -55,7 +55,7 @@
                                                         src="https://guide-images.cdn.ifixit.com/igi/lBnxvijJKpT5VGBQ.200x150"
                                                         alt="" />
                                                     <div class="guide-intro-header-main">
-                                                        <h1 class="guide-title">{%BLOGTITLE%}</h1>
+                                                        <h1 class="guide-title"></h1>
                                                         <div class="guide-author-section">
                                                             <span class="author-avatar">
                                                                 <img
@@ -198,7 +198,6 @@
                                                                         fill="currentColor"
                                                                         d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm56-160c0-22.3-13.1-41.6-32-50.6V120c0-13.3-10.7-24-24-24s-24 10.7-24 24V301.4c-18.9 9-32 28.3-32 50.6c0 30.9 25.1 56 56 56s56-25.1 56-56zM160 192a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm-16 64a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm256 32a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM384 160a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"></path>
                                                                 </svg>
-                                                                Moderate
                                                             </span>
                                                         </div>
                                                     </div>
@@ -206,12 +205,7 @@
                                             </div>
                                             <div class="guide-intro-main">
                                                 <h2>Introduction</h2>
-                                                <p>
-                                                    Is your car having trouble starting? Is there corrosion build-up on
-                                                    your terminals, preventing a proper connection? This handy guide
-                                                    will help you remove the troublesome terminal and replace it with a
-                                                    brand new one.
-                                                </p>
+
                                                 <p>
                                                     <strong
                                                         >Warning: It is dangerous to work on a vehicle battery. Exercise
@@ -226,6 +220,7 @@
                                 <ol class="steps-container container" id="steps-container">
                                     <li class="step step-wrapper">
                                         <div class="step-title">Step 1: Identify the problem</div>
+
                                         <div class="image-container">
                                             <!-- Add an image source here -->
                                             <div
@@ -255,6 +250,7 @@
                                                 </a>
                                             </div>
                                         </div>
+
                                         <ol class="step-guide">
                                             <li class="line">
                                                 <div class="fa fa-circle bullet bullet_red"></div>
@@ -330,9 +326,6 @@
                                             </div>
                                         </div>
                                     </li>
-
-                                    <li class="step step-wrapper"></li>
-                                    <li class="step step-wrapper"></li>
                                 </ol>
                                 <div id="conclusion" class="completion-container">
                                     <div class="container">
@@ -488,6 +481,12 @@
             </div>
         </footer>
 
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+
+        <script src="../controllers/blog.js"></script>
+
         <script>
             function toggleComments(button) {
                 const commentSection = button.closest('.comment-section');
@@ -532,9 +531,5 @@
                 commonReplyInput.focus();
             }
         </script>
-
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
     </body>
 </html>
