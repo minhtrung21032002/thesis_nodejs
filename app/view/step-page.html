@@ -180,6 +180,7 @@
             #draggable-list {
                 display: flex;
                 list-style-type: none;
+                flex-wrap: wrap;
                 padding: 0;
                 margin: 20px;
             }
@@ -190,6 +191,7 @@
                 padding: 10px;
                 margin: 5px;
                 cursor: move;
+                /* min-width: 25px; */
             }
 
             .sidebarFloat {
@@ -204,7 +206,9 @@
     </head>
     <body>
         <div class="container" style="width: 1000px">
-            <h2 class="history-heading">Install LED Pod Lights on a Off-Road Truck Jeeptall</h2>
+            <h2 class="history-heading" style="margin-top: 20px">
+                Install LED Pod Lights on a Off-Road Truck Jeeptall
+            </h2>
             <div class="contentFLoat" style="float: left; width: 600px">
                 <div class="tabWrap">
                     <ul class="tabs">
@@ -291,8 +295,8 @@
             </div>
 
             <div class="sidebarFloat" style="float: right">
-                <div style="margin-top: 24px">
-                    <h3 class="toggleBar">
+                <div style="margin-top: 24px; border: 1px solid blue; padding: 10px">
+                    <h3 class="toggleBar" style="font-size: 15px">
                         Steps
                         <span
                             ><a
@@ -303,15 +307,27 @@
                             </a></span
                         >
                     </h3>
-                    <div id="draggable-list">
+                    <div id="draggable-list" style="max-width: 300px">
                         <div class="draggable-item" data-id="item1">Item 1</div>
                         <div class="draggable-item" data-id="item2">Item 2</div>
                         <div class="draggable-item" data-id="item3">Item 3</div>
+                        <div class="draggable-item" data-id="item4">Item 3</div>
+                        <div class="draggable-item" data-id="item5">Item 3</div>
                         <!-- Add more items as needed -->
                     </div>
                 </div>
             </div>
             <div style="clear: both"></div>
+
+            <div>
+                <h2>Upload Image</h2>
+                <form action="upload.php" method="post" enctype="multipart/form-data">
+                    <label for="image">Select Image:</label>
+                    <input type="file" name="image" id="image" accept="image/*" />
+                    <br />
+                    <input type="submit" value="Upload" />
+                </form>
+            </div>
         </div>
 
         <script
@@ -328,6 +344,7 @@
                 menubar: false,
                 skin: 'oxide-dark',
                 content_css: 'dark',
+                min_height: 200,
             });
 
             // Comments
