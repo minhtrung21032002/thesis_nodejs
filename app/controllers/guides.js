@@ -8,7 +8,7 @@ const renderUI = data => {
     let content = '';
     data.forEach(blog => {
         content += ` 
-        <a href="../view/blog-page.html?id=${blog._id}" class="col-md-4 blog-link">
+        <a href="../view/blog-page.html?id=${blog.blog_id}" class="col-md-4 blog-link">
             <figure class="blog-card">
                 <div class="img-wrapper">
                     <img
@@ -37,7 +37,7 @@ const renderUI = data => {
 // };
 
 // Assuming your JSON file is hosted or part of your project
-const filePath = '../../data/guide_data.json';
+const filePath = 'http://localhost:3000/guide/api';
 
 // Fetch JSON data
 fetch(filePath)

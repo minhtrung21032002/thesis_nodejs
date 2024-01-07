@@ -25,8 +25,8 @@
 // }
 
 //////////////////////////////////////
-function loadBlogData(blogId) {}
-fetch(`../../data/blog_data.json`)
+function loadBlogData(blogId) {
+fetch(`http://localhost:3000/guide/blog/api/${blogId}`)
     .then(response => {
         if (!response.ok) {
             throw new Error(`Network response was not ok (Status: ${response.status})`);
@@ -70,7 +70,7 @@ fetch(`../../data/blog_data.json`)
         data.steps.forEach(renderStep);
     })
     .catch(error => console.error(`Error fetching blog data: ${error.message}`, error));
-
+}
 function renderStep(step) {
     console.log(step);
     const stepList = document.getElementById('steps-container');
