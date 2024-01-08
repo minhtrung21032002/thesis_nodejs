@@ -1,0 +1,132 @@
+{
+    "user_information": {
+        "user_id": "658d89893a00e3e5b5209abc",
+        "points": 5000,
+        "member_since": "2022-01-01",
+        "user_name": "sampleuser",
+        "user_img": "https://guide-images.cdn.ifixit.com/igi/sfJOkToMs44AtSyG.standard"
+    },
+    "list_guides": [
+        {
+            "_id": "657e6ae6817b8b95953fa2b9",
+            "guide_title": "Brake Pads",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/IBcTXldHHKwE4lSx.thumbnail"
+        },
+        {
+            "_id": "657e6ae6817b8b95953fa2be",
+            "guide_title": "Car Battery Terminal",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/lBnxvijJKpT5VGBQ.thumbnail"
+        },
+        {
+            "_id": "657e6ae6817b8b95953fa2c3",
+            "guide_title": "Car Tire Valve Stem",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/BKLiHmjCb5MCUjOh.thumbnail"
+        },
+        {
+            "_id": "657e6ae6817b8b95953fa2c8",
+            "guide_title": "Clutch",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/PpNkoyrd3MxxyNxq.thumbnail"
+        },
+        {
+            "_id": "657e6ae7817b8b95953fa2cd",
+            "guide_title": "Floorboard Carpeting",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/RvqOiBjJsyrM6teE.thumbnail"
+        },
+        {
+            "_id": "657e6ae7817b8b95953fa2d2",
+            "guide_title": "Headlights",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/FiaIRm5XgZIaFSVP.thumbnail"
+        },
+        {
+            "_id": "657e6ae7817b8b95953fa2d7",
+            "guide_title": "HID Headlight Bulb",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/Eyx2LGKB4Wf2wqFm.thumbnail"
+        },
+        {
+            "_id": "657e6ae7817b8b95953fa2dc",
+            "guide_title": "LED Pod Light",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/fRF4OsJuEN24tbJM.thumbnail"
+        },
+        {
+            "_id": "657e6ae8817b8b95953fa2e1",
+            "guide_title": "LED Tailgate Strip Light",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/D6VWr2DuQSFBTEbH.thumbnail"
+        },
+        {
+            "_id": "657e6ae8817b8b95953fa2e6",
+            "guide_title": "License plate bulbs",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/qBSeElvpBAsFYcfD.thumbnail"
+        },
+        {
+            "_id": "657e6ae8817b8b95953fa2eb",
+            "guide_title": "license plate lights",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/nZ132tTHJR5OmDGP.thumbnail"
+        },
+        {
+            "_id": "657e6ae8817b8b95953fa2f0",
+            "guide_title": "Philips Style LED Daytime Running Lights Upgrade",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/DaJvcPUFn6fPsISV.thumbnail"
+        },
+        {
+            "_id": "657e6ae8817b8b95953fa2f5",
+            "guide_title": "spark plugs and ignition/coil pack",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/ta2pYgT26lNtlvZf.thumbnail"
+        },
+        {
+            "_id": "657e6ae8817b8b95953fa2fa",
+            "guide_title": "Sun Visor",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/clOMBGRc6pPPSBDZ.thumbnail"
+        },
+        {
+            "_id": "657e6ae9817b8b95953fa2ff",
+            "guide_title": "Tow Hitch Pod Light",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/rDBQD1mP3Xt6XDPM.thumbnail"
+        },
+        {
+            "_id": "657e6ae9817b8b95953fa304",
+            "guide_title": "Tow Hook Mount",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/ADWZP6EYWM6UDYbt.thumbnail"
+        },
+        {
+            "_id": "657e6ae9817b8b95953fa309",
+            "guide_title": "Truck OEM Halogen Bulbs Cab Roof Marker Lights",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/ojWBlaF3SgbNlyZk.thumbnail"
+        },
+        {
+            "_id": "657e6ae9817b8b95953fa30e",
+            "guide_title": "Wheel Lock",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/n3xFIuLNrCjPGMqB.thumbnail"
+        },
+        {
+            "_id": "657e6ae9817b8b95953fa313",
+            "guide_title": "Wiper Blades",
+            "img_url": "https://guide-images.cdn.ifixit.com/igi/MMTIXKQGuKmebEaW.thumbnail"
+        }
+    ],
+    "list_badges": [
+        {
+            "_id": "6597fd0d63bd54d8ac653e42",
+            "badge_icon": "https://assets.cdn.ifixit.com/static/images/badges/student.svg",
+            "badge_name": "beginner",
+            "badge_description": "Reach 0-1000 points",
+            "__v": 0
+        },
+        {
+            "_id": "6597fd0d63bd54d8ac653e44",
+            "badge_icon": "https://assets.cdn.ifixit.com/static/images/badges/scholar.svg",
+            "badge_name": "intermediate",
+            "badge_description": "Reach 2000 points",
+            "__v": 0
+        },
+        {
+            "_id": "6597fd0d63bd54d8ac653e46",
+            "badge_icon": "https://assets.cdn.ifixit.com/static/images/badges/storyteller.svg",
+            "badge_name": "advanced",
+            "badge_description": "Reach 5000 points",
+            "__v": 0
+        }
+    ],
+    "total_number_access": 6,
+    "total_number_of_likes": 8,
+    "total_number_of_completed": 10
+}

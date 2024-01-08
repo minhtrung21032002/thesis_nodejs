@@ -5,6 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>${blog_title} Introduction</title>
         <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
             input,
             label {
                 width: 100%;
@@ -27,6 +32,7 @@
             /* Main */
             .floatLeft {
                 width: 700px;
+                float: left;
             }
 
             .floatRight {
@@ -77,18 +83,35 @@
                 line-height: 19px;
             }
 
+            a.nextLink:hover {
+                text-decoration: underline;
+            }
+
+            .arrow {
+                font-size: 1.2em;
+                font-weight: 400;
+                line-height: 1.388em;
+            }
+
             /* Drop file */
             #drop-area {
                 border: 2px dashed #ccc;
                 border-radius: 20px;
                 width: 480px;
                 font-family: sans-serif;
-                margin: 100px 0;
+                /* margin: 100px 0; */
                 padding: 20px;
+                transition: 0.5s all;
             }
             #drop-area.highlight {
                 border-color: purple;
             }
+
+            #drop-area:hover {
+                background-color: #94ecb4;
+                border-color: #22c55e;
+            }
+
             p {
                 margin-top: 0;
             }
@@ -119,6 +142,31 @@
             #fileElem {
                 display: none;
             }
+
+            #draggable-list {
+                display: flex;
+                list-style-type: none;
+                flex-wrap: wrap;
+                padding: 0;
+            }
+
+            .draggable-item {
+                background-color: #f0f0f0;
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin: 5px;
+                cursor: move;
+                /* min-width: 25px; */
+            }
+
+            .sidebarFloat {
+                float: right;
+            }
+
+            .sidebarFloat .toggleBar {
+                display: flex;
+                justify-content: space-between;
+            }
         </style>
     </head>
     <body>
@@ -137,16 +185,7 @@
                                 >Introduction</a
                             >
                         </li>
-                        <li class="tab">
-                            <a
-                                href="/Guide/intro/meta/37588"
-                                class="tab-link"
-                                id="detailsTab"
-                                data-tab="details"
-                                data-url=""
-                                >Details</a
-                            >
-                        </li>
+
                         <li class="tab">
                             <a
                                 href="./step-page.html"
@@ -160,72 +199,110 @@
                     </ul>
                 </div>
 
-                <label class="tip introTypePrompt" for="introThing"> What part are you replacing? </label>
-                <input type="text" />
-                <label class="tip" for="introTitle" style="margin-top: 15px"> Title </label>
-                <input
-                    type="text"
-                    name="intro[title]"
-                    id="introTitle"
-                    data-translate-field="title"
-                    data-translate-source="source-title"
-                    tabindex="5"
-                    class="js-translate-to twoThirdsWidth hasTip watchModified"
-                    value="Brake Pads Replacement" />
-                <div id="drop-area">
-                    <form class="my-form">
-                        <p>
-                            Upload multiple files with the file dialog or by dragging and dropping images onto the
-                            dashed region
-                        </p>
-                        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)" />
-                        <label class="button" for="fileElem">Select some files</label>
+                <div style="background-color: #f7f9faff; padding: 10px">
+                    <label class="tip introTypePrompt" for="introThing"> What part are you replacing? </label>
+                    <input type="text" />
+                    <label class="tip" for="introTitle" style="margin-top: 15px"> Title </label>
+                    <input
+                        type="text"
+                        name="intro[title]"
+                        id="introTitle"
+                        data-translate-field="title"
+                        data-translate-source="source-title"
+                        tabindex="5"
+                        class="js-translate-to twoThirdsWidth hasTip watchModified"
+                        value="Brake Pads Replacement" />
+                    <label class="tip" for="introTitle" style="margin-top: 15px"> Images </label>
+
+                    <div id="drop-area" style="position: relative">
+                        <form class="my-form">
+                            <p>
+                                Upload multiple files with the file dialog or by dragging and dropping images onto the
+                                dashed region
+                            </p>
+                            <input
+                                type="file"
+                                id="fileElem"
+                                multiple
+                                accept="image/*"
+                                onchange="handleFiles(this.files)" />
+                            <label
+                                class="button"
+                                for="fileElem"
+                                style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0"
+                                >Select some files</label
+                            >
+                        </form>
+                        <progress id="progress-bar" max="100" value="0"></progress>
+                        <div id="gallery"></div>
+                    </div>
+
+                    <label for="introIntroduction" style="margin-top: 15px"> Introduction </label>
+                    <form method="post" style="width: 100%">
+                        <textarea id="mytextarea" style="width: 100%; min-height: 120px">Hello, World!</textarea>
                     </form>
-                    <progress id="progress-bar" max="100" value="0"></progress>
-                    <div id="gallery"></div>
+
+                    <label for="introIntroduction" style="margin-top: 15px"> Conclusion </label>
+                    <form method="post" style="width: 100%">
+                        <textarea id="mytextarea2" style="width: 100%; min-height: 120px">Hello, World!</textarea>
+                    </form>
+
+                    <div class="guide-action-buttons" style="width: 100%; margin-top: 15px; margin-bottom: 25px">
+                        <button
+                            type="submit"
+                            name="save"
+                            tabindex="8"
+                            class="button button-medium button-action-solid"
+                            id="save"
+                            style="
+                                display: block;
+                                margin-left: auto;
+                                margin-right: 0;
+                                background-color: #3b82f6;
+                                border-color: #3b82f6;
+                                color: #fff;
+                            ">
+                            Save
+                        </button>
+                    </div>
+
+                    <div
+                        class="pagination paginationBottom"
+                        style="display: table; width: 100%; background-color: #f9fafb; padding: 4px 8px">
+                        <p class="left" style="display: table-cell; width: auto; min-width: 75px; text-align: star"></p>
+
+                        <p class="middle" style="display: table-cell; width: auto; min-width: 75px; text-align: center">
+                            Editing Introduction
+                        </p>
+
+                        <p class="right" style="display: table-cell; width: auto; min-width: 75px; text-align: right">
+                            <a
+                                href="/Guide/edit/56171/new-after/0"
+                                class="nextLink"
+                                style="color: #4b5563; font-weight: 700"
+                                >Guide Steps <span class="arrow">»</span></a
+                            >
+                        </p>
+                    </div>
                 </div>
+            </div>
 
-                <label for="introIntroduction"> Introduction </label>
-                <form method="post" style="width: 700px">
-                    <textarea id="mytextarea" style="width: 100%; height: 300px">Hello, World!</textarea>
-                </form>
-
-                <div class="guide-action-buttons" style="width: 700px; margin-top: 15px; margin-bottom: 25px">
-                    <button
-                        type="submit"
-                        name="save"
-                        tabindex="8"
-                        class="button button-medium button-action-solid"
-                        id="save"
-                        style="
-                            display: block;
-                            margin-left: auto;
-                            margin-right: 0;
-                            background-color: #3b82f6;
-                            border-color: #3b82f6;
-                            color: #fff;
-                        ">
-                        Save
-                    </button>
-                </div>
-
+            <div class="sidebarFloat" style="float: right">
                 <div
-                    class="pagination paginationBottom"
-                    style="display: table; width: 100%; background-color: #f9fafb; padding: 4px 8px">
-                    <p class="left" style="display: table-cell; width: auto; min-width: 75px; text-align: star"></p>
-
-                    <p class="middle" style="display: table-cell; width: auto; min-width: 75px; text-align: center">
-                        Editing Introduction
-                    </p>
-
-                    <p class="right" style="display: table-cell; width: auto; min-width: 75px; text-align: right">
-                        <a
-                            href="/Guide/edit/56171/new-after/0"
-                            class="nextLink"
-                            style="color: #4b5563; font-weight: 700"
-                            >Guide Steps <span class="arrow">»</span></a
-                        >
-                    </p>
+                    style="
+                        margin-top: 24px;
+                        border: 1px solid rgb(192, 192, 196);
+                        padding: 10px;
+                        background-color: #f7f9faff;
+                    ">
+                    <h3 class="toggleBar" style="font-size: 15px">Steps</h3>
+                    <div id="draggable-list" style="max-width: 297px">
+                        <div class="draggable-item" data-id="item1">Item 1</div>
+                        <div class="draggable-item" data-id="item2">Item 2</div>
+                        <div class="draggable-item" data-id="item3">Item 3</div>
+                        <div class="draggable-item" data-id="item4">Item 3</div>
+                        <div class="draggable-item" data-id="item5">Item 3</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -240,11 +317,39 @@
             tinymce.init({
                 selector: '#mytextarea',
                 toolbar:
-                    'undo redo | formatpainter casechange blocks | bold italic backcolor | ' +
+                    'undo redo | formatpainter casechange blocks | bold italic | ' +
                     'alignleft aligncenter alignright alignjustify | ' +
                     'bullist numlist checklist outdent indent | removeformat | a11ycheck code table',
                 menubar: false,
+                height: 220,
             });
+            tinymce.init({
+                selector: '#mytextarea2',
+                toolbar:
+                    'undo redo | formatpainter casechange blocks | bold italic | ' +
+                    'alignleft aligncenter alignright alignjustify | ' +
+                    'bullist numlist checklist outdent indent | removeformat | a11ycheck code table',
+                menubar: false,
+                height: 220,
+            });
+        </script>
+
+        <script>
+            // document.addEventListener('DOMContentLoaded', function () {
+            //     const draggableList = new Draggable.Sortable(document.querySelectorAll('#draggable-list'), {
+            //         draggable: '.draggable-item',
+            //         mirror: {
+            //             constrainDimensions: true,
+            //         },
+            //     });
+
+            //     draggableList.on('sortable:stop', event => {
+            //         // Handle the drop event as needed
+            //         const draggedItem = event.data.dragEvent.source;
+            //         const itemId = draggedItem.getAttribute('data-id');
+            //         console.log('Dropped item with ID:', itemId);
+            //     });
+            // });
         </script>
 
         <script>

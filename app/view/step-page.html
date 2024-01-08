@@ -23,6 +23,7 @@
                 margin: 0;
                 padding: 0;
             }
+
             .clearer {
                 clear: both;
             }
@@ -182,7 +183,6 @@
                 list-style-type: none;
                 flex-wrap: wrap;
                 padding: 0;
-                margin: 20px;
             }
 
             .draggable-item {
@@ -210,11 +210,12 @@
                 Install LED Pod Lights on a Off-Road Truck Jeeptall
             </h2>
             <div class="contentFLoat" style="float: left; width: 600px">
+                <div style="border: 1px solid #ccc"></div>
                 <div class="tabWrap">
                     <ul class="tabs">
                         <li class="tab">
                             <a
-                                href="/Guide/intro/37588"
+                                href="./introduction-page.html"
                                 class="tab-link"
                                 id="introductionTab"
                                 data-tab="introduction"
@@ -222,16 +223,7 @@
                                 >Introduction</a
                             >
                         </li>
-                        <li class="tab">
-                            <a
-                                href="/Guide/intro/meta/37588"
-                                class="tab-link"
-                                id="detailsTab"
-                                data-tab="details"
-                                data-url=""
-                                >Details</a
-                            >
-                        </li>
+
                         <li class="tab">
                             <a
                                 href="/Guide/edit/37588/86292"
@@ -263,7 +255,6 @@
                     <div class="clearer"></div>
                 </div>
 
-                <h4>TinyMCE Quick Start Guide</h4>
                 <div style="margin-top: 20px">
                     <form method="post">
                         <textarea id="mytextarea">Hello, World!</textarea>
@@ -295,19 +286,26 @@
             </div>
 
             <div class="sidebarFloat" style="float: right">
-                <div style="margin-top: 24px; border: 1px solid blue; padding: 10px">
+                <div
+                    style="
+                        margin-top: 24px;
+                        border: 1px solid rgb(192, 192, 196);
+                        padding: 10px;
+                        background-color: #f7f9faff;
+                    ">
                     <h3 class="toggleBar" style="font-size: 15px">
                         Steps
-                        <span
-                            ><a
+                        <span>
+                            <a
                                 href="#reorderSteps"
                                 class="rearrange-steps-button"
                                 style="color: #4b5563; text-decoration: none">
                                 <i class="fa fa-retweet"></i> Rearrange
-                            </a></span
-                        >
+                                <div style="display: none"><span>Save</span> or <span>Cancel</span></div>
+                            </a>
+                        </span>
                     </h3>
-                    <div id="draggable-list" style="max-width: 300px">
+                    <div id="draggable-list" style="max-width: 298px">
                         <div class="draggable-item" data-id="item1">Item 1</div>
                         <div class="draggable-item" data-id="item2">Item 2</div>
                         <div class="draggable-item" data-id="item3">Item 3</div>
@@ -342,46 +340,13 @@
                 selector: '#mytextarea',
                 toolbar: 'undo redo | formatpainter casechange blocks | bold italic underline| ',
                 menubar: false,
-                skin: 'oxide-dark',
-                content_css: 'dark',
+
                 min_height: 200,
             });
-
-            // Comments
-            fetch('/your-server-endpoint', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ content: content }),
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('Content saved successfully:', data);
-                })
-                .catch(error => {
-                    console.error('Error saving content:', error);
-                });
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const draggableList = new Draggable.Sortable(document.querySelectorAll('#draggable-list'), {
-                    draggable: '.draggable-item',
-                    mirror: {
-                        constrainDimensions: true,
-                    },
-                });
-
-                draggableList.on('sortable:stop', event => {
-                    // Handle the drop event as needed
-                    const draggedItem = event.data.dragEvent.source;
-                    const itemId = draggedItem.getAttribute('data-id');
-                    console.log('Dropped item with ID:', itemId);
-                });
-            });
-        </script>
+        <script src="../controllers/step.js"></script>
     </body>
 </html>
