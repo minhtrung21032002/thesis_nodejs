@@ -1,3 +1,5 @@
+function renderStepsThumbList() {}
+
 document.addEventListener('DOMContentLoaded', function () {
     let isDraggingEnabled = false;
 

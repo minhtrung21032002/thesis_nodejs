@@ -372,6 +372,7 @@ button {
 /* STEP */
 .step {
     margin-bottom: 30px;
+    position: relative;
 }
 
 .step-title {
@@ -381,7 +382,7 @@ button {
 }
 
 .image-container {
-    max-width: 100%;
+    width: 300px;
     margin-bottom: 10px;
 }
 
@@ -389,7 +390,13 @@ button {
     border-radius: 4px !important;
 }
 
+img.fotorama__img {
+    /* width: 275px !important; */
+    /* object-fit: contain; */
+    /* height: auto !important; */
+}
 .step-guide {
+    /* float: right; */
     font-size: 14px;
     margin-bottom: 10px;
 }

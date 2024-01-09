@@ -217,116 +217,7 @@
                                     </div>
                                 </div>
 
-                                <ol class="steps-container container" id="steps-container">
-                                    <li class="step step-wrapper">
-                                        <div class="step-title">Step 1: Identify the problem</div>
-
-                                        <div class="image-container">
-                                            <!-- Add an image source here -->
-                                            <div
-                                                class="fotorama"
-                                                data-nav="thumbs"
-                                                data-loop="false"
-                                                data-arrows="false">
-                                                <!-- Thumbnails -->
-                                                <a
-                                                    href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpLbTUIFAK_4SnS-slUvq25TqyOtQ4J0AXSQ&usqp=CAU">
-                                                    <img
-                                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpLbTUIFAK_4SnS-slUvq25TqyOtQ4J0AXSQ&usqp=CAU"
-                                                        alt="Thumbnail 1" />
-                                                </a>
-                                                <a
-                                                    href="https://hips.hearstapps.com/hmg-prod/images/cute-cat-photos-1593441022.jpg?crop=1.00xw:0.753xh;0,0.153xh&resize=1200:*"
-                                                    onmouseover="changeMainImage(this)">
-                                                    <img
-                                                        src="https://hips.hearstapps.com/hmg-prod/images/cute-cat-photos-1593441022.jpg?crop=1.00xw:0.753xh;0,0.153xh&resize=1200:*"
-                                                        alt="Thumbnail 2" />
-                                                </a>
-                                                <a
-                                                    href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpLbTUIFAK_4SnS-slUvq25TqyOtQ4J0AXSQ&usqp=CAU">
-                                                    <img
-                                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpLbTUIFAK_4SnS-slUvq25TqyOtQ4J0AXSQ&usqp=CAU"
-                                                        alt="Thumbnail 3" />
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <ol class="step-guide">
-                                            <li class="line">
-                                                <div class="fa fa-circle bullet bullet_red"></div>
-                                                <p>
-                                                    Gather information about the issue. Lorem ipsum dolor sit amet,
-                                                    consectetur adipiscing elit.
-                                                </p>
-                                            </li>
-                                            <li class="line">
-                                                <div class="fa fa-circle bullet bullet_red"></div>
-                                                <p>
-                                                    Gather information about the issue. Lorem ipsum dolor sit amet,
-                                                    consectetur adipiscing elit.
-                                                </p>
-                                            </li>
-                                            <li class="line">
-                                                <div class="fa fa-circle bullet bullet_red"></div>
-                                                <p>
-                                                    Gather information about the issue. Lorem ipsum dolor sit amet,
-                                                    consectetur adipiscing elit.
-                                                </p>
-                                            </li>
-                                            <li class="line">
-                                                <div class="fa fa-circle bullet bullet_red"></div>
-                                                <p>
-                                                    Gather information about the issue. Lorem ipsum dolor sit amet,
-                                                    consectetur adipiscing elit.
-                                                </p>
-                                            </li>
-
-                                            <!-- Additional guide content -->
-                                        </ol>
-
-                                        <!-- Comment Section -->
-                                        <div class="comment-section">
-                                            <div class="comment-button-container">
-                                                <div class="comment-button" onclick="toggleComments(this)">Comment</div>
-                                            </div>
-
-                                            <div class="comment-input" style="display: none">
-                                                <h4 class="js-add-comment-title">Add Comment</h4>
-                                                <textarea class="common-reply-textarea">Type your comment</textarea>
-
-                                                <div class="post-buttons">
-                                                    <button onclick="postComment(this)" class="post-comment-btn">
-                                                        Post comment
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="comments" style="display: none">
-                                                <div class="comment">
-                                                    <div class="comment-icon">💬</div>
-                                                    <div class="comment-content">
-                                                        <div class="comment-author">John Doe</div>
-                                                        <div class="comment-date">December 10, 2023</div>
-                                                        This guide was really helpful! Thanks for sharing.
-                                                        <button onclick="replyToComment(this)" class="reply-button">
-                                                            Reply
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="comment">
-                                                    <div class="comment-icon">💬</div>
-                                                    <div class="comment-content">
-                                                        <div class="comment-author">Jane Smith</div>
-                                                        <div class="comment-date">December 11, 2023</div>
-                                                        I had the same issue, and this fixed it for me. Great job!
-                                                        <button onclick="replyToComment(this)" class="reply-button">
-                                                            Reply
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ol>
+                                <ol class="steps-container container" id="steps-container"></ol>
                                 <div id="conclusion" class="completion-container">
                                     <div class="container">
                                         <h3>🤗 You're finish</h3>
@@ -444,7 +335,9 @@
                                         <div class="comment-input">
                                             <textarea placeholder="Write your comment here..."></textarea>
                                             <div class="comment-button-container">
-                                                <button class="submit-comment button">Post Comment</button>
+                                                <button class="submit-comment button" onclick="postComment(this)">
+                                                    Post Comment
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -486,50 +379,5 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 
         <script src="../controllers/blog.js"></script>
-
-        <script>
-            function toggleComments(button) {
-                const commentSection = button.closest('.comment-section');
-
-                const commentInput = commentSection.querySelector('.comment-input');
-
-                const commentsContainer = commentSection.querySelector('.comments');
-
-                if (commentInput.style.display === 'none') {
-                    commentInput.style.display = 'block';
-                    commentsContainer.style.display = 'block';
-                } else {
-                    commentInput.style.display = 'none';
-                    commentsContainer.style.display = 'none';
-                }
-            }
-
-            function postComment(button) {
-                const commentInput = button.previousElementSibling;
-                const commentsContainer = commentInput.nextElementSibling;
-                const commentText = commentInput.querySelector('textarea').value;
-
-                if (commentText.trim() !== '') {
-                    const commentElement = document.createElement('div');
-                    commentElement.textContent = commentText;
-                    commentsContainer.appendChild(commentElement);
-                    commentInput.querySelector('textarea').value = '';
-                }
-            }
-
-            function replyToComment(button) {
-                // Hide all reply inputs
-                document.querySelectorAll('.reply-input').forEach(function (replyInput) {
-                    replyInput.style.display = 'none';
-                });
-
-                // Display the common reply input
-                var commonReplyInput = document.querySelector('.common-reply-textarea');
-                commonReplyInput.parentElement.style.display = 'block';
-
-                // Focus the common reply textarea
-                commonReplyInput.focus();
-            }
-        </script>
     </body>
 </html>

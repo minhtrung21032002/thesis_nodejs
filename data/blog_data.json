@@ -1,12 +1,15 @@
 {
     "blogId": "657e6ae5817b8b95953fa2ac",
     "user_information": {
-        "_id": "658d89893a00e3e5b5209abc",
+        "_id": "658e8240bcdfd9edfeeabd2e",
         "member_since": "2022-01-01",
-        "password": "samplepassword",
-        "user_name": "sampleuser",
+        "password": "samplepassword2",
+        "user_name": "sampleuser2",
         "total_guides": "5",
-        "__v": 0
+        "__v": 0,
+        "points": 0,
+        "badges": ["6597fd0d63bd54d8ac653e42"],
+        "user_img": ""
     },
     "blog_information": {
         "_id": "657e6ae5817b8b95953fa2ac",
@@ -16,7 +19,11 @@
         "conclusion": "<p>Put the floor mats back into the car (or truck) once they've finished drying.</p>",
         "difficulty": "Very easy",
         "introduction": "<p>Judging by the looks, my wife's floor mats haven't been cleaned since the car rolled off the showroom floor in 2000. I created this guide based on a tried-and-true technique that my mother showed me when I was a wee lass.</p>\n\n<p>There may or may not be better techniques out there, but I know this one works with common household items on-hand.</p>",
-        "time": 600
+        "time": 600,
+        "number_of_comments": 2,
+        "number_access": 22,
+        "number_of_likes": 0,
+        "number_of_completed": 0
     },
     "summary_comments": [
         {
@@ -30,8 +37,11 @@
                 "member_since": "2022-01-01",
                 "password": "samplepassword",
                 "user_name": "sampleuser",
-                "total_guides": "5",
-                "__v": 0
+                "total_guides": "2",
+                "__v": 0,
+                "points": 5000,
+                "badges": ["6597fd0d63bd54d8ac653e42", "6597fd0d63bd54d8ac653e44", "6597fd0d63bd54d8ac653e46"],
+                "user_img": "https://guide-images.cdn.ifixit.com/igi/sfJOkToMs44AtSyG.standard"
             }
         },
         {
@@ -45,8 +55,11 @@
                 "member_since": "2022-01-01",
                 "password": "samplepassword",
                 "user_name": "sampleuser",
-                "total_guides": "5",
-                "__v": 0
+                "total_guides": "2",
+                "__v": 0,
+                "points": 5000,
+                "badges": ["6597fd0d63bd54d8ac653e42", "6597fd0d63bd54d8ac653e44", "6597fd0d63bd54d8ac653e46"],
+                "user_img": "https://guide-images.cdn.ifixit.com/igi/sfJOkToMs44AtSyG.standard"
             }
         }
     ],
@@ -56,7 +69,7 @@
             "step_number": [1],
             "step_imgs": [
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/1vPalD5rfTEehGXY.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/1vPalD5rfTEehGXY.large",
                     "img_number": 1,
                     "_id": "658bf0e414edd9039ddc7b19"
                 }
@@ -80,6 +93,20 @@
                     "content_div": "Bonus: if you're doing it right, a rainbow will manifest itself to congratulate you.",
                     "_id": "658bf0e414edd9039ddc7b1c"
                 }
+            ],
+            "step_comments": [
+                {
+                    "commentId": "6590d67c33863737ed682cbe",
+                    "comment_content": "<p>Make sure to use a power/computer memory saver for newer car model before disconnecting the car battery.  This should be done to prevent losing all your settings, radio stations etc.</p>",
+                    "user_id": "658d89893a00e3e5b5209abc",
+                    "dateCreated": "2020-08-05T09:28:51.000Z"
+                },
+                {
+                    "commentId": "6590d67c33863737ed682cbc",
+                    "comment_content": "<p>Não tem tradução em português pôr favor</p>",
+                    "user_id": "658d89893a00e3e5b5209abc",
+                    "dateCreated": "2023-02-07T14:20:38.000Z"
+                }
             ]
         },
         {
@@ -87,7 +114,7 @@
             "step_number": [2],
             "step_imgs": [
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/4B262PsCxKaDZWbF.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/4B262PsCxKaDZWbF.large",
                     "img_number": 1,
                     "_id": "658bf0e414edd9039ddc7b1e"
                 }
@@ -111,14 +138,15 @@
                     "content_div": "You don't have to use a whole bunch, as the stuff is quite soapy. Just have enough sprinkled so that most of the mat is covered.",
                     "_id": "658bf0e414edd9039ddc7b21"
                 }
-            ]
+            ],
+            "step_comments": []
         },
         {
             "stepId": "658bf0e414edd9039ddc7b22",
             "step_number": [3],
             "step_imgs": [
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/1WSTrMRoYKaWJ6SS.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/1WSTrMRoYKaWJ6SS.large",
                     "img_number": 1,
                     "_id": "658bf0e414edd9039ddc7b23"
                 }
@@ -148,14 +176,15 @@
                     "content_div": "As a bonus, you will have the cleanest feet in the tri-state area after this procedure.",
                     "_id": "658bf0e414edd9039ddc7b27"
                 }
-            ]
+            ],
+            "step_comments": []
         },
         {
             "stepId": "658bf0e414edd9039ddc7b28",
             "step_number": [4],
             "step_imgs": [
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/EZxV3qTLh6Ou6c1J.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/EZxV3qTLh6Ou6c1J.large",
                     "img_number": 1,
                     "_id": "658bf0e414edd9039ddc7b29"
                 }
@@ -179,19 +208,20 @@
                     "content_div": "Repeat the rinsing until juices run clear, so to speak.",
                     "_id": "658bf0e414edd9039ddc7b2c"
                 }
-            ]
+            ],
+            "step_comments": []
         },
         {
             "stepId": "658bf0e414edd9039ddc7b2d",
             "step_number": [5],
             "step_imgs": [
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/kcMOAQZxDFbPCCnP.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/kcMOAQZxDFbPCCnP.large",
                     "img_number": 1,
                     "_id": "658bf0e414edd9039ddc7b2e"
                 },
                 {
-                    "img_url": "https://guide-images.cdn.ifixit.com/igi/RCFMRG4bOlJbKD1P.thumbnail",
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/RCFMRG4bOlJbKD1P.large",
                     "img_number": 2,
                     "_id": "658bf0e414edd9039ddc7b2f"
                 }
@@ -209,7 +239,8 @@
                     "content_div": "Bonus tip: If you want extra-clean sneakers, now's the time to scrub them as well! just detach the broom from the handle, or use a wet sock to agitate the dirt on each sneaker.",
                     "_id": "658bf0e414edd9039ddc7b31"
                 }
-            ]
+            ],
+            "step_comments": []
         }
     ]
 }
