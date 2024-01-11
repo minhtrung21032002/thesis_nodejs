@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Profile</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            #user-info {
+                text-align: center;
+                padding: 20px;
+                background-color: #a9c196;
+                width: 350px;
+                float: right;
+            }
+
+            #guides-container {
+                width: 1000px;
+                display: flex;
+                flex-wrap: wrap;
+                padding: 20px;
+                float: left;
+            }
+
+            .guide-card {
+                width: 200px;
+                margin: 10px;
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: center;
+            }
+
+            #badges-container {
+                display: flex;
+                justify-content: space-around;
+                padding: 20px;
+                clear: both; /* Clear the float property */
+            }
+
+            .badge-card {
+                text-align: center;
+                position: relative;
+            }
+
+            .badge-card p {
+                display: none;
+                width: 100px;
+                top: 70%;
+                left: 10%;
+                position: absolute;
+            }
+
+            .badge-card:hover p {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="user-info"></div>
+
+        <div><h3>My guides</h3></div>
+        <div id="guides-container"></div>
+
+        <div id="badges-container"></div>
+
+        <div style="text-align: center">
+            <p>Total Number of Access: 6</p>
+            <p>Total Number of Likes: 8</p>
+            <p>Total Number of Completed: 10</p>
+        </div>
+
+        <script src="../controllers/profile.js"></script>
+    </body>
+</html>

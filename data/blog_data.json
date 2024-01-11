@@ -1,0 +1,246 @@
+{
+    "blogId": "657e6ae5817b8b95953fa2ac",
+    "user_information": {
+        "_id": "658e8240bcdfd9edfeeabd2e",
+        "member_since": "2022-01-01",
+        "password": "samplepassword2",
+        "user_name": "sampleuser2",
+        "total_guides": "5",
+        "__v": 0,
+        "points": 0,
+        "badges": ["6597fd0d63bd54d8ac653e42"],
+        "user_img": ""
+    },
+    "blog_information": {
+        "_id": "657e6ae5817b8b95953fa2ac",
+        "blog_title": "How To Clean Car Floor Mats",
+        "last_updated": "2023-12-17T03:28:37.224Z",
+        "__v": 4,
+        "conclusion": "<p>Put the floor mats back into the car (or truck) once they've finished drying.</p>",
+        "difficulty": "Very easy",
+        "introduction": "<p>Judging by the looks, my wife's floor mats haven't been cleaned since the car rolled off the showroom floor in 2000. I created this guide based on a tried-and-true technique that my mother showed me when I was a wee lass.</p>\n\n<p>There may or may not be better techniques out there, but I know this one works with common household items on-hand.</p>",
+        "time": 600,
+        "number_of_comments": 2,
+        "number_access": 22,
+        "number_of_likes": 0,
+        "number_of_completed": 0
+    },
+    "summary_comments": [
+        {
+            "_id": "658d89893a00e3e5b5209abe",
+            "comment_content": "This is a sample comment.",
+            "user_id": "658d89893a00e3e5b5209abc",
+            "dateCreated": "2023-12-28T14:43:21.875Z",
+            "__v": 0,
+            "user_information": {
+                "_id": "658d89893a00e3e5b5209abc",
+                "member_since": "2022-01-01",
+                "password": "samplepassword",
+                "user_name": "sampleuser",
+                "total_guides": "2",
+                "__v": 0,
+                "points": 5000,
+                "badges": ["6597fd0d63bd54d8ac653e42", "6597fd0d63bd54d8ac653e44", "6597fd0d63bd54d8ac653e46"],
+                "user_img": "https://guide-images.cdn.ifixit.com/igi/sfJOkToMs44AtSyG.standard"
+            }
+        },
+        {
+            "_id": "658e81ecbcdfd9edfeeabd2a",
+            "comment_content": "This is a sample comment2.",
+            "user_id": "658d89893a00e3e5b5209abc",
+            "dateCreated": "2023-12-28T14:43:21.875Z",
+            "__v": 0,
+            "user_information": {
+                "_id": "658d89893a00e3e5b5209abc",
+                "member_since": "2022-01-01",
+                "password": "samplepassword",
+                "user_name": "sampleuser",
+                "total_guides": "2",
+                "__v": 0,
+                "points": 5000,
+                "badges": ["6597fd0d63bd54d8ac653e42", "6597fd0d63bd54d8ac653e44", "6597fd0d63bd54d8ac653e46"],
+                "user_img": "https://guide-images.cdn.ifixit.com/igi/sfJOkToMs44AtSyG.standard"
+            }
+        }
+    ],
+    "steps": [
+        {
+            "stepId": "658bf0e414edd9039ddc7b18",
+            "step_number": [1],
+            "step_imgs": [
+                {
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/1vPalD5rfTEehGXY.large",
+                    "img_number": 1,
+                    "_id": "658bf0e414edd9039ddc7b19"
+                }
+            ],
+            "step_content": [
+                {
+                    "icon": "black",
+                    "content_div_number": 1,
+                    "content_div": "Soak the floor mat generously with water.",
+                    "_id": "658bf0e414edd9039ddc7b1a"
+                },
+                {
+                    "icon": "icon_note",
+                    "content_div_number": 2,
+                    "content_div": "I used <a href=\"http://www.amazon.com/dp/B002Z8E52Y?tag=ifixitam-20\" rel=\"nofollow noopener noreferrer\">this power washer</a> for the procedure, but it's totally unnecessary. You can just use a regular water hose.",
+                    "_id": "658bf0e414edd9039ddc7b1b"
+                },
+                {
+                    "icon": "black",
+                    "content_div_number": 3,
+                    "content_div": "Bonus: if you're doing it right, a rainbow will manifest itself to congratulate you.",
+                    "_id": "658bf0e414edd9039ddc7b1c"
+                }
+            ],
+            "step_comments": [
+                {
+                    "commentId": "6590d67c33863737ed682cbe",
+                    "comment_content": "<p>Make sure to use a power/computer memory saver for newer car model before disconnecting the car battery.  This should be done to prevent losing all your settings, radio stations etc.</p>",
+                    "user_id": "658d89893a00e3e5b5209abc",
+                    "dateCreated": "2020-08-05T09:28:51.000Z"
+                },
+                {
+                    "commentId": "6590d67c33863737ed682cbc",
+                    "comment_content": "<p>Não tem tradução em português pôr favor</p>",
+                    "user_id": "658d89893a00e3e5b5209abc",
+                    "dateCreated": "2023-02-07T14:20:38.000Z"
+                }
+            ]
+        },
+        {
+            "stepId": "658bf0e414edd9039ddc7b1d",
+            "step_number": [2],
+            "step_imgs": [
+                {
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/4B262PsCxKaDZWbF.large",
+                    "img_number": 1,
+                    "_id": "658bf0e414edd9039ddc7b1e"
+                }
+            ],
+            "step_content": [
+                {
+                    "icon": "black",
+                    "content_div_number": 1,
+                    "content_div": "Spread your favorite granule-based, eco-friendly laundry detergent onto the entire area of the floor mat.",
+                    "_id": "658bf0e414edd9039ddc7b1f"
+                },
+                {
+                    "icon": "black",
+                    "content_div_number": 2,
+                    "content_div": "Why eco-friendly? This soapy gray water will go down the curb and into your favorite creek. So be nice to it!",
+                    "_id": "658bf0e414edd9039ddc7b20"
+                },
+                {
+                    "icon": "icon_note",
+                    "content_div_number": 3,
+                    "content_div": "You don't have to use a whole bunch, as the stuff is quite soapy. Just have enough sprinkled so that most of the mat is covered.",
+                    "_id": "658bf0e414edd9039ddc7b21"
+                }
+            ],
+            "step_comments": []
+        },
+        {
+            "stepId": "658bf0e414edd9039ddc7b22",
+            "step_number": [3],
+            "step_imgs": [
+                {
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/1WSTrMRoYKaWJ6SS.large",
+                    "img_number": 1,
+                    "_id": "658bf0e414edd9039ddc7b23"
+                }
+            ],
+            "step_content": [
+                {
+                    "icon": "black",
+                    "content_div_number": 1,
+                    "content_div": "Scrub like crazy with a push broom. As you can see in the photo, I'm preventing the mat from moving by standing on an edge.",
+                    "_id": "658bf0e414edd9039ddc7b24"
+                },
+                {
+                    "icon": "black",
+                    "content_div_number": 2,
+                    "content_div": "Brush in a couple of different directions so you agitate all the contaminants from various angles.",
+                    "_id": "658bf0e414edd9039ddc7b25"
+                },
+                {
+                    "icon": "icon_note",
+                    "content_div_number": 3,
+                    "content_div": "No push broom (or other stiff brush) handy? No problem! Take your shoes and socks off, and scrub with your feet. Just be careful to not slip off the mat. You <strong>do not</strong> want to rub your feet up against concrete, or whatever surface the mat is on.",
+                    "_id": "658bf0e414edd9039ddc7b26"
+                },
+                {
+                    "icon": "black",
+                    "content_div_number": 4,
+                    "content_div": "As a bonus, you will have the cleanest feet in the tri-state area after this procedure.",
+                    "_id": "658bf0e414edd9039ddc7b27"
+                }
+            ],
+            "step_comments": []
+        },
+        {
+            "stepId": "658bf0e414edd9039ddc7b28",
+            "step_number": [4],
+            "step_imgs": [
+                {
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/EZxV3qTLh6Ou6c1J.large",
+                    "img_number": 1,
+                    "_id": "658bf0e414edd9039ddc7b29"
+                }
+            ],
+            "step_content": [
+                {
+                    "icon": "black",
+                    "content_div_number": 1,
+                    "content_div": "Thoroughly wash off the soap:",
+                    "_id": "658bf0e414edd9039ddc7b2a"
+                },
+                {
+                    "icon": "black",
+                    "content_div_number": 2,
+                    "content_div": "Start on one edge of the floor mat and push the soap all the way across the mat.",
+                    "_id": "658bf0e414edd9039ddc7b2b"
+                },
+                {
+                    "icon": "black",
+                    "content_div_number": 3,
+                    "content_div": "Repeat the rinsing until juices run clear, so to speak.",
+                    "_id": "658bf0e414edd9039ddc7b2c"
+                }
+            ],
+            "step_comments": []
+        },
+        {
+            "stepId": "658bf0e414edd9039ddc7b2d",
+            "step_number": [5],
+            "step_imgs": [
+                {
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/kcMOAQZxDFbPCCnP.large",
+                    "img_number": 1,
+                    "_id": "658bf0e414edd9039ddc7b2e"
+                },
+                {
+                    "img_url": "https://guide-images.cdn.ifixit.com/igi/RCFMRG4bOlJbKD1P.large",
+                    "img_number": 2,
+                    "_id": "658bf0e414edd9039ddc7b2f"
+                }
+            ],
+            "step_content": [
+                {
+                    "icon": "black",
+                    "content_div_number": 1,
+                    "content_div": "Repeat for all of the other floor mats in the car.",
+                    "_id": "658bf0e414edd9039ddc7b30"
+                },
+                {
+                    "icon": "icon_note",
+                    "content_div_number": 2,
+                    "content_div": "Bonus tip: If you want extra-clean sneakers, now's the time to scrub them as well! just detach the broom from the handle, or use a wet sock to agitate the dirt on each sneaker.",
+                    "_id": "658bf0e414edd9039ddc7b31"
+                }
+            ],
+            "step_comments": []
+        }
+    ]
+}

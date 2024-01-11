@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>${blog_title} Introduction</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            input,
+            label {
+                width: 100%;
+                display: block;
+            }
+            label {
+                font-weight: 700;
+                font-size: 16px;
+                margin-bottom: 0.75rem;
+            }
+
+            input {
+                margin-top: 5px;
+                padding: 5px 10px;
+                /* border-radius/: 2px; */
+                width: 358px;
+                outline: none;
+            }
+
+            /* Main */
+            .floatLeft {
+                width: 700px;
+                float: left;
+            }
+
+            .floatRight {
+                width: 20%;
+            }
+
+            /* tab */
+            .tabWrap {
+                margin-bottom: 6px;
+            }
+            .tabs {
+                height: 35px;
+                margin: 24px 0 8px;
+                padding: 0;
+                list-style-type: none;
+                border-bottom: 1px solid #979797;
+            }
+            .tabs > li {
+                float: left;
+                position: relative;
+                display: inline-block;
+                height: 34px;
+                margin: 0 3px;
+                font-size: 14px;
+            }
+            a {
+                text-decoration: none;
+            }
+            a.tab-link.active {
+                background-color: #fff;
+                border: 1px solid #979797;
+                border-bottom-color: #fff;
+                color: #212426;
+                font-weight: 700;
+            }
+
+            a.tab-link {
+                position: relative;
+                color: #212426;
+                display: block;
+                overflow: hidden;
+                border: 1px solid #e5e7eb;
+                border-radius: 2px 2px 0 0;
+                top: -1px;
+                border-width: 1px 1px 0;
+                padding: 7px 17px 8px;
+                background-color: #f9fafb;
+                line-height: 19px;
+            }
+
+            a.nextLink:hover {
+                text-decoration: underline;
+            }
+
+            .arrow {
+                font-size: 1.2em;
+                font-weight: 400;
+                line-height: 1.388em;
+            }
+
+            /* Drop file */
+            #drop-area {
+                border: 2px dashed #ccc;
+                border-radius: 20px;
+                width: 480px;
+                font-family: sans-serif;
+                /* margin: 100px 0; */
+                padding: 20px;
+                transition: 0.5s all;
+            }
+            #drop-area.highlight {
+                border-color: purple;
+            }
+
+            #drop-area:hover {
+                background-color: #94ecb4;
+                border-color: #22c55e;
+            }
+
+            p {
+                margin-top: 0;
+            }
+            .my-form {
+                margin-bottom: 10px;
+            }
+            #gallery {
+                margin-top: 10px;
+            }
+            #gallery img {
+                width: 150px;
+                margin-bottom: 10px;
+                margin-right: 10px;
+                vertical-align: middle;
+            }
+            .button {
+                width: initial;
+                display: inline-block;
+                padding: 10px;
+                background: #ccc;
+                cursor: pointer;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+            .button:hover {
+                background: #ddd;
+            }
+            #fileElem {
+                display: none;
+            }
+
+            #draggable-list {
+                display: flex;
+                list-style-type: none;
+                flex-wrap: wrap;
+                padding: 0;
+            }
+
+            .draggable-item {
+                background-color: #f0f0f0;
+                border: 1px solid #ccc;
+                padding: 10px;
+                margin: 5px;
+                cursor: move;
+                /* min-width: 25px; */
+            }
+
+            .sidebarFloat {
+                float: right;
+            }
+
+            .sidebarFloat .toggleBar {
+                display: flex;
+                justify-content: space-between;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" style="width: 1100px; margin: auto">
+            <div class="floatLeft">
+                <h2>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderi</h2>
+                <div class="tabWrap">
+                    <ul class="tabs">
+                        <li class="tab">
+                            <a
+                                href="/Guide/intro/37588"
+                                class="tab-link active"
+                                id="introductionTab"
+                                data-tab="introduction"
+                                data-url=""
+                                >Introduction</a
+                            >
+                        </li>
+
+                        <li class="tab">
+                            <a
+                                href="./step-page.html"
+                                class="tab-link"
+                                id="guidestepsTab"
+                                data-tab="guidesteps"
+                                data-url=""
+                                >Guide Steps</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="background-color: #f7f9faff; padding: 10px">
+                    <label class="tip introTypePrompt" for="introThing"> What part are you replacing? </label>
+                    <input type="text" />
+                    <label class="tip" for="introTitle" style="margin-top: 15px"> Title </label>
+                    <input
+                        type="text"
+                        name="intro[title]"
+                        id="introTitle"
+                        data-translate-field="title"
+                        data-translate-source="source-title"
+                        tabindex="5"
+                        class="js-translate-to twoThirdsWidth hasTip watchModified"
+                        value="Brake Pads Replacement" />
+                    <label class="tip" for="introTitle" style="margin-top: 15px"> Images </label>
+
+                    <div id="drop-area" style="position: relative">
+                        <form class="my-form">
+                            <p>
+                                Upload multiple files with the file dialog or by dragging and dropping images onto the
+                                dashed region
+                            </p>
+                            <input
+                                type="file"
+                                id="fileElem"
+                                multiple
+                                accept="image/*"
+                                onchange="handleFiles(this.files)" />
+                            <label
+                                class="button"
+                                for="fileElem"
+                                style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0"
+                                >Select some files</label
+                            >
+                        </form>
+                        <progress id="progress-bar" max="100" value="0"></progress>
+                        <div id="gallery"></div>
+                    </div>
+
+                    <label for="introIntroduction" style="margin-top: 15px"> Introduction </label>
+                    <form method="post" style="width: 100%">
+                        <textarea id="mytextarea" style="width: 100%; min-height: 120px">Hello, World!</textarea>
+                    </form>
+
+                    <label for="introIntroduction" style="margin-top: 15px"> Conclusion </label>
+                    <form method="post" style="width: 100%">
+                        <textarea id="mytextarea2" style="width: 100%; min-height: 120px">Hello, World!</textarea>
+                    </form>
+
+                    <div class="guide-action-buttons" style="width: 100%; margin-top: 15px; margin-bottom: 25px">
+                        <button
+                            type="submit"
+                            name="save"
+                            tabindex="8"
+                            class="button button-medium button-action-solid"
+                            id="save"
+                            style="
+                                display: block;
+                                margin-left: auto;
+                                margin-right: 0;
+                                background-color: #3b82f6;
+                                border-color: #3b82f6;
+                                color: #fff;
+                            ">
+                            Save
+                        </button>
+                    </div>
+
+                    <div
+                        class="pagination paginationBottom"
+                        style="display: table; width: 100%; background-color: #f9fafb; padding: 4px 8px">
+                        <p class="left" style="display: table-cell; width: auto; min-width: 75px; text-align: star"></p>
+
+                        <p class="middle" style="display: table-cell; width: auto; min-width: 75px; text-align: center">
+                            Editing Introduction
+                        </p>
+
+                        <p class="right" style="display: table-cell; width: auto; min-width: 75px; text-align: right">
+                            <a
+                                href="/Guide/edit/56171/new-after/0"
+                                class="nextLink"
+                                style="color: #4b5563; font-weight: 700"
+                                >Guide Steps <span class="arrow">»</span></a
+                            >
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebarFloat" style="float: right">
+                <div
+                    style="
+                        margin-top: 24px;
+                        border: 1px solid rgb(192, 192, 196);
+                        padding: 10px;
+                        background-color: #f7f9faff;
+                    ">
+                    <h3 class="toggleBar" style="font-size: 15px">Steps</h3>
+                    <div id="draggable-list" style="max-width: 297px">
+                        <div class="draggable-item" data-id="item1">Item 1</div>
+                        <div class="draggable-item" data-id="item2">Item 2</div>
+                        <div class="draggable-item" data-id="item3">Item 3</div>
+                        <div class="draggable-item" data-id="item4">Item 3</div>
+                        <div class="draggable-item" data-id="item5">Item 3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script
+            src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
+            referrerpolicy="origin"></script>
+
+        <script
+            src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
+            referrerpolicy="origin"></script>
+        <script>
+            tinymce.init({
+                selector: '#mytextarea',
+                toolbar:
+                    'undo redo | formatpainter casechange blocks | bold italic | ' +
+                    'alignleft aligncenter alignright alignjustify | ' +
+                    'bullist numlist checklist outdent indent | removeformat | a11ycheck code table',
+                menubar: false,
+                height: 220,
+            });
+            tinymce.init({
+                selector: '#mytextarea2',
+                toolbar:
+                    'undo redo | formatpainter casechange blocks | bold italic | ' +
+                    'alignleft aligncenter alignright alignjustify | ' +
+                    'bullist numlist checklist outdent indent | removeformat | a11ycheck code table',
+                menubar: false,
+                height: 220,
+            });
+        </script>
+
+        <script>
+            // document.addEventListener('DOMContentLoaded', function () {
+            //     const draggableList = new Draggable.Sortable(document.querySelectorAll('#draggable-list'), {
+            //         draggable: '.draggable-item',
+            //         mirror: {
+            //             constrainDimensions: true,
+            //         },
+            //     });
+
+            //     draggableList.on('sortable:stop', event => {
+            //         // Handle the drop event as needed
+            //         const draggedItem = event.data.dragEvent.source;
+            //         const itemId = draggedItem.getAttribute('data-id');
+            //         console.log('Dropped item with ID:', itemId);
+            //     });
+            // });
+        </script>
+
+        <script>
+            // ************************ Drag and drop ***************** //
+            let dropArea = document.getElementById('drop-area');
+
+            // Prevent default drag behaviors
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false);
+                document.body.addEventListener(eventName, preventDefaults, false);
+            });
+
+            // Highlight drop area when item is dragged over it
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropArea.addEventListener(eventName, highlight, false);
+            });
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, unhighlight, false);
+            });
+
+            // Handle dropped files
+            dropArea.addEventListener('drop', handleDrop, false);
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            function highlight(e) {
+                dropArea.classList.add('highlight');
+            }
+
+            function unhighlight(e) {
+                dropArea.classList.remove('active');
+            }
+
+            function handleDrop(e) {
+                var dt = e.dataTransfer;
+                var files = dt.files;
+
+                handleFiles(files);
+            }
+
+            let uploadProgress = [];
+            let progressBar = document.getElementById('progress-bar');
+
+            function initializeProgress(numFiles) {
+                progressBar.value = 0;
+                uploadProgress = [];
+
+                for (let i = numFiles; i > 0; i--) {
+                    uploadProgress.push(0);
+                }
+            }
+
+            function updateProgress(fileNumber, percent) {
+                uploadProgress[fileNumber] = percent;
+                let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length;
+                progressBar.value = total;
+            }
+
+            function handleFiles(files) {
+                files = [...files];
+                initializeProgress(files.length);
+                files.forEach(uploadFile);
+                files.forEach(previewFile);
+            }
+
+            function previewFile(file) {
+                let reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = function () {
+                    let img = document.createElement('img');
+                    img.src = reader.result;
+                    document.getElementById('gallery').appendChild(img);
+                };
+            }
+
+            function uploadFile(file, i) {
+                var url = 'https://api.cloudinary.com/v1_1/joezimim007/image/upload';
+                var xhr = new XMLHttpRequest();
+                var formData = new FormData();
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+                // Update progress (can be used to show progress indicator)
+                xhr.upload.addEventListener('progress', function (e) {
+                    updateProgress(i, (e.loaded * 100.0) / e.total || 100);
+                });
+
+                xhr.addEventListener('readystatechange', function (e) {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        updateProgress(i, 100); // <- Add this
+                    } else if (xhr.readyState == 4 && xhr.status != 200) {
+                        // Error. Inform the user
+                    }
+                });
+
+                formData.append('upload_preset', 'ujpu6gyk');
+                formData.append('file', file);
+                xhr.send(formData);
+            }
+        </script>
+    </body>
+</html>
