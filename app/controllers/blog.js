@@ -11,7 +11,7 @@ function loadBlogData(blogId) {
         .then(data => {
             console.log(data);
             dataGlo = data;
-            const { _id, member_since, password, user_name, total_guides } = data.user_information;
+            const { _id: user_id, member_since, password, user_name, total_guides } = data.user_information;
             const {
                 _id: blogId,
                 blog_title,
@@ -43,7 +43,7 @@ function loadBlogData(blogId) {
 
             document.querySelector('.guide-intro-main h2').insertAdjacentHTML('afterend', `${introduction}`);
 
-            data.steps.forEach(renderStep);
+            data.steps.forEach((step) => { renderStep(step, user_id) });
 
             renderComments(data.summary_comments);
         })
@@ -51,10 +51,11 @@ function loadBlogData(blogId) {
 }
 loadBlogData();
 
-function renderStep(step) {
-    console.log('data:')
+function renderStep(step, user_id) {
+    console.log('user_id')
+    console.log(user_id)
+
     console.log(step.stepId)
-    console.log(dataGlo.user_information._id)
     const stepList = document.getElementById('steps-container');
     const stepItem = document.createElement('li');
     stepItem.classList.add('step', 'step-wrapper');
@@ -81,7 +82,7 @@ function renderStep(step) {
                     <h4 class="js-add-comment-title">Add Comment</h4>
                     <textarea class="common-reply-textarea">Type your comment</textarea>
                     <div class="post-buttons">
-                        <button onclick="postComment(this,${step.stepId},${dataGlo.user_information._id})" class="post-comment-btn">
+                        <button onclick="postComment(this,'${step.stepId}','${user_id}')" class="post-comment-btn">
                             Post comment
                         </button>
                     </div>
@@ -185,12 +186,11 @@ function toggleComments(button) {
 
 function postComment(button, step_id, user_id) {
     var commentInputContainer = button.closest('.comment-input');
-    console.log(commentInputContainer);
 
     var commentTextarea = commentInputContainer.querySelector('textarea');
     // /guide/blog/comment/step/:step_id/:user_id
     var commentText = commentTextarea.value.trim();
-    console.log(commentText);
+
 
     if (commentText !== '') {
         // Prepare the data to be sent
@@ -199,8 +199,6 @@ function postComment(button, step_id, user_id) {
             date: getCurrentDate(),
             text: commentText,
         };
-        console.log(step_id)
-        console.log(JSON.stringify(postData))
         // localhost:3000/guide/blog/comment/step/658bf0e414edd9039ddc7b18/658e8240bcdfd9edfeeabd2e
         // Make the fetch POST request
         fetch(`http://localhost:3000/guide/blog/comment/step/${step_id}/${user_id}`, {
@@ -211,7 +209,14 @@ function postComment(button, step_id, user_id) {
             },
             body: JSON.stringify(postData),
         })
-            .then(response => { console.log(response); return response.json() })
+        .then(response => {
+            console.log(response);
+            if (response.status === 200) {
+                // Reload the page
+                window.location.reload();
+            }
+            return response.json();
+        })
 
             .then(data => {
                 // Handle the response data if needed
