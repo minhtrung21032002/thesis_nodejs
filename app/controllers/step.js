@@ -1,14 +1,50 @@
-function renderStepsThumbList() {}
+let stepsData;
+fetch('/data/step_edit.json')
+    .then(response => {
+        console.log(response);
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        stepsData = data.steps;
+        renderStepsThumbList(data.steps);
+    });
+
+function renderStepsThumbList(steps) {
+    const stepsData = steps;
+    let stepsHtml = '';
+    stepsData.forEach(step => {
+        // console.log(step.step_imgs);
+        stepsHtml += `
+            <div class="draggable-item" data-id="${step.step_number[0]}">
+            <img src="${step.step_imgs[0].img_url}" alt="" width=40 />
+            </div>
+        `;
+    });
+
+    document.querySelector('#draggable-list').innerHTML = stepsHtml;
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     let isDraggingEnabled = false;
+
+    function toggleButtonsVisibility(isDraggingEnabled) {
+        const saveCancelButtons = document.getElementById('saveCancelButtons');
+
+        if (isDraggingEnabled) {
+            saveCancelButtons.style.display = 'block';
+        } else {
+            saveCancelButtons.style.display = 'none';
+        }
+    }
+
+    toggleButtonsVisibility(isDraggingEnabled);
 
     const draggableList = new Draggable.Sortable(document.querySelectorAll('#draggable-list'), {
         draggable: '.draggable-item',
         mirror: {
             constrainDimensions: true,
         },
-        // plugins: [Draggable.Plugins.Sortable],
         classes: {
             mirror: 'draggable-mirror',
         },
@@ -16,14 +52,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     draggableList.on('sortable:start', event => {
-        // Check if dragging is enabled before allowing the drag to start
         if (!isDraggingEnabled) {
             event.cancel();
         }
     });
 
     draggableList.on('sortable:stop', event => {
-        // Handle the drop event as needed
         const draggedItem = event.data.dragEvent.source;
         const itemId = draggedItem.getAttribute('data-id');
         console.log('Dropped item with ID:', itemId);
@@ -32,5 +66,52 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.rearrange-steps-button').addEventListener('click', function () {
         isDraggingEnabled = !isDraggingEnabled;
         console.log(isDraggingEnabled);
+
+        toggleButtonsVisibility(isDraggingEnabled);
     });
+
+    document.getElementById('saveStepsButton').addEventListener('click', function () {
+        console.log(stepsData);
+        const updatedOrder = Array.from(document.querySelectorAll('.draggable-item')).map(item =>
+            item.getAttribute('data-id')
+        );
+
+        const updatedSteps = stepsData.map(step => {
+            const newStepNumber = updatedOrder.indexOf(step.step_number[0].toString()) + 1;
+            return { ...step, step_number: [newStepNumber] };
+        });
+        console.log(updatedSteps);
+        sendPatchRequest(updatedSteps);
+        isDraggingEnabled = false;
+        toggleButtonsVisibility(isDraggingEnabled);
+    });
+
+    document.getElementById('cancelStepsButton').addEventListener('click', function () {
+        isDraggingEnabled = false;
+        toggleButtonsVisibility(isDraggingEnabled);
+    });
+
+    function sendPatchRequest(updatedSteps) {
+        const apiUrl = 'your_api_endpoint';
+
+        fetch(apiUrl, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ steps: updatedSteps }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Patch request successful:', data);
+            })
+            .catch(error => {
+                console.error('Error during PATCH request:', error);
+            });
+    }
 });

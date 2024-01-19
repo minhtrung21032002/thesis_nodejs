@@ -188,7 +188,7 @@
             .draggable-item {
                 background-color: #f0f0f0;
                 border: 1px solid #ccc;
-                padding: 10px;
+
                 margin: 5px;
                 cursor: move;
                 /* min-width: 25px; */
@@ -300,9 +300,11 @@
                                 href="#reorderSteps"
                                 class="rearrange-steps-button"
                                 style="color: #4b5563; text-decoration: none">
-                                <i class="fa fa-retweet"></i> Rearrange
-                                <div style="display: none"><span>Save</span> or <span>Cancel</span></div>
+                                <i class="fa fa-retweet rearrangeBtn"></i> Rearrange
                             </a>
+                            <div style="display: none" id="saveCancelButtons">
+                                <span id="saveStepsButton">Save</span> or <span id="cancelStepsButton">Cancel</span>
+                            </div>
                         </span>
                     </h3>
                     <div id="draggable-list" style="max-width: 298px">
@@ -317,14 +319,10 @@
             </div>
             <div style="clear: both"></div>
 
-            <div>
-                <h2>Upload Image</h2>
-                <form action="upload.php" method="post" enctype="multipart/form-data">
-                    <label for="image">Select Image:</label>
-                    <input type="file" name="image" id="image" accept="image/*" />
-                    <br />
-                    <input type="submit" value="Upload" />
-                </form>
+            <h2>Upload images</h2>
+            <div id="stepMediaImages">
+                <div></div>
+                <div></div>
             </div>
         </div>
 
