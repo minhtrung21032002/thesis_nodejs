@@ -250,9 +250,17 @@
                 </div>
 
                 <div style="margin-top: 20px">
-                    <form method="post">
-                        <textarea id="mytextarea">Hello, World!</textarea>
-                    </form>
+                    <div class="editContent" id="myEditor">
+            <p class="p-inline">Your wisdom here</p>
+        </div>
+
+        <div class="actionsContainer mb-5">
+            <button class="btn btn-success" id="addBtn">Add <i class="fa-solid fa-plus"></i></button>
+        </div>
+
+        <div class="actionButtons">
+            <button class="btn btn-primary" id="saveBtn">save</button>
+        </div>
                 </div>
 
                 <div id="guideStepActions" style="margin-top: 20px">
@@ -327,17 +335,39 @@
         <script
             src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
-        <script>
-            tinymce.init({
-                selector: '#mytextarea',
-                toolbar: 'undo redo | formatpainter casechange blocks | bold italic underline| ',
+     
+   <script>
+            const pInline = {
+                selector: '.p-inline',
                 menubar: false,
-                resize: true,
-                min_height: 200,
-                height: 200,
+                inline: true,
+                plugins: ['lists', 'powerpaste', 'autolink'],
+                toolbar: 'undo redo | bold italic underline',
+                valid_elements: 'strong,em,span[style],a[href]',
+                valid_styles: {
+                    '*': 'font-size,font-family,color,text-decoration,text-align',
+                },
+                powerpaste_word_import: 'clean',
+                powerpaste_html_import: 'clean',
+            };
+            tinymce.init(pInline);
+
+            document.getElementById('addBtn').addEventListener('click', () => {
+                const p = document.createElement('p');
+                p.classList.add('p-inline');
+                p.innerHTML = 'Your wisdom here';
+                document.getElementById('myEditor').appendChild(p);
+                if (!p) {
+                    return;
+                }
+                tinymce.init(pInline);
+            });
+
+            document.getElementById('saveBtn').addEventListener('click', () => {
+                const content = document.getElementById('myEditor').innerHTML;
+                console.log(content);
             });
         </script>
-
         <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
 
         <script src="../controllers/step.js"></script>
