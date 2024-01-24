@@ -1,7 +1,7 @@
 let dataGlo;
 function loadBlogData(blogId) {
-    // fetch(`http://localhost:3000/guide/blog/api/${blogId}`)
-    fetch('../../data/blog_data.json')
+    fetch(`http://localhost:3000/guide/blog/api/${blogId}`)
+        //fetch('../../data/blog_data.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (Status: ${response.status})`);
@@ -49,7 +49,7 @@ function loadBlogData(blogId) {
         })
         .catch(error => console.error(`Error fetching blog data: ${error.message}`, error));
 }
-loadBlogData();
+
 
 function renderStep(step, user_id) {
     console.log('user_id')
@@ -209,14 +209,14 @@ function postComment(button, step_id, user_id) {
             },
             body: JSON.stringify(postData),
         })
-        .then(response => {
-            console.log(response);
-            if (response.status === 200) {
-                // Reload the page
-                window.location.reload();
-            }
-            return response.json();
-        })
+            .then(response => {
+                console.log(response);
+                if (response.status === 200) {
+                    // Reload the page
+                    window.location.reload();
+                }
+                return response.json();
+            })
 
             .then(data => {
                 // Handle the response data if needed
