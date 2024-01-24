@@ -1,5 +1,5 @@
 let stepsData;
-fetch('/data/step_edit.json')
+fetch('http://localhost:3000/guide/blog/edit/steps/api/657e6ae5817b8b95953fa2ac/658bf0e414edd9039ddc7b18')
     .then(response => {
         console.log(response);
         return response.json();
@@ -11,6 +11,7 @@ fetch('/data/step_edit.json')
     });
 
 function renderStepsThumbList(steps) {
+    console.log(steps)
     const stepsData = steps;
     let stepsHtml = '';
     stepsData.forEach(step => {
@@ -92,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function sendPatchRequest(updatedSteps) {
-        const apiUrl = 'your_api_endpoint';
+        const apiUrl = 'http://localhost:3000/guide/blog/edit/steps/657e6ae5817b8b95953fa2ac';
 
         fetch(apiUrl, {
             method: 'PATCH',
