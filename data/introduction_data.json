@@ -1,4 +1,18 @@
 {
+    "blog_information": {
+        "_id": "657e6ae5817b8b95953fa2ac",
+        "blog_title": "Install LED Pod Lights on a Off-Road Truck Jeeptall",
+        "last_updated": "2023-12-17T03:28:37.224Z",
+        "__v": 4,
+        "conclusion": "<p>Put the floor mats back into the car (or truck) once they've finished drying.</p>",
+        "difficulty": "Very easy",
+        "introduction": "<p>Judging by the looks, my wife's floor mats haven't been cleaned since the car rolled off the showroom floor in 2000. I created this guide based on a tried-and-true technique that my mother showed me when I was a wee lass.</p>\n\n<p>There may or may not be better techniques out there, but I know this one works with common household items on-hand.</p>",
+        "time": 600,
+        "number_of_comments": 2,
+        "number_access": 27,
+        "number_of_likes": 0,
+        "number_of_completed": 0
+    },
     "steps": [
         {
             "stepId": "658bf0e414edd9039ddc7b18",

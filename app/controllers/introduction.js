@@ -4,11 +4,18 @@ function loadIntroductionData() {
         .then(data => {
             console.log(data);
             // console.log(data)
-            // renderIntroduction(data);
+            renderIntroduction(data);
             renderStepsThumbList(data.steps);
         });
 }
 loadIntroductionData();
+
+function renderIntroduction(data) {
+    console.log(data.blog_information);
+    console.log(data.blog_information.blog_title);
+    document.querySelector('.guide-title').innerHTML = `
+    ${data.blog_information.blog_title}`;
+}
 
 function renderStepsThumbList(steps) {
     const stepsData = steps;
