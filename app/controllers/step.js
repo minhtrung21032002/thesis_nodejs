@@ -17,11 +17,16 @@ function renderStepContentDiv(step_content) {
 
     step_content.forEach(step => {
         console.log(step);
-        const div = document.createElement('div');
-        div.classList.add('p-inline');
-        div.innerHTML = step.content_div;
-        document.getElementById('myEditor').appendChild(div);
-        newTextEditor(div);
+        const lineDiv = document.createElement('div');
+        lineDiv.classList.add('line');
+        const paragraph = document.createElement('div');
+        paragraph.classList.add('p-inline');
+        paragraph.innerHTML = step.content_div;
+
+        lineDiv.insertAdjacentHTML('afterbegin', '<div class="icon fa fa-circle bullet"></div>');
+        lineDiv.appendChild(paragraph);
+        document.getElementById('myEditor').appendChild(lineDiv);
+        newTextEditor(paragraph);
     });
 }
 
