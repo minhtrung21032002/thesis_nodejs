@@ -382,6 +382,7 @@ button {
 }
 
 .image-container {
+    float: left;
     width: 300px;
     margin-bottom: 10px;
 }
@@ -390,13 +391,9 @@ button {
     border-radius: 4px !important;
 }
 
-img.fotorama__img {
-    /* width: 275px !important; */
-    /* object-fit: contain; */
-    /* height: auto !important; */
-}
 .step-guide {
-    /* float: right; */
+    width: calc(100% - 350px);
+    float: right;
     font-size: 14px;
     margin-bottom: 10px;
 }
@@ -422,7 +419,7 @@ img.fotorama__img {
     margin: 0;
 }
 .comment-section {
-    /* display: none; */
+    clear: both;
     margin-top: 10px;
 }
 
@@ -613,6 +610,8 @@ img.fotorama__img {
 .team-meta {
     padding: 1.25rem;
 }
+
+/*  PAGE STEP */
 
 /* PAGE COMMENTS SECTION */
 .comments-container {

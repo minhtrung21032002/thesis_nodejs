@@ -144,19 +144,23 @@
             }
 
             #draggable-list {
+                margin-top: 10px;
                 display: flex;
                 list-style-type: none;
                 flex-wrap: wrap;
+                gap: 10px;
                 padding: 0;
             }
 
             .draggable-item {
                 background-color: #f0f0f0;
                 border: 1px solid #ccc;
-                padding: 10px;
-                margin: 5px;
                 cursor: move;
                 /* min-width: 25px; */
+            }
+
+            .draggable-item img {
+                height: 100%;
             }
 
             .sidebarFloat {
@@ -306,9 +310,6 @@
                 </div>
             </div>
         </div>
-        <script
-            src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
-            referrerpolicy="origin"></script>
 
         <script
             src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
@@ -321,7 +322,9 @@
                     'alignleft aligncenter alignright alignjustify | ' +
                     'bullist numlist checklist outdent indent | removeformat | a11ycheck code table',
                 menubar: false,
+                plugins: 'autoresize',
                 height: 220,
+                statusbar: false,
             });
             tinymce.init({
                 selector: '#mytextarea2',
@@ -330,26 +333,10 @@
                     'alignleft aligncenter alignright alignjustify | ' +
                     'bullist numlist checklist outdent indent | removeformat | a11ycheck code table',
                 menubar: false,
+                plugins: 'autoresize',
                 height: 220,
+                statusbar: false,
             });
-        </script>
-
-        <script>
-            // document.addEventListener('DOMContentLoaded', function () {
-            //     const draggableList = new Draggable.Sortable(document.querySelectorAll('#draggable-list'), {
-            //         draggable: '.draggable-item',
-            //         mirror: {
-            //             constrainDimensions: true,
-            //         },
-            //     });
-
-            //     draggableList.on('sortable:stop', event => {
-            //         // Handle the drop event as needed
-            //         const draggedItem = event.data.dragEvent.source;
-            //         const itemId = draggedItem.getAttribute('data-id');
-            //         console.log('Dropped item with ID:', itemId);
-            //     });
-            // });
         </script>
 
         <script>
@@ -453,5 +440,7 @@
                 xhr.send(formData);
             }
         </script>
+
+        <script src="../controllers/introduction.js"></script>
     </body>
 </html>
