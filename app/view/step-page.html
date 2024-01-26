@@ -207,6 +207,15 @@
                 margin-top: 10px;
             }
 
+            button {
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+            }
+
+            button:hover {
+                opacity: 0.8;
+            }
+
             #addBtn {
                 display: block;
                 margin-left: auto;
@@ -214,6 +223,11 @@
                 margin-top: 10px;
                 margin-bottom: 10px;
                 border: none;
+            }
+
+            #addBtn:hover {
+                background-color: #4b5563;
+                color: white;
             }
 
             #saveBtn {
@@ -404,7 +418,7 @@
                 const stepContentArray = [];
 
                 paragraphsArray.forEach((paragraph, index) => {
-                    const content = paragraph.textContent.trim();
+                    const content = paragraph.innerHTML.trim();
 
                     const stepContentObj = {
                         content_div_number: index + 1,
@@ -439,5 +453,7 @@
         <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
 
         <script src="../controllers/step.js"></script>
+
+        <script type="module" src=""></script>
     </body>
 </html>

@@ -1,5 +1,6 @@
 let stepsData;
-fetch('http://localhost:3000/guide/blog/edit/steps/api/657e6ae5817b8b95953fa2ac/658bf0e414edd9039ddc7b18')
+// fetch('http://localhost:3000/guide/blog/edit/steps/api/657e6ae5817b8b95953fa2ac/658bf0e414edd9039ddc7b18')
+fetch('../../data/step_edit.json')
     .then(response => {
         console.log(response);
         return response.json();
@@ -8,10 +9,23 @@ fetch('http://localhost:3000/guide/blog/edit/steps/api/657e6ae5817b8b95953fa2ac/
         console.log(data);
         stepsData = data.steps;
         renderStepsThumbList(data.steps);
+        renderStepContentDiv(data.primary_step.step_content);
     });
 
+function renderStepContentDiv(step_content) {
+    console.log(step_content);
+
+    step_content.forEach(step => {
+        console.log(step);
+        const div = document.createElement('div');
+        div.classList.add('p-inline');
+        div.innerHTML = step.content_div;
+        document.getElementById('myEditor').appendChild(div);
+        newTextEditor(div);
+    });
+}
+
 function renderStepsThumbList(steps) {
-    console.log(steps)
     const stepsData = steps;
     let stepsHtml = '';
     stepsData.forEach(step => {
