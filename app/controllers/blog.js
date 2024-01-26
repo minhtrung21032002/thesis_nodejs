@@ -1,7 +1,7 @@
 let dataGlo;
 function loadBlogData(blogId) {
-    fetch(`http://localhost:3000/guide/blog/api/${blogId}`)
-        //fetch('../../data/blog_data.json')
+    // fetch(`http://localhost:3000/guide/blog/api/${blogId}`)
+    fetch('../../data/blog_data.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (Status: ${response.status})`);
@@ -43,19 +43,21 @@ function loadBlogData(blogId) {
 
             document.querySelector('.guide-intro-main h2').insertAdjacentHTML('afterend', `${introduction}`);
 
-            data.steps.forEach((step) => { renderStep(step, user_id) });
+            data.steps.forEach(step => {
+                renderStep(step, user_id);
+            });
 
             renderComments(data.summary_comments);
         })
         .catch(error => console.error(`Error fetching blog data: ${error.message}`, error));
 }
-
+loadBlogData();
 
 function renderStep(step, user_id) {
-    console.log('user_id')
-    console.log(user_id)
+    console.log('user_id');
+    console.log(user_id);
 
-    console.log(step.stepId)
+    console.log(step.stepId);
     const stepList = document.getElementById('steps-container');
     const stepItem = document.createElement('li');
     stepItem.classList.add('step', 'step-wrapper');
@@ -63,10 +65,12 @@ function renderStep(step, user_id) {
         <div class="step-title">Step ${step.step_number[0]}: Identify the problem</div>
         <div class="image-container">
         <div class="fotorama"
+             data-width="100%" 
              data-nav="thumbs"
-             data-loop="false"
-             data-arrows="false"> 
+        > 
              ${renderImages(step.step_imgs)}
+             <img src="../../assets/img/cat.jpg" alt="" />
+             <img src="../../assets/img/cat.jpg" alt="" />
         </div>
            
         </div>
@@ -93,18 +97,24 @@ function renderStep(step, user_id) {
                 </div>                                  
         </div>
     `;
+
     stepList.appendChild(stepItem);
+    $('.fotorama').fotorama();
 }
 
 // Function to render step images
 function renderImages(images) {
     // prettier-ignore
-    return images.map((image, index) => `
-    <a href="${image.img_url}"
-       ${index === 1 ? ' onmouseover="changeMainImage(this)"' : ''}>
-       <img src="${image.img_url}" alt="Step Image ${image.img_number}" width=275>
+    //
+    return images
+        .map(
+            (image, index) => `
+    <a href="${image.img_url}">
+       <img src="${image.img_url}" alt="Step Image ${image.img_number}" width="100%">
     </a>
-    `).join('');
+    `
+        )
+        .join('');
 }
 
 // Function to render step content
@@ -191,7 +201,6 @@ function postComment(button, step_id, user_id) {
     // /guide/blog/comment/step/:step_id/:user_id
     var commentText = commentTextarea.value.trim();
 
-
     if (commentText !== '') {
         // Prepare the data to be sent
         var postData = {
@@ -202,7 +211,6 @@ function postComment(button, step_id, user_id) {
         // localhost:3000/guide/blog/comment/step/658bf0e414edd9039ddc7b18/658e8240bcdfd9edfeeabd2e
         // Make the fetch POST request
         fetch(`http://localhost:3000/guide/blog/comment/step/${step_id}/${user_id}`, {
-
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -225,7 +233,6 @@ function postComment(button, step_id, user_id) {
             .catch(error => {
                 console.error('Error posting comment:', error);
             });
-
     }
 }
 
