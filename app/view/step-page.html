@@ -116,6 +116,7 @@
                 font-size: 14px;
                 text-align: center;
                 transition: border-color 0.1s, background-color 0.1s;
+                appearance: none;
                 -webkit-appearance: none;
             }
 
@@ -276,10 +277,11 @@
                 background-size: contain;
             }
 
-            .input-field-container:first-of-type {
+            .input-field-container.first-input-field {
                 background-position: center;
                 background-size: cover;
                 height: 140px;
+                margin-bottom: 10px;
             }
 
             .input-field-container .multiple-input {
@@ -292,18 +294,21 @@
             .input-field-container .image-wrapper {
                 background-color: transparent;
                 width: 100%;
-                height: 80px;
+                height: 100%;
             }
 
             .input-field-container .image {
                 display: block;
                 width: 100%;
+                height: 100%;
             }
 
             .input-field-container .image img {
                 display: block;
                 width: 100%;
+                height: 100%;
                 object-fit: cover;
+                overflow: hidden;
             }
         </style>
     </head>
@@ -313,7 +318,7 @@
             <h2 class="history-heading" style="margin-top: 20px">
                 Install LED Pod Lights on a Off-Road Truck Jeeptall
             </h2>
-            <div class="contentFLoat" style="float: left; width: 600px">
+            <div class="contentFLoat" style="float: left; width: 640px">
                 <div style="border: 1px solid #ccc"></div>
                 <div class="tabWrap">
                     <ul class="tabs">
@@ -359,39 +364,40 @@
                     <div class="clearer"></div>
                 </div>
 
-                <div style="float: left; width: 55%">
+                <div style="float: left; width: 55%; margin-left: -20px">
                     <section class="container mt-4">
-                        <div class="image-container">
-                            <div class="row">
-                                <div class="input-field-container col-12 my-2">
-                                    <!-- Dùng custom-file-input để ẩn nút input (UI) -->
-                                    <input
-                                        type="file"
-                                        accept="image/jpeg, image/png, image/jpg"
-                                        class="multiple-input custom-file-input" />
-                                    <div class="image-wrapper my-2"></div>
-                                </div>
-                                <div class="input-field-container col-4">
-                                    <input
-                                        type="file"
-                                        accept="image/jpeg, image/png, image/jpg"
-                                        class="multiple-input custom-file-input" />
-                                    <div class="image-wrapper"></div>
-                                </div>
-                                <div class="input-field-container col-4">
-                                    <input
-                                        type="file"
-                                        accept="image/jpeg, image/png, image/jpg"
-                                        class="col-12 multiple-input custom-file-input" />
-                                    <div class="image-wrapper"></div>
-                                </div>
-                                <div class="input-field-container col-4">
-                                    <input
-                                        type="file"
-                                        accept="image/jpeg, image/png, image/jpg"
-                                        class="multiple-input custom-file-input" />
-                                    <div class="image-wrapper"></div>
-                                </div>
+                        <div class="row">
+                            <div class="input-field-container first-input-field col-12">
+                                <!-- Dùng custom-file-input để ẩn nút input (UI) -->
+                                <input
+                                    type="file"
+                                    accept="image/jpeg, image/png, image/jpg"
+                                    class="multiple-input custom-file-input" />
+                                <div class="image-wrapper"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field-container col-4">
+                                <input
+                                    type="file"
+                                    accept="image/jpeg, image/png, image/jpg"
+                                    class="multiple-input custom-file-input" />
+                                <div class="image-wrapper"></div>
+                            </div>
+                            <div class="input-field-container col-4">
+                                <input
+                                    type="file"
+                                    accept="image/jpeg, image/png, image/jpg"
+                                    class="col-12 multiple-input custom-file-input" />
+                                <div class="image-wrapper"></div>
+                            </div>
+                            <div class="input-field-container col-4">
+                                <input
+                                    type="file"
+                                    accept="image/jpeg, image/png, image/jpg"
+                                    class="multiple-input custom-file-input" />
+                                <div class="image-wrapper"></div>
                             </div>
                         </div>
                     </section>
@@ -402,7 +408,7 @@
                         <p class="p-inline">Your wisdom here</p>
                     </div>
 
-                    <div class="actionsContainer mb-5">
+                    <div class="actionsContainer mb-3">
                         <button class="btn btn-success" id="addBtn">Add <i class="fa-solid fa-plus"></i></button>
                     </div>
 
