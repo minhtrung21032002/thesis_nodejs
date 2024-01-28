@@ -12,6 +12,12 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer" />
 
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous" />
+
         <style>
             * {
                 margin: 0;
@@ -257,6 +263,48 @@
                 color: white;
                 font-weight: 600;
             }
+
+            /* My custom image-container */
+            .image-container {
+                width: 100%;
+            }
+
+            .input-field-container {
+                height: 80px;
+                position: relative;
+                background: url('../../assets/img/no-default-thumbnail.png') center no-repeat;
+                background-size: contain;
+            }
+
+            .input-field-container:first-of-type {
+                background-position: center;
+                background-size: cover;
+                height: 140px;
+            }
+
+            .input-field-container .multiple-input {
+                position: absolute;
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+
+            .input-field-container .image-wrapper {
+                background-color: transparent;
+                width: 100%;
+                height: 80px;
+            }
+
+            .input-field-container .image {
+                display: block;
+                width: 100%;
+            }
+
+            .input-field-container .image img {
+                display: block;
+                width: 100%;
+                object-fit: cover;
+            }
         </style>
     </head>
 
@@ -311,7 +359,45 @@
                     <div class="clearer"></div>
                 </div>
 
-                <div style="margin-top: 20px; width: 50%; float: right">
+                <div style="float: left; width: 55%">
+                    <section class="container mt-4">
+                        <div class="image-container">
+                            <div class="row">
+                                <div class="input-field-container col-12 my-2">
+                                    <!-- Dùng custom-file-input để ẩn nút input (UI) -->
+                                    <input
+                                        type="file"
+                                        accept="image/jpeg, image/png, image/jpg"
+                                        class="multiple-input custom-file-input" />
+                                    <div class="image-wrapper my-2"></div>
+                                </div>
+                                <div class="input-field-container col-4">
+                                    <input
+                                        type="file"
+                                        accept="image/jpeg, image/png, image/jpg"
+                                        class="multiple-input custom-file-input" />
+                                    <div class="image-wrapper"></div>
+                                </div>
+                                <div class="input-field-container col-4">
+                                    <input
+                                        type="file"
+                                        accept="image/jpeg, image/png, image/jpg"
+                                        class="col-12 multiple-input custom-file-input" />
+                                    <div class="image-wrapper"></div>
+                                </div>
+                                <div class="input-field-container col-4">
+                                    <input
+                                        type="file"
+                                        accept="image/jpeg, image/png, image/jpg"
+                                        class="multiple-input custom-file-input" />
+                                    <div class="image-wrapper"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div style="margin-top: 20px; width: 45%; float: right">
                     <div class="editContent" id="myEditor">
                         <p class="p-inline">Your wisdom here</p>
                     </div>
@@ -401,6 +487,7 @@
             referrerpolicy="origin"></script>
 
         <script>
+            // Editor START
             function newTextEditor(targetElement) {
                 const editor = tinymce.init({
                     target: targetElement,
@@ -471,7 +558,27 @@
                         console.error('Error occurred:', error);
                     });
             });
+            // Editor END
+
+            // Image Input START
+            // Upload Single Image with Multiple Input
+            const inputs = document.querySelectorAll('.multiple-input');
+            inputs.forEach(input => {
+                console.log(input);
+                input.addEventListener('change', function () {
+                    const file = input.files;
+                    console.log(file);
+                    console.log(input.nextElementSibling);
+                    console.log(input.nextElementSibling.innerHTML);
+                    input.nextElementSibling.innerHTML = `<div class="image"><img src="${URL.createObjectURL(
+                        file[0]
+                    )}" alt="image"></div> `;
+                });
+            });
+
+            // Image Input END
         </script>
+
         <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
 
         <script src="../controllers/step.js"></script>
