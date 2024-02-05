@@ -1,6 +1,6 @@
 let stepsData;
-// fetch('http://localhost:3000/guide/blog/edit/steps/api/657e6ae5817b8b95953fa2ac/658bf0e414edd9039ddc7b18')
-fetch('../../data/step_edit.json')
+ fetch('http://localhost:3000/guide/blog/edit/steps/api/657e6ae5817b8b95953fa2ac/658bf0e414edd9039ddc7b18')
+//fetch('../../data/step_edit.json')
     .then(response => {
         console.log(response);
         return response.json();

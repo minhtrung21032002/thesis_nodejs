@@ -1,7 +1,7 @@
 let dataGlo;
 function loadBlogData(blogId) {
-    // fetch(`http://localhost:3000/guide/blog/api/${blogId}`)
-    fetch('../../data/blog_data.json')
+    fetch(`http://localhost:3000/guide/blog/api/${blogId}`)
+    //fetch('../../data/blog_data.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (Status: ${response.status})`);
@@ -51,7 +51,7 @@ function loadBlogData(blogId) {
         })
         .catch(error => console.error(`Error fetching blog data: ${error.message}`, error));
 }
-loadBlogData();
+//loadBlogData();
 
 function renderStep(step, user_id) {
     console.log('user_id');
@@ -69,8 +69,7 @@ function renderStep(step, user_id) {
              data-nav="thumbs"
         > 
              ${renderImages(step.step_imgs)}
-             <img src="../../assets/img/cat.jpg" alt="" />
-             <img src="../../assets/img/cat.jpg" alt="" />
+
         </div>
            
         </div>
@@ -196,7 +195,7 @@ function toggleComments(button) {
 
 function postComment(button, step_id, user_id) {
     var commentInputContainer = button.closest('.comment-input');
-
+    
     var commentTextarea = commentInputContainer.querySelector('textarea');
     // /guide/blog/comment/step/:step_id/:user_id
     var commentText = commentTextarea.value.trim();
@@ -210,6 +209,8 @@ function postComment(button, step_id, user_id) {
         };
         // localhost:3000/guide/blog/comment/step/658bf0e414edd9039ddc7b18/658e8240bcdfd9edfeeabd2e
         // Make the fetch POST request
+
+       
         fetch(`http://localhost:3000/guide/blog/comment/step/${step_id}/${user_id}`, {
             method: 'POST',
             headers: {
@@ -235,6 +236,55 @@ function postComment(button, step_id, user_id) {
             });
     }
 }
+
+function postSummaryComment(button){
+
+
+    const { _id: user_id} = dataGlo.user_information;
+    const { _id: blog_id,} = dataGlo.blog_information;
+    console.log('post summary comment')
+    var commentInputContainer = button.closest('.comment-input');
+    var textarea = commentInputContainer.querySelector('textarea');
+    // Get the input value of the textarea
+    var commentText = textarea.value;
+
+    if (commentText !== '') {
+        // Prepare the data to be sent
+        var postData = {
+            author: 'Your Name', // You can replace this with the actual author information
+            date: getCurrentDate(),
+            text: commentText,
+        };
+        // localhost:3000/guide/blog/comment/step/658bf0e414edd9039ddc7b18/658e8240bcdfd9edfeeabd2e
+        // Make the fetch POST request
+
+       
+        fetch(`http://localhost:3000/guide/blog/comment/summary/${blog_id}/${user_id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData),
+        })
+            .then(response => {
+                console.log(response);
+                if (response.status === 200) {
+                    // Reload the page
+                    window.location.reload();
+                }
+                return response.json();
+            })
+
+            .then(data => {
+                // Handle the response data if needed
+                console.log('Comment posted successfully:', data);
+            })
+            .catch(error => {
+                console.error('Error posting comment:', error);
+            });
+    }
+}
+
 
 function getCurrentDate() {
     var currentDate = new Date();
