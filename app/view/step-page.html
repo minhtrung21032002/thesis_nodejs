@@ -265,50 +265,64 @@
                 font-weight: 600;
             }
 
-            /* My custom image-container */
+            /* Image container */
             .image-container {
-                width: 100%;
-            }
-
-            .input-field-container {
-                height: 80px;
                 position: relative;
-                background: url('../../assets/img/no-default-thumbnail.png') center no-repeat;
-                background-size: contain;
-            }
-
-            .input-field-container.first-input-field {
-                background-position: center;
-                background-size: cover;
-                height: 140px;
+                border: 1px solid #ddd;
+                padding: 7px;
                 margin-bottom: 10px;
+                width: 96px;
+                height: 72px;
             }
 
-            .input-field-container .multiple-input {
+            .image-container#bigStepImage {
+                width: 300px;
+                height: 225px;
+            }
+
+            .image-container .icon {
                 position: absolute;
-                display: block;
+                display: grid;
+                place-items: center;
+                align-items: center;
                 width: 100%;
                 height: 100%;
+                top: 0;
+                left: 0;
+                font-size: 30px;
+                transition: all 0.4s ease;
             }
 
-            .input-field-container .image-wrapper {
-                background-color: transparent;
+            .image-container:hover {
+                background-color: #95edb6ff;
+            }
+
+            .image-container:hover .icon {
+                color: #7bc797ff;
+            }
+
+            .image-wrapper {
                 width: 100%;
                 height: 100%;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
             }
 
-            .input-field-container .image {
-                display: block;
-                width: 100%;
-                height: 100%;
-            }
-
-            .input-field-container .image img {
-                display: block;
+            .image-wrapper img {
+                /* display: block;   */
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                overflow: hidden;
+            }
+
+            .input-image {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                opacity: 0;
             }
         </style>
     </head>
@@ -364,43 +378,31 @@
                     <div class="clearer"></div>
                 </div>
 
-                <div style="float: left; width: 55%; margin-left: -20px">
-                    <section class="container mt-4">
-                        <div class="row">
-                            <div class="input-field-container first-input-field col-12">
-                                <!-- Dùng custom-file-input để ẩn nút input (UI) -->
-                                <input
-                                    type="file"
-                                    accept="image/jpeg, image/png, image/jpg"
-                                    class="multiple-input custom-file-input" />
-                                <div class="image-wrapper"></div>
-                            </div>
+                <div class="container" style="width: 302px; float: left">
+                    <div class="row">
+                        <div class="col-12 image-container" id="bigStepImage">
+                            <div class="image-wrapper"></div>
+                            <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                            <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
                         </div>
-
-                        <div class="row">
-                            <div class="input-field-container col-4">
-                                <input
-                                    type="file"
-                                    accept="image/jpeg, image/png, image/jpg"
-                                    class="multiple-input custom-file-input" />
-                                <div class="image-wrapper"></div>
-                            </div>
-                            <div class="input-field-container col-4">
-                                <input
-                                    type="file"
-                                    accept="image/jpeg, image/png, image/jpg"
-                                    class="col-12 multiple-input custom-file-input" />
-                                <div class="image-wrapper"></div>
-                            </div>
-                            <div class="input-field-container col-4">
-                                <input
-                                    type="file"
-                                    accept="image/jpeg, image/png, image/jpg"
-                                    class="multiple-input custom-file-input" />
-                                <div class="image-wrapper"></div>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 image-container">
+                            <div class="image-wrapper thumb-wrapper"></div>
+                            <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                            <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
                         </div>
-                    </section>
+                        <div class="col-4 image-container">
+                            <div class="image-wrapper thumb-wrapper"></div>
+                            <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                            <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
+                        </div>
+                        <div class="col-4 image-container">
+                            <div class="image-wrapper thumb-wrapper"></div>
+                            <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                            <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
+                        </div>
+                    </div>
                 </div>
 
                 <div style="margin-top: 20px; width: 45%; float: right">
@@ -476,12 +478,6 @@
                 </div>
             </div>
             <div style="clear: both"></div>
-
-            <h2>Upload images</h2>
-            <div id="stepMediaImages">
-                <div></div>
-                <div></div>
-            </div>
         </div>
 
         <script
@@ -568,20 +564,57 @@
 
             // Image Input START
             // Upload Single Image with Multiple Input
-            const inputs = document.querySelectorAll('.multiple-input');
-            inputs.forEach(input => {
-                console.log(input);
+            const stepImages = [];
+
+            const inputs = document.querySelectorAll('.input-image');
+            const imgWrappers = document.querySelectorAll('.image-wrapper.thumb-wrapper');
+            const bigStepImage = document.querySelector('#bigStepImage .image-wrapper');
+
+            function displayImages() {
+                stepImages.forEach((img, index) => {
+                    imgWrappers[index].innerHTML = `<img src="${img.img_url}" alt=""/>`;
+                    imgWrappers[index].nextElementSibling.style.display = 'none';
+                });
+                bigStepImage.innerHTML = `<img src="${stepImages[0].img_url}" alt=""/>`;
+                bigStepImage.nextElementSibling.style.display = 'none';
+            }
+
+            if (stepImages.length > 0) {
+                stepImages.forEach((img, index) => {
+                    console.log(imgWrappers[index]);
+                    imgWrappers[index].innerHTML = `<img src="${img.img_url}" alt=""/>`;
+                    imgWrappers[index].nextElementSibling.style.display = 'none';
+                });
+                displayImages();
+            }
+
+            // Upload single image
+            inputs.forEach((input, index) => {
                 input.addEventListener('change', function () {
                     const file = input.files;
-                    console.log(file);
-                    console.log(input.nextElementSibling);
-                    console.log(input.nextElementSibling.innerHTML);
-                    input.nextElementSibling.innerHTML = `<div class="image"><img src="${URL.createObjectURL(
-                        file[0]
-                    )}" alt="image"></div> `;
+                    console.log(URL.createObjectURL(file[0]));
+                    const newStepImg = {
+                        img_url: `${URL.createObjectURL(file[0])}`,
+                        img_number: 1,
+                        _id: '658bf0e414edd9039ddc7b19',
+                    };
+                    if (index < 2) {
+                        stepImages[0] = newStepImg; // Update the image at index 0 for the first and second inputs
+                    } else {
+                        stepImages[index - 1] = newStepImg; // Update the image at the exact position for inputs from 3 onwards
+                    }
+                    console.log(stepImages);
+                    displayImages();
                 });
             });
 
+            /**
+             * Một primary step images chứa một array step_imgs:[] chứa tối đa 3 {}
+             * Khung ảnh chính chứa img đầu tiên hoặc có default input nếu array trống
+             * Một khung chứa tối đa 3item ảnh nhỏ hoặc 3 input-field-container nếu array trống
+             * Khi click vào mỗi input sẽ thêm vào mảng một file ảnh và hiển thị ảnh đó trong khung ảnh nhỏ tương ứng
+             * Khi hover vào ảnh nhỏ sẽ hiển thị nút xóa ảnh và hiển thị ảnh đó trong khung ảnh chính
+             */
             // Image Input END
         </script>
 
