@@ -1,5 +1,13 @@
 let stepsData;
- fetch('http://localhost:3000/guide/blog/edit/steps/api/657e6ae5817b8b95953fa2ac/658bf0e414edd9039ddc7b18')
+
+// Get Blog ID and Step ID
+
+const urlParams = new URLSearchParams(window.location.search);
+const blogId = urlParams.get('blog_id');
+const stepId = urlParams.get('step_id');
+
+
+ fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
 //fetch('../../data/step_edit.json')
     .then(response => {
         console.log(response);

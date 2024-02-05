@@ -310,4 +310,20 @@ console.log(blogId);
 // Load blog data on page load
 if (blogId) {
     loadBlogData(blogId);
+    editPageHref(blogId);
 }
+
+
+
+function editPageHref(blogId){
+
+    const blogEditBtn = document.getElementsByClassName('blog-edit-btn')[0];
+    console.log('blog id: ' + blogId);
+
+    // Update the href property
+    blogEditBtn.href = `./introduction-page.html?id=${blogId}`;
+
+    // Log the updated href value
+    console.log(blogEditBtn.href);
+}
+
