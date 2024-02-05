@@ -6,20 +6,22 @@ const urlParams = new URLSearchParams(window.location.search);
 const blogId = urlParams.get('blog_id');
 const stepId = urlParams.get('step_id');
 
+function getStepData(){
+    fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
+    //fetch('../../data/step_edit.json')
+        .then(response => {
+            console.log(response);
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            stepsData = data.steps;
+            renderStepsThumbList(data.steps);
+            renderStepContentDiv(data.primary_step.step_content);
+        });
+}
 
- fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
-//fetch('../../data/step_edit.json')
-    .then(response => {
-        console.log(response);
-        return response.json();
-    })
-    .then(data => {
-        console.log(data);
-        stepsData = data.steps;
-        renderStepsThumbList(data.steps);
-        renderStepContentDiv(data.primary_step.step_content);
-    });
-
+getStepData()
 function renderStepContentDiv(step_content) {
     console.log(step_content);
 
@@ -44,13 +46,19 @@ function renderStepsThumbList(steps) {
     stepsData.forEach(step => {
         // console.log(step.step_imgs);
         stepsHtml += `
-            <div class="draggable-item" data-id="${step.step_number[0]}">
-            <img src="${step.step_imgs[0].img_url}" alt="" width=40 />
-            </div>
-        `;
+        <div class="draggable-item" data-id="${step.step_number[0]}">
+            <img src="${step.step_imgs[0].img_url}" alt="" width=40 onclick="newStepId('${step.stepId}')"/>
+        </div>
+    `;
     });
 
     document.querySelector('#draggable-list').innerHTML = stepsHtml;
+}
+
+function newStepId(clickedStepId){
+    const newUrl = `./step-page.html?blog_id=${blogId}&step_id=${clickedStepId}`;
+    history.pushState({}, '', newUrl);
+    location.reload();
 }
 
 document.addEventListener('DOMContentLoaded', function () {
