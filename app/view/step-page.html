@@ -488,6 +488,10 @@
             src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+
+        <script src="../controllers/step.js"></script>
+
         <script>
             // Editor START
             function newTextEditor(targetElement) {
@@ -501,8 +505,6 @@
                     plugins: 'autoresize',
                     statusbar: false,
                 });
-
-                console.log(editor);
             }
 
             document.getElementById('addBtn').addEventListener('click', () => {
@@ -562,11 +564,5 @@
             });
             // Editor END
         </script>
-
-        <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
-
-        <script src="../controllers/step.js"></script>
-
-        <script type="module" src=""></script>
     </body>
 </html>

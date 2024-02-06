@@ -7,8 +7,8 @@ const blogId = urlParams.get('blog_id');
 const stepId = urlParams.get('step_id');
 
 function getStepData() {
-    fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
-        // fetch('../../data/step_edit.json')
+    // fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
+    fetch('../../data/step_edit.json')
         .then(response => {
             console.log(response);
             return response.json();
@@ -18,7 +18,9 @@ function getStepData() {
             stepsData = data.steps;
             renderStepsThumbList(data.steps);
             renderStepContentDiv(data.primary_step.step_content);
-            displayImages(data.primary_step.step_imgs);
+            renderMainContent(data.blog_information, data.primary_step);
+            stepImages = [...data.primary_step.step_imgs];
+            displayImages(stepImages);
         });
 }
 getStepData();
@@ -30,9 +32,9 @@ getStepData();
 const inputs = document.querySelectorAll('.input-image');
 const imgWrappers = document.querySelectorAll('.image-wrapper.thumb-wrapper');
 const bigStepImage = document.querySelector('#bigStepImage .image-wrapper');
+let stepImages = [];
 
-function displayImages(data) {
-    const stepImages = [...data];
+function displayImages(stepImages) {
     stepImages.forEach((img, index) => {
         imgWrappers[index].innerHTML = `<img src="${img.img_url}" alt=""/>`;
         imgWrappers[index].nextElementSibling.style.display = 'none';
@@ -47,7 +49,7 @@ if (stepImages.length > 0) {
         imgWrappers[index].innerHTML = `<img src="${img.img_url}" alt=""/>`;
         imgWrappers[index].nextElementSibling.style.display = 'none';
     });
-    displayImages();
+    displayImages(stepImages);
 }
 
 // Upload single image
@@ -55,18 +57,20 @@ inputs.forEach((input, index) => {
     input.addEventListener('change', function () {
         const file = input.files;
         console.log(URL.createObjectURL(file[0]));
+        console.log(stepImages);
         const newStepImg = {
             img_url: `${URL.createObjectURL(file[0])}`,
             img_number: 1,
             _id: '658bf0e414edd9039ddc7b19',
         };
+        console.log(newStepImg);
         if (index < 2) {
             stepImages[0] = newStepImg; // Update the image at index 0 for the first and second inputs
         } else {
             stepImages[index - 1] = newStepImg; // Update the image at the exact position for inputs from 3 onwards
         }
         console.log(stepImages);
-        displayImages();
+        displayImages(stepImages);
     });
 });
 /**
@@ -77,6 +81,11 @@ inputs.forEach((input, index) => {
  * Khi hover vào ảnh nhỏ sẽ hiển thị nút xóa ảnh và hiển thị ảnh đó trong khung ảnh chính
  */
 // Image Input END
+
+function renderMainContent(blog_info, primary_step) {
+    document.querySelector('.history-heading').innerHTML = blog_info.blog_title;
+    document.querySelector('.step-title').innerHTML = `Editing Step - ${primary_step.step_number[0]}  `;
+}
 
 function renderStepContentDiv(step_content) {
     console.log(step_content);
