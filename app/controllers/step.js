@@ -56,13 +56,27 @@ function renderStepsThumbList(steps) {
 }
 
 function newStepId(clickedStepId){
+    // Update url
     const newUrl = `./step-page.html?blog_id=${blogId}&step_id=${clickedStepId}`;
     history.pushState({}, '', newUrl);
     location.reload();
 }
 
+function newHrefIntroduction(){
+        // Get the link element by its id
+    const introductionTab = document.getElementById('introductionTab');
+    const newHref = introductionTab.href = `./introduction-page.html?id=${blogId}`;
+    
+    console.log('Introduction href:', newHref);
+
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     let isDraggingEnabled = false;
+
+    // Update href value of introduction
+    newHrefIntroduction()
+
 
     function toggleButtonsVisibility(isDraggingEnabled) {
         const saveCancelButtons = document.getElementById('saveCancelButtons');
