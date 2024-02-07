@@ -84,16 +84,21 @@ inputs.forEach((input, index) => {
 function renderMainContent(blog_info, primary_step, steps) {
     document.querySelector('.history-heading').innerHTML = blog_info.blog_title;
     document.querySelector('.step-title').innerHTML = `Editing Step - ${primary_step.step_number[0]}  `;
-    currentStep = primary_step.step_number[0];
+    currentStepNumber = primary_step.step_number[0]; // stepnumber = 1 => steps[0]
+    console.log('current step')
+    console.log(currentStepNumber)
     steps.forEach(step => {
         console.log(step.step_number[0]);
     });
     // nextStep;
-    if (currentStep === 1) {
-        document.querySelector('#deleteStep').href = `./step-page.html?blog_id=${blogId}&step_id= ${steps[1].stepId} `;
+    if (currentStepNumber === 1) {
+        const nextStep = steps[1].stepId
+        document.querySelector('#deleteStep').href = `./step-page.html?blog_id=${blogId}&step_id=${nextStep} `;
     } else {
-        document.querySelector('#deleteStep').href = `./step-page.html?blog_id=${blogId}&step_id= ${
-            steps[currentStep - 1].stepId
+      
+        const previousStep = steps[currentStepNumber - 2 ].stepId
+        document.querySelector('#deleteStep').href = `./step-page.html?blog_id=${blogId}&step_id=${
+            previousStep
         } `;
     }
 }
@@ -129,7 +134,7 @@ function renderStepsThumbList(steps) {
     document.querySelector('#draggable-list').innerHTML = stepsHtml;
 }
 
-function newStepId(clickedStepId) {
+
 function newStepId(clickedStepId) {
     // Update url
     const newUrl = `./step-page.html?blog_id=${blogId}&step_id=${clickedStepId}`;
@@ -137,8 +142,7 @@ function newStepId(clickedStepId) {
     location.reload();
 }
 
-function newHrefIntroduction() {
-    // Get the link element by its id
+
 function newHrefIntroduction() {
     // Get the link element by its id
     const introductionTab = document.getElementById('introductionTab');
