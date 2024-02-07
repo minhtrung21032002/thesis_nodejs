@@ -29,6 +29,10 @@ function loadBlogData(blogId) {
             document.querySelector('.guide-author').innerHTML = `
             ${user_name}
         `;
+            console.log(data.steps[0].step_imgs[0])
+            document.querySelector('.thumbnail').src = `${data.steps[0].step_imgs[0].img_url}`;
+
+
 
             const formattedDate = new Intl.DateTimeFormat('en-US', {
                 month: 'long',

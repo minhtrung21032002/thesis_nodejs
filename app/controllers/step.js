@@ -1,4 +1,10 @@
 let stepsData;
+// note: Insert .dddd
+function handleDelete() {
+}
+document.querySelector('#deleteStep').addEventListener('click', function () {
+    handleDelete()
+})
 
 // Get Blog ID and Step ID
 
@@ -7,8 +13,8 @@ const blogId = urlParams.get('blog_id');
 const stepId = urlParams.get('step_id');
 
 function getStepData() {
-    // fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
-    fetch('../../data/step_edit.json')
+    fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
+        //fetch('../../data/step_edit.json')
         .then(response => {
             console.log(response);
             return response.json();
@@ -120,25 +126,27 @@ function renderStepsThumbList(steps) {
     document.querySelector('#draggable-list').innerHTML = stepsHtml;
 }
 
-function newStepId(clickedStepId){
+function newStepId(clickedStepId) {
     // Update url
     const newUrl = `./step-page.html?blog_id=${blogId}&step_id=${clickedStepId}`;
     history.pushState({}, '', newUrl);
     location.reload();
 }
 
-function newHrefIntroduction(){
-        // Get the link element by its id
+function newHrefIntroduction() {
+    // Get the link element by its id
     const introductionTab = document.getElementById('introductionTab');
     const newHref = introductionTab.href = `./introduction-page.html?id=${blogId}`;
-    
+
     console.log('Introduction href:', newHref);
 
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+function handleUpdateSteps () {
     let isDraggingEnabled = false;
-
+    // click on insert, append a new empty step, reload the page 
+    // in the render step check if step == null => display image
+    // primary step the same, check if that step data is empty => then delete that step from (user click other step) reload the page
     // Update href value of introduction
     newHrefIntroduction()
 
@@ -207,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function sendPatchRequest(updatedSteps) {
-        const apiUrl = 'http://localhost:3000/guide/blog/edit/steps/657e6ae5817b8b95953fa2ac';
+        const apiUrl = `http://localhost:3000/guide/blog/edit/steps/${blogId}`;
 
         fetch(apiUrl, {
             method: 'PATCH',
@@ -229,4 +237,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error during PATCH request:', error);
             });
     }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    handleUpdateSteps()
 });
+
