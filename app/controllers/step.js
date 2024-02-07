@@ -7,8 +7,8 @@ const blogId = urlParams.get('blog_id');
 const stepId = urlParams.get('step_id');
 
 function getStepData() {
-    // fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
-    fetch('../../data/step_edit.json')
+    fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
+        // fetch('../../data/step_edit.json')
         .then(response => {
             console.log(response);
             return response.json();
@@ -18,7 +18,7 @@ function getStepData() {
             stepsData = data.steps;
             renderStepsThumbList(data.steps);
             renderStepContentDiv(data.primary_step.step_content);
-            renderMainContent(data.blog_information, data.primary_step);
+            renderMainContent(data.blog_information, data.primary_step, data.steps);
             stepImages = [...data.primary_step.step_imgs];
             displayImages(stepImages);
         });
@@ -73,18 +73,23 @@ inputs.forEach((input, index) => {
         displayImages(stepImages);
     });
 });
-/**
- * Một primary step images chứa một array step_imgs:[] chứa tối đa 3 {}
- * Khung ảnh chính chứa img đầu tiên hoặc có default input nếu array trống
- * Một khung chứa tối đa 3item ảnh nhỏ hoặc 3 input-field-container nếu array trống
- * Khi click vào mỗi input sẽ thêm vào mảng một file ảnh và hiển thị ảnh đó trong khung ảnh nhỏ tương ứng
- * Khi hover vào ảnh nhỏ sẽ hiển thị nút xóa ảnh và hiển thị ảnh đó trong khung ảnh chính
- */
 // Image Input END
 
-function renderMainContent(blog_info, primary_step) {
+function renderMainContent(blog_info, primary_step, steps) {
     document.querySelector('.history-heading').innerHTML = blog_info.blog_title;
     document.querySelector('.step-title').innerHTML = `Editing Step - ${primary_step.step_number[0]}  `;
+    currentStep = primary_step.step_number[0];
+    steps.forEach(step => {
+        console.log(step.step_number[0]);
+    });
+    // nextStep;
+    if (currentStep === 1) {
+        document.querySelector('#deleteStep').href = `./step-page.html?blog_id=${blogId}&step_id= ${steps[1].stepId} `;
+    } else {
+        document.querySelector('#deleteStep').href = `./step-page.html?blog_id=${blogId}&step_id= ${
+            steps[currentStep - 1].stepId
+        } `;
+    }
 }
 
 function renderStepContentDiv(step_content) {
@@ -109,39 +114,57 @@ function renderStepsThumbList(steps) {
     const stepsData = steps;
     let stepsHtml = '';
     stepsData.forEach(step => {
-        // console.log(step.step_imgs);
         stepsHtml += `
         <div class="draggable-item" data-id="${step.step_number[0]}">
             <img src="${step.step_imgs[0].img_url}" alt="" width=40 onclick="newStepId('${step.stepId}')"/>
         </div>
     `;
     });
-
     document.querySelector('#draggable-list').innerHTML = stepsHtml;
 }
 
-function newStepId(clickedStepId){
+function newStepId(clickedStepId) {
     // Update url
     const newUrl = `./step-page.html?blog_id=${blogId}&step_id=${clickedStepId}`;
     history.pushState({}, '', newUrl);
     location.reload();
 }
 
-function newHrefIntroduction(){
-        // Get the link element by its id
+function newHrefIntroduction() {
+    // Get the link element by its id
     const introductionTab = document.getElementById('introductionTab');
-    const newHref = introductionTab.href = `./introduction-page.html?id=${blogId}`;
-    
-    console.log('Introduction href:', newHref);
+    const newHref = (introductionTab.href = `./introduction-page.html?id=${blogId}`);
 
+    console.log('Introduction href:', newHref);
 }
 
+// Handle Delete Button
+// document.getElementById('deleteStepButton').addEventListener('click', deleteStep);
+function deleteStep() {
+    console.log('Delete button clicked');
+    const stepId = urlParams.get('step_id');
+    // console.log(stepId);
+    // fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`, {
+    // fetch('../../data/step_edit.json', {
+    //     method: 'DELETE',
+    // })
+    //     .then(response => {
+    //         console.log(response);
+    //         return response.json();
+    //     })
+    //     .then(data => {
+    //         console.log('Step deleted:', data);
+    //         window.location.href = `./introduction-page.html?id=${blogId}`;
+    //     });
+}
+// Delete Button END
+
+// Drag and Drop START
 document.addEventListener('DOMContentLoaded', function () {
     let isDraggingEnabled = false;
 
     // Update href value of introduction
-    newHrefIntroduction()
-
+    newHrefIntroduction();
 
     function toggleButtonsVisibility(isDraggingEnabled) {
         const saveCancelButtons = document.getElementById('saveCancelButtons');
@@ -230,3 +253,4 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 });
+// Drag and Drop END
