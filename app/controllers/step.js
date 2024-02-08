@@ -5,32 +5,28 @@ import { getStorage  } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-
 
 let stepsData;
 let stateData;
-// note: Insert 
+// note: Insert
 
 // Get Blog ID and Step ID
 
 const urlParams = new URLSearchParams(window.location.search);
 const blogId = urlParams.get('blog_id');
 const stepId = urlParams.get('step_id');
-console.log(blogId)
-console.log(stepId)
+console.log(blogId);
+console.log(stepId);
 
 if (stepId == null) {
-
     const parts = blogId.split('/');
 
     const stepNumber = parts[parts.length - 1];
-    const newblogId = parts[0]
+    const newblogId = parts[0];
     console.log(stepNumber); // Output: 8
 
-    getInsertStepData(stepNumber, newblogId)
+    getInsertStepData(stepNumber, newblogId);
 }
 
 function getInsertStepData(stepNumber, blogId) {
-
     fetch(`http://localhost:3000/guide/blog/edit/steps/insert/api/${blogId}`)
-
-
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -41,9 +37,8 @@ function getInsertStepData(stepNumber, blogId) {
         .then(data => {
             // Assuming renderStepsThumbListInsert is a function to render data
 
-            console.log(data.steps)
+            console.log(data.steps);
             renderStepsThumbListInsert(data.steps, stepNumber);
-
         })
         .catch(error => {
             // Handle any errors that occur during the fetch operation or parsing of JSON
@@ -51,41 +46,40 @@ function getInsertStepData(stepNumber, blogId) {
             // You can also notify the user about the error
             alert('An error occurred while fetching data. Please try again later.');
         });
-
 }
 
 function renderStepsThumbListInsert(steps, stepNumber) {
-    const stepsData = steps
     let stepsHtml = '';
-    var incrementedStepNumber 
-    // steps = 4, bam vo 2, stepnumber = 2 
-    steps.forEach(step => {
+    var incrementedStepNumber;
 
+    steps.splice(stepNumber - 1, 0, { step_number: [stepNumber + 1] });
+    steps.forEach(step => {
         if (step.step_number[0] <= stepNumber) {
-            // Preserve step numbers lower than specified stepNumber
-            console.log('lower')
             stepsHtml += `
             <div class="draggable-item" data-id="${step.step_number[0]}">
                 <img src="${step.step_imgs[0].img_url}" alt="" width=40 onclick="newStepId('${step.stepId}')"/>
+            </div>                    
+            `;
+        } else if (step.step_number[0] == stepNumber + 1) {
+            stepsHtml += `
+            <div class="draggable-item" data-id="${step.step_number[0]}">
+                <img src="https://picsum.photos/seed/picsum/200/300" alt="" width=40 onclick=""/>
             </div>
             `;
-        } else if (step.step_number[0] > stepNumber) {
-            console.log(step.step_number[0])
-  incrementedStepNumber = step.step_number[0] + 1;
-            console.log('equal here')
-            // Insert random image for the specified step number
-            // const randomImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvhaxpY0m83_5haTmVh1kdUraYSyHWALEO2VODzEXiUg&s"; // Replace this with your logic to get a random image URL
+        } else if (step.step_number[0] > stepNumber + 1) {
+            console.log(step.step_number[0]);
+            incrementedStepNumber = step.step_number[0] + 1;
+            console.log('equal here');
+
             stepsHtml += `
             <div class="draggable-item" data-id="${incrementedStepNumber}">
                 <img src="${step.step_imgs[0].img_url}" alt="" width=40 onclick="newStepId('${step.stepId}')"/>
             </div>
             `;
-          
-        } 
+        }
     });
 
     document.querySelector('#draggable-list').innerHTML = stepsHtml;
-
 }
 
 function getStepData() {
@@ -98,7 +92,7 @@ function getStepData() {
         .then(data => {
             console.log(data);
             stepsData = data.steps;
-            stateData = data
+            stateData = data;
             renderStepsThumbList(data.steps);
             renderStepContentDiv(data.primary_step.step_content);
             renderMainContent(data.blog_information, data.primary_step, data.steps);
@@ -110,26 +104,22 @@ if (stepId != null) {
     getStepData();
 }
 
-
-
 function handleInsert() {
-    console.log('egeaga')
-    console.log(stateData)
-    const stepNumber = stateData.primary_step.step_number[0]
-    console.log(stepNumber)
+    console.log('egeaga');
+    console.log(stateData);
+    const stepNumber = stateData.primary_step.step_number[0];
+    console.log(stepNumber);
     const newUrl = `./step-page.html?blog_id=${blogId}/new-after/${stepNumber}`;
-    console.log('egeaga')
-    console.log(document.querySelector('#insertStep').href = newUrl)
+    console.log('egeaga');
+    console.log((document.querySelector('#insertStep').href = newUrl));
 
     history.pushState({}, '', newUrl);
     location.reload();
-
-
 }
 
 document.querySelector('#insertStep').addEventListener('click', function (e) {
-    e.preventDefault()
-    handleInsert()
+    e.preventDefault();
+    handleInsert();
 });
 // Image Input START
 // Upload Single Image with Multiple Input
@@ -181,8 +171,7 @@ inputs.forEach((input, index) => {
 });
 // Image Input END
 function handleDelete(deleteHref) {
-
-    // const deleteURL = 
+    // const deleteURL =
     // /guide/blog/edit/steps/delete/:step_id/:blog_id
     const apiUrl = `http://localhost:3000/guide/blog/edit/steps/delete/${stepId}/${blogId}`;
 
@@ -208,35 +197,34 @@ function handleDelete(deleteHref) {
         });
 }
 
-
 function renderMainContent(blog_info, primary_step, steps) {
     document.querySelector('.history-heading').innerHTML = blog_info.blog_title;
     document.querySelector('.step-title').innerHTML = `Editing Step - ${primary_step.step_number[0]}  `;
     currentStepNumber = primary_step.step_number[0]; // stepnumber = 1 => steps[0]
-    ccurentStepId = primary_step.stepId
-
+    ccurentStepId = primary_step.stepId;
 
     currentStepNumber = primary_step.step_number[0]; // stepnumber = 1 => steps[0]
-    console.log(currentStepNumber)
+    console.log(currentStepNumber);
     steps.forEach(step => {
         console.log(step.step_number[0]);
     });
     let newHrefDelete;
 
-
     if (currentStepNumber === 1) {
         const nextStep = steps[1].stepId;
-        newHrefDelete = document.querySelector('#deleteStep').href = `./step-page.html?blog_id=${blogId}&step_id=${nextStep} `;
+        newHrefDelete = document.querySelector(
+            '#deleteStep'
+        ).href = `./step-page.html?blog_id=${blogId}&step_id=${nextStep} `;
     } else {
         const previousStep = steps[currentStepNumber - 2].stepId;
-        newHrefDelete = document.querySelector('#deleteStep').href = `./step-page.html?blog_id=${blogId}&step_id=${previousStep
-            } `;
+        newHrefDelete = document.querySelector(
+            '#deleteStep'
+        ).href = `./step-page.html?blog_id=${blogId}&step_id=${previousStep} `;
     }
     document.querySelector('#deleteStep').addEventListener('click', function (e) {
         e.preventDefault();
-        handleDelete(newHrefDelete)
-    })
-
+        handleDelete(newHrefDelete);
+    });
 }
 
 function renderStepContentDiv(step_content) {
@@ -270,7 +258,6 @@ function renderStepsThumbList(steps) {
     document.querySelector('#draggable-list').innerHTML = stepsHtml;
 }
 
-
 function newStepId(clickedStepId) {
     // Update url
     const newUrl = `./step-page.html?blog_id=${blogId}&step_id=${clickedStepId}`;
@@ -278,19 +265,17 @@ function newStepId(clickedStepId) {
     location.reload();
 }
 
-
 function newHrefIntroduction() {
     // Get the link element by its id
     const introductionTab = document.getElementById('introductionTab');
-    const newHref = introductionTab.href = `./introduction-page.html?id=${blogId}`;
+    const newHref = (introductionTab.href = `./introduction-page.html?id=${blogId}`);
 
     console.log('Introduction href:', newHref);
-
 }
 
 function handleUpdateSteps() {
     let isDraggingEnabled = false;
-    // click on insert, append a new empty step, reload the page 
+    // click on insert, append a new empty step, reload the page
     // in the render step check if step == null => display image
     // primary step the same, check if that step data is empty => then delete that step from (user click other step) reload the page
     // Update href value of introduction
@@ -385,7 +370,7 @@ function handleUpdateSteps() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    handleUpdateSteps()
+    handleUpdateSteps();
 });
 
 function saveImageFirebase(){
