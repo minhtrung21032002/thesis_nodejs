@@ -10,7 +10,7 @@ const stepId = urlParams.get('step_id');
 console.log(blogId)
 console.log(stepId)
 
-if (stepId == null){
+if (stepId == null) {
 
     const parts = blogId.split('/');
 
@@ -18,46 +18,45 @@ if (stepId == null){
     const newblogId = parts[0]
     console.log(stepNumber); // Output: 8
 
-    getInsertStepData(stepNumber,newblogId)
+    getInsertStepData(stepNumber, newblogId)
 }
 
-function getInsertStepData(stepNumber, blogId){
+function getInsertStepData(stepNumber, blogId) {
 
     fetch(`http://localhost:3000/guide/blog/edit/steps/insert/api/${blogId}`)
 
-    
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
 
-        return response.json();
-    })
-    .then(data => {
-        // Assuming renderStepsThumbListInsert is a function to render data
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
 
-        console.log('data before')
-        console.log(data)
-        console.log(data.steps)
-        // renderStepsThumbListInsert(data.steps, stepNumber);
-    })
-    .catch(error => {
-        // Handle any errors that occur during the fetch operation or parsing of JSON
-        console.error('Error:', error);
-        // You can also notify the user about the error
-        alert('An error occurred while fetching data. Please try again later.');
-    });
+            return response.json();
+        })
+        .then(data => {
+            // Assuming renderStepsThumbListInsert is a function to render data
+
+            console.log(data.steps)
+            renderStepsThumbListInsert(data.steps, stepNumber);
+
+        })
+        .catch(error => {
+            // Handle any errors that occur during the fetch operation or parsing of JSON
+            console.error('Error:', error);
+            // You can also notify the user about the error
+            alert('An error occurred while fetching data. Please try again later.');
+        });
 
 }
 
-function renderStepsThumbListInsert(steps, stepNumber){
-    const stepsData = steps;
-    console.log(stepsData);
-    console.log(stepNumber);
+function renderStepsThumbListInsert(steps, stepNumber) {
+    const stepsData = steps
     let stepsHtml = '';
-    stepsData.forEach(step => {
-   
-        if (step.step_number[0] < stepNumber) {
+    var incrementedStepNumber 
+    // steps = 4, bam vo 2, stepnumber = 2 
+    steps.forEach(step => {
+
+        if (step.step_number[0] <= stepNumber) {
             // Preserve step numbers lower than specified stepNumber
             console.log('lower')
             stepsHtml += `
@@ -65,28 +64,23 @@ function renderStepsThumbListInsert(steps, stepNumber){
                 <img src="${step.step_imgs[0].img_url}" alt="" width=40 onclick="newStepId('${step.stepId}')"/>
             </div>
             `;
-        } else if (step.step_number[0] = stepNumber) {
+        } else if (step.step_number[0] > stepNumber) {
             console.log(step.step_number[0])
+  incrementedStepNumber = step.step_number[0] + 1;
             console.log('equal here')
             // Insert random image for the specified step number
-            const randomImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvhaxpY0m83_5haTmVh1kdUraYSyHWALEO2VODzEXiUg&s"; // Replace this with your logic to get a random image URL
-            stepsHtml += `
-            <div class="draggable-item" data-id="${stepNumber}">
-                <img src="${randomImageUrl}" alt="" width=40 onclick="newStepId('${step.stepId}')"/>
-            </div>
-            `;
-        } else {
-            console.log('bigger ')
-            // Increment step number for steps higher than specified stepNumber
-            const incrementedStepNumber = step.step_number[0] + 1;
+            // const randomImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvhaxpY0m83_5haTmVh1kdUraYSyHWALEO2VODzEXiUg&s"; // Replace this with your logic to get a random image URL
             stepsHtml += `
             <div class="draggable-item" data-id="${incrementedStepNumber}">
                 <img src="${step.step_imgs[0].img_url}" alt="" width=40 onclick="newStepId('${step.stepId}')"/>
             </div>
             `;
-        }
+          
+        } 
     });
+
     document.querySelector('#draggable-list').innerHTML = stepsHtml;
+
 }
 
 function getStepData() {
@@ -107,13 +101,13 @@ function getStepData() {
             displayImages(stepImages);
         });
 }
-if(stepId != null) {
+if (stepId != null) {
     getStepData();
 }
 
 
 
-function handleInsert(){
+function handleInsert() {
     console.log('egeaga')
     console.log(stateData)
     const stepNumber = stateData.primary_step.step_number[0]
@@ -121,14 +115,14 @@ function handleInsert(){
     const newUrl = `./step-page.html?blog_id=${blogId}/new-after/${stepNumber}`;
     console.log('egeaga')
     console.log(document.querySelector('#insertStep').href = newUrl)
-    
+
     history.pushState({}, '', newUrl);
     location.reload();
 
-    
-}  
 
-document.querySelector('#insertStep').addEventListener('click',function(e){
+}
+
+document.querySelector('#insertStep').addEventListener('click', function (e) {
     e.preventDefault()
     handleInsert()
 });
@@ -223,12 +217,12 @@ function renderMainContent(blog_info, primary_step, steps) {
         console.log(step.step_number[0]);
     });
     let newHrefDelete;
-    
+
 
     if (currentStepNumber === 1) {
         const nextStep = steps[1].stepId;
         newHrefDelete = document.querySelector('#deleteStep').href = `./step-page.html?blog_id=${blogId}&step_id=${nextStep} `;
-    } else {    
+    } else {
         const previousStep = steps[currentStepNumber - 2].stepId;
         newHrefDelete = document.querySelector('#deleteStep').href = `./step-page.html?blog_id=${blogId}&step_id=${previousStep
             } `;
