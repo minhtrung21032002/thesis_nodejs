@@ -1,6 +1,6 @@
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js"
-import { getStorage  } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js';
+//import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js"
+// import { getStorage  } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js';
 
 
 let stepsData;
@@ -51,35 +51,40 @@ function getInsertStepData(stepNumber, blogId) {
 function renderStepsThumbListInsert(steps, stepNumber) {
     let stepsHtml = '';
     var incrementedStepNumber;
-
-    steps.splice(stepNumber - 1, 0, { step_number: [stepNumber + 1] });
-    steps.forEach(step => {
-        if (step.step_number[0] <= stepNumber) {
-            stepsHtml += `
-            <div class="draggable-item" data-id="${step.step_number[0]}">
-                <img src="${step.step_imgs[0].img_url}" alt="" width=40 onclick="newStepId('${step.stepId}')"/>
-            </div>                    
-            `;
-        } else if (step.step_number[0] == stepNumber + 1) {
-            stepsHtml += `
-            <div class="draggable-item" data-id="${step.step_number[0]}">
-                <img src="https://picsum.photos/seed/picsum/200/300" alt="" width=40 onclick=""/>
-            </div>
-            `;
-        } else if (step.step_number[0] > stepNumber + 1) {
-            console.log(step.step_number[0]);
-            incrementedStepNumber = step.step_number[0] + 1;
-            console.log('equal here');
-
-            stepsHtml += `
-            <div class="draggable-item" data-id="${incrementedStepNumber}">
+    
+    // Insert the new step with an incremented step number
+    steps.splice(stepNumber - 1, 0, { step_number: parseInt(stepNumber) + 1 });
+    
+    // Loop through the steps to update step numbers and build HTML
+    steps.forEach((step, index) => {
+        const currentStepNumber = step.step_number[0];
+        const nextStepNumber = index < steps.length - 1 ? steps[index + 1].step_number[0] : currentStepNumber;
+    
+        // Increment step numbers for steps after the inserted step
+        if (currentStepNumber > stepNumber) {
+            step.step_number[0] = currentStepNumber + 1;
+        }
+    
+        // Build HTML for each step
+        stepsHtml += `
+            <div class="draggable-item" data-id="${currentStepNumber}">
                 <img src="${step.step_imgs[0].img_url}" alt="" width=40 onclick="newStepId('${step.stepId}')"/>
             </div>
+        `;
+    
+        // Add HTML for the new step if this is the original stepNumber or the next step
+        if (currentStepNumber === stepNumber || nextStepNumber === stepNumber) {
+            stepsHtml += `
+                <div class="draggable-item" data-id="${parseInt(stepNumber) + 1}">
+                    <img src="https://picsum.photos/seed/picsum/200/300" alt="" width=40 onclick=""/>
+                </div>
             `;
         }
     });
-
+    
+    // Update the HTML content
     document.querySelector('#draggable-list').innerHTML = stepsHtml;
+    
 }
 
 function getStepData() {
