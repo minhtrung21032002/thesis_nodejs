@@ -18,14 +18,14 @@ console.log(stepId);
 if (stepId == null) {
     const parts = blogId.split('/');
 
-    const stepNumber = parts[parts.length - 1];
+    const prevStepNumber = parts[parts.length - 1];
     const newblogId = parts[0];
-    console.log(stepNumber); // Output: 8
+    console.log(prevStepNumber); // Output: 8
 
-    getInsertStepData(stepNumber, newblogId);
+    getInsertStepData(prevStepNumber, newblogId);
 }
 
-function getInsertStepData(stepNumber, blogId) {
+function getInsertStepData(prevStepNumber, blogId) {
     fetch(`http://localhost:3000/guide/blog/edit/steps/insert/api/${blogId}`)
         .then(response => {
             if (!response.ok) {
@@ -35,54 +35,42 @@ function getInsertStepData(stepNumber, blogId) {
             return response.json();
         })
         .then(data => {
-            // Assuming renderStepsThumbListInsert is a function to render data
-
             console.log(data.steps);
-            renderStepsThumbListInsert(data.steps, stepNumber);
+            renderStepsThumbListInsert(data.steps, prevStepNumber);
         })
         .catch(error => {
-            // Handle any errors that occur during the fetch operation or parsing of JSON
             console.error('Error:', error);
-            // You can also notify the user about the error
             alert('An error occurred while fetching data. Please try again later.');
         });
 }
 
-function renderStepsThumbListInsert(steps, stepNumber) {
+function renderStepsThumbListInsert(prevStepNumber) {
     let stepsHtml = '';
-    var incrementedStepNumber;
-    
-    // Insert the new step with an incremented step number
-    steps.splice(stepNumber - 1, 0, { step_number: parseInt(stepNumber) + 1 });
-    
-    // Loop through the steps to update step numbers and build HTML
+    steps.splice(prevStepNumber, 0, { step_number: [prevStepNumber + 1] });
+    // /  Handle logic for adding new step
     steps.forEach((step, index) => {
-        const currentStepNumber = step.step_number[0];
-        const nextStepNumber = index < steps.length - 1 ? steps[index + 1].step_number[0] : currentStepNumber;
-    
-        // Increment step numbers for steps after the inserted step
-        if (currentStepNumber > stepNumber) {
-            step.step_number[0] = currentStepNumber + 1;
-        }
-    
-        // Build HTML for each step
-        stepsHtml += `
-            <div class="draggable-item" data-id="${currentStepNumber}">
+        step.step_number[0] = index + 1;
+    });
+    steps.forEach((step, index) => {
+        if (step.step_number[0] == prevStepNumber + 1) {
+            stepsHtml += `
+            <div class="draggable-item" data-id="${index + 1}">
+                <img src="https://picsum.photos/seed/picsum/200/300" alt="" width=40 onclick=""/>
+            </div>
+            `;
+        } else if (step.step_number[0] > stepNumber + 1) {
+            console.log(step.step_number[0]);
+            incrementedStepNumber = step.step_number[0] + 1;
+            console.log('equal here');
+
+            stepsHtml += `
+            <div class="draggable-item" data-id="${incrementedStepNumber}">
                 <img src="${step.step_imgs[0].img_url}" alt="" width=40 onclick="newStepId('${step.stepId}')"/>
             </div>
-        `;
-    
-        // Add HTML for the new step if this is the original stepNumber or the next step
-        if (currentStepNumber === stepNumber || nextStepNumber === stepNumber) {
-            stepsHtml += `
-                <div class="draggable-item" data-id="${parseInt(stepNumber) + 1}">
-                    <img src="https://picsum.photos/seed/picsum/200/300" alt="" width=40 onclick=""/>
-                </div>
             `;
         }
     });
-    
-    // Update the HTML content
+
     document.querySelector('#draggable-list').innerHTML = stepsHtml;
     
 }
