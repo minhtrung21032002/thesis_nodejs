@@ -490,8 +490,8 @@
 
         <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
 
-        <script src="../controllers/step.js"></script>
-
+        <script src="../controllers/step.js" type ="module"></script>
+        
         <script>
             // Editor START
             function newTextEditor(targetElement) {
@@ -547,8 +547,8 @@
 
                 const jsonString = JSON.stringify(jsonStepContent);
                 console.log(jsonString);
-
-                fetch('#', {
+                const apiUrl = `http://localhost:3000/guide/blog/edit/steps/${blogId}`;
+                fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -563,6 +563,10 @@
                     });
             });
             // Editor END
+
+            
         </script>
+
+        
     </body>
 </html>

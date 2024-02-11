@@ -1,6 +1,6 @@
 
-//import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js"
-// import { getStorage  } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js';
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js"
+ import { getStorage, ref, getDownloadURL, uploadBytes   } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js';
 
 
 let stepsData;
@@ -10,18 +10,19 @@ let stateData;
 // Get Blog ID and Step ID
 
 const urlParams = new URLSearchParams(window.location.search);
-const blogId = urlParams.get('blog_id');
-const stepId = urlParams.get('step_id');
-console.log(blogId);
-console.log(stepId);
+var blogId = urlParams.get('blog_id');
+var stepId = urlParams.get('step_id');
+
 
 if (stepId == null) {
+
+
     const parts = blogId.split('/');
 
     const prevStepNumber = parts[parts.length - 1];
     const newblogId = parts[0];
-    console.log(prevStepNumber); // Output: 8
-
+    blogId = newblogId;
+ 
     getInsertStepData(prevStepNumber, newblogId);
 }
 
@@ -35,7 +36,7 @@ function getInsertStepData(prevStepNumber, blogId) {
             return response.json();
         })
         .then(data => {
-            console.log(data.steps);
+           
             renderStepsThumbListInsert(data.steps, prevStepNumber);
         })
         .catch(error => {
@@ -44,27 +45,29 @@ function getInsertStepData(prevStepNumber, blogId) {
         });
 }
 
-function renderStepsThumbListInsert(prevStepNumber) {
+function renderStepsThumbListInsert(steps, prevStepNumber) {
     let stepsHtml = '';
+
     steps.splice(prevStepNumber, 0, { step_number: [prevStepNumber + 1] });
     // /  Handle logic for adding new step
     steps.forEach((step, index) => {
         step.step_number[0] = index + 1;
+    
     });
     steps.forEach((step, index) => {
-        if (step.step_number[0] == prevStepNumber + 1) {
+        console.log(step.step_number[0])
+        if (step.step_number[0] == parseInt(prevStepNumber) + 1) {
+           
             stepsHtml += `
             <div class="draggable-item" data-id="${index + 1}">
                 <img src="https://picsum.photos/seed/picsum/200/300" alt="" width=40 onclick=""/>
             </div>
             `;
-        } else if (step.step_number[0] > stepNumber + 1) {
-            console.log(step.step_number[0]);
-            incrementedStepNumber = step.step_number[0] + 1;
-            console.log('equal here');
+        } else {
+            
 
             stepsHtml += `
-            <div class="draggable-item" data-id="${incrementedStepNumber}">
+            <div class="draggable-item" data-id="${index + 1}">
                 <img src="${step.step_imgs[0].img_url}" alt="" width=40 onclick="newStepId('${step.stepId}')"/>
             </div>
             `;
@@ -72,9 +75,7 @@ function renderStepsThumbListInsert(prevStepNumber) {
     });
 
     document.querySelector('#draggable-list').innerHTML = stepsHtml;
-    
 }
-
 function getStepData() {
     fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
         //fetch('../../data/step_edit.json')
@@ -365,22 +366,114 @@ function handleUpdateSteps() {
 document.addEventListener('DOMContentLoaded', function () {
     handleUpdateSteps();
 });
-
 function saveImageFirebase(){
 
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXGDpGLkoxPHaMGIG-E6GxviDDssv-97c",
+            authDomain: "thesis-268ea.firebaseapp.com",
+            projectId: "thesis-268ea",
+            storageBucket: "thesis-268ea.appspot.com",
+            messagingSenderId: "1065392850994",
+            appId: "1:1065392850994:web:023a10aca1806650fd142b",
+            measurementId: "G-XHJ0ES966N"
+        };
+        
+
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app, "gs://thesis-268ea.appspot.com");
+
+    // Create a storage reference from our storage service
+    const storageRef = ref(storage);
+
+
+   
+    document.getElementById('saveBtn').addEventListener('click', async () => {
+        const fileInputs = document.querySelectorAll('.input-image');
+    
+        // Assuming you have a dynamic step ID stored in a variable called 'stepId'
+        stepId = 456;
+    
+        try {
+            // Create a reference to the 'steps_edit_images/step_id' folder
+            const stepIdRef = ref(storageRef, `steps_edit_images/step_${stepId}`);
+    
+            let uploadedFileCount = 0;
+            let uploadImagesURL = [];
+            
+            // Create an array to store promises returned by getDownloadURL()
+            const promises = [];
+    
+            for (const input of fileInputs) {
+                const file = input.files[0];
+                if (file !== undefined) {
+                    uploadedFileCount++; // Increment the uploaded file count
+                    const fileName = `/image_${uploadedFileCount}.jpg`; // Use the uploadedFileCount as the index
+                    
+                    // Create a reference to the file inside the 'step_id' folder
+                    const fileRef = ref(stepIdRef, fileName);
+            
+                    try {
+                        // Upload the file to Firebase Storage
+                        const snapshot = await uploadBytes(fileRef, file);
+                        console.log('Uploaded a blob or file!');
+                        
+                        // Push the promise returned by getDownloadURL() into the promises array
+                        promises.push(getDownloadURL(fileRef).then(url => {
+                            uploadImagesURL.push(url);
+                        }).catch(error => {
+                            console.log('Error getting download URL:', error);
+                        }));
+                    } catch (error) {
+                        console.error('Error uploading file:', error);
+                    }
+                } else {
+                    console.log('File is undefined. Skipping upload.');
+                }
+            }
+    
+            // Wait for all promises to resolve
+            await Promise.all(promises);
+            
+            // After all promises are resolved, call uploadImagesServerInsertStep()
+            console.log('Upload images URL:', uploadImagesURL);
+            uploadImagesServerInsertStep(uploadImagesURL);
+    
+        } catch (error) {
+            console.error('Error uploading images:', error);
+        }
+    });
     
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBXGDpGLkoxPHaMGIG-E6GxviDDssv-97c",
-  authDomain: "thesis-268ea.firebaseapp.com",
-  projectId: "thesis-268ea",
-  storageBucket: "thesis-268ea.appspot.com",
-  messagingSenderId: "1065392850994",
-  appId: "1:1065392850994:web:023a10aca1806650fd142b",
-  measurementId: "G-XHJ0ES966N"
-};
+}
 
-const app = initializeApp(firebaseConfig);
-const storage = app.storage();
+saveImageFirebase()
+
+
+function uploadImagesServerInsertStep(uploadImagesURL){
+    const apiUrl = `http://localhost:3000/guide/blog/edit/steps/${blogId}`;
+    console.log('before sending')
+    console.log(uploadImagesURL)
+    fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },  
+        body: JSON.stringify({ steps: uploadImagesURL }),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Patch request successful:', data);
+            window.location.href = deleteHref;
+        })
+        .catch(error => {
+            console.error('Error during PATCH request:', error);
+        });
+
 }
 
