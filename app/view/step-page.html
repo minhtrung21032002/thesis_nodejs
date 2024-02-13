@@ -1,572 +1,589 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Step {%BLOGTITLE%}</title>
 
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Step {%BLOGTITLE%}</title>
 
-        <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-            crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-            }
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 
-            .clearer {
-                clear: both;
-            }
+    <style>
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+            padding-top: 60px;
+        }
 
-            .container {
-                max-width: 1199px;
-                margin: auto;
-            }
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            /* 5% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            /* Could be more or less, depending on screen size */
+        }
 
-            /* tab */
-            .tabWrap {
-                margin-bottom: 6px;
-            }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-            .tabs {
-                height: 35px;
-                margin: 24px 0 8px;
-                padding: 0;
-                list-style-type: none;
-                border-bottom: 1px solid #979797;
-            }
+        .clearer {
+            clear: both;
+        }
 
-            .tabs > li {
-                position: relative;
-                display: inline-block;
-                height: 34px;
-                margin: 0 3px;
-                font-size: 14px;
-            }
+        .container {
+            max-width: 1199px;
+            margin: auto;
+        }
 
-            a {
-                text-decoration: none;
-            }
+        /* tab */
+        .tabWrap {
+            margin-bottom: 6px;
+        }
 
-            a.tab-link.active {
-                background-color: #fff;
-                border: 1px solid #979797;
-                border-bottom-color: #fff;
-                color: #212426;
-                font-weight: 700;
-            }
+        .tabs {
+            height: 35px;
+            margin: 24px 0 8px;
+            padding: 0;
+            list-style-type: none;
+            border-bottom: 1px solid #979797;
+        }
 
-            a.tab-link {
-                position: relative;
-                color: #212426;
-                display: block;
-                overflow: hidden;
-                border: 1px solid #e5e7eb;
-                border-radius: 2px 2px 0 0;
-                top: -1px;
-                border-width: 1px 1px 0;
-                padding: 7px 17px 8px;
-                background-color: #f9fafb;
-                line-height: 19px;
-            }
+        .tabs>li {
+            position: relative;
+            display: inline-block;
+            height: 34px;
+            margin: 0 3px;
+            font-size: 14px;
+        }
 
-            /* STEP TITLE */
-            .step-title-prefix {
-                float: left;
-                margin-right: 5px;
-            }
+        a {
+            text-decoration: none;
+        }
 
-            .step-title {
-                font-size: 22px;
-                color: #212426;
-                overflow-wrap: break-word;
-                word-wrap: break-word;
-            }
+        a.tab-link.active {
+            background-color: #fff;
+            border: 1px solid #979797;
+            border-bottom-color: #fff;
+            color: #212426;
+            font-weight: 700;
+        }
 
-            /* Guide step actions */
-            #guideStepActions {
-                padding: 15px 0;
-            }
+        a.tab-link {
+            position: relative;
+            color: #212426;
+            display: block;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            border-radius: 2px 2px 0 0;
+            top: -1px;
+            border-width: 1px 1px 0;
+            padding: 7px 17px 8px;
+            background-color: #f9fafb;
+            line-height: 19px;
+        }
 
-            #guideStepActions .button {
-                margin-top: -8px;
-            }
+        /* STEP TITLE */
+        .step-title-prefix {
+            float: left;
+            margin-right: 5px;
+        }
 
-            a.button.button-delete {
-                color: #ef4444;
-                border: 1px solid;
-                border-color: #fde3e3;
-                padding: 6px 12px 7px;
-                position: relative;
-                cursor: pointer;
-                display: inline-block;
-                background-color: #fff;
-                border-radius: 4px;
-                font-size: 14px;
-                text-align: center;
-                transition: border-color 0.1s, background-color 0.1s;
-                appearance: none;
-                -webkit-appearance: none;
-            }
+        .step-title {
+            font-size: 22px;
+            color: #212426;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
 
-            #insertStep {
-                float: right;
-                border: 1px solid;
-                padding: 6px 12px 7px;
-                margin-left: 8px;
-                border-radius: 4px;
-                background-color: #fff;
-                border-radius: 4px;
-                border: 1px solid #d1d5db;
-                color: #212426;
-                font-size: 14px;
-                text-align: center;
-                transition: border-color 0.1s, background-color 0.1s;
-            }
+        /* Guide step actions */
+        #guideStepActions {
+            padding: 15px 0;
+        }
 
-            a.button.button-delete:hover {
-                background-color: #fef6f6;
-                border-color: #fbd0d0;
-            }
+        #guideStepActions .button {
+            margin-top: -8px;
+        }
 
-            #insertStep:hover {
-                background-color: #e5e7eb;
-                background-image: none;
-            }
+        a.button.button-delete {
+            color: #ef4444;
+            border: 1px solid;
+            border-color: #fde3e3;
+            padding: 6px 12px 7px;
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            background-color: #fff;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+            transition: border-color 0.1s, background-color 0.1s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
 
-            /* Pagination */
-            .pagination {
-                width: 100%;
-                margin: 8px 0;
-                border-radius: 4px;
-                padding: 4px 8px;
-                background-color: #f9fafb;
-                line-height: 2em;
-                text-align: center;
-                display: table;
-            }
+        #insertStep {
+            float: right;
+            border: 1px solid;
+            padding: 6px 12px 7px;
+            margin-left: 8px;
+            border-radius: 4px;
+            background-color: #fff;
+            border-radius: 4px;
+            border: 1px solid #d1d5db;
+            color: #212426;
+            font-size: 14px;
+            text-align: center;
+            transition: border-color 0.1s, background-color 0.1s;
+        }
 
-            .pagination a {
-                color: #4b5563;
-                font-weight: 700;
-            }
+        a.button.button-delete:hover {
+            background-color: #fef6f6;
+            border-color: #fbd0d0;
+        }
 
-            .pagination .left {
-                text-align: start;
-            }
+        #insertStep:hover {
+            background-color: #e5e7eb;
+            background-image: none;
+        }
 
-            .pagination .middle,
-            .pagination .right {
-                margin: 0;
-                display: table-cell;
-                float: none !important;
-                width: auto;
-                min-width: 75px;
-            }
+        /* Pagination */
+        .pagination {
+            width: 100%;
+            margin: 8px 0;
+            border-radius: 4px;
+            padding: 4px 8px;
+            background-color: #f9fafb;
+            line-height: 2em;
+            text-align: center;
+            display: table;
+        }
 
-            .pagination .right {
-                margin: 0;
-                display: table-cell;
-                float: none !important;
-                width: auto;
-                min-width: 75px;
-                text-align: right;
-            }
+        .pagination a {
+            color: #4b5563;
+            font-weight: 700;
+        }
 
-            #draggable-list {
-                margin-top: 10px;
-                display: flex;
-                list-style-type: none;
-                flex-wrap: wrap;
-                gap: 10px;
-                padding: 0;
-            }
+        .pagination .left {
+            text-align: start;
+        }
 
-            .draggable-item {
-                background-color: #f0f0f0;
-                border: 1px solid #ccc;
-                cursor: move;
-                /* min-width: 25px; */
-            }
+        .pagination .middle,
+        .pagination .right {
+            margin: 0;
+            display: table-cell;
+            float: none !important;
+            width: auto;
+            min-width: 75px;
+        }
 
-            .draggable-item img {
-                /* width: 20%; */
-                height: 100%;
-            }
+        .pagination .right {
+            margin: 0;
+            display: table-cell;
+            float: none !important;
+            width: auto;
+            min-width: 75px;
+            text-align: right;
+        }
 
-            .sidebarFloat {
-                float: right;
-            }
+        #draggable-list {
+            margin-top: 10px;
+            display: flex;
+            list-style-type: none;
+            flex-wrap: wrap;
+            gap: 3px;
+            padding: 0;
+        }
 
-            .sidebarFloat .toggleBar {
-                display: flex;
-                justify-content: space-between;
-            }
+        .draggable-item {
+            cursor: move;
+            overflow: hidden;
+            width: 56px;
+            height: 42px;
+            background-size: 52px 52px;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
 
-            /* Editor */
-            .line {
-                position: relative;
-            }
+        .sidebarFloat {
+            float: right;
+        }
 
-            .line .bullet {
-                position: absolute;
-                top: 5px;
-                left: -20px;
-                font-size: 10px;
-                color: #4b5563;
-            }
-            .p-inline {
-                margin-top: 10px;
-            }
+        .sidebarFloat .toggleBar {
+            display: flex;
+            justify-content: space-between;
+        }
 
-            button {
-                cursor: pointer;
-                transition: all 0.2s ease-in-out;
-            }
+        /* Editor */
+        .line {
+            position: relative;
+        }
 
-            button:hover {
-                opacity: 0.8;
-            }
+        .line .bullet {
+            position: absolute;
+            top: 5px;
+            left: -20px;
+            font-size: 10px;
+            color: #4b5563;
+        }
 
-            #addBtn {
-                display: block;
-                margin-left: auto;
-                padding: 5px 10px;
-                margin-top: 10px;
-                margin-bottom: 10px;
-                border: none;
-            }
+        .line .bullet.bullet_blue {
+            color: blue;
+        }
 
-            #addBtn:hover {
-                background-color: #4b5563;
-                color: white;
-            }
+        .line .bullet.bullet_caution {
+            color: #ed1c24;
+            font-size: 15px;
+        }
 
-            #saveBtn {
-                display: block;
-                margin: 0;
-                margin-left: auto;
-                padding: 5px 10px;
-                background-color: green;
-                border-radius: 2px;
-                border: none;
-                color: white;
-                font-weight: 600;
-            }
 
-            /* Image container */
-            .image-container {
-                position: relative;
-                border: 1px solid #ddd;
-                padding: 7px;
-                margin-bottom: 10px;
-                width: 96px;
-                height: 72px;
-            }
 
-            .image-container#bigStepImage {
-                width: 300px;
-                height: 225px;
-            }
+        .line .bullet.bullet_note {
+            font-size: 15px;
+            color: #666;
+        }
 
-            .image-container .icon {
-                position: absolute;
-                display: grid;
-                place-items: center;
-                align-items: center;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                font-size: 30px;
-                transition: all 0.4s ease;
-            }
 
-            .image-container:hover {
-                background-color: #95edb6ff;
-            }
 
-            .image-container:hover .icon {
-                color: #7bc797ff;
-            }
+        .line .bullet.bullet_reminder {
+            font-size: 15px;
+            color: #666;
+        }
 
-            .image-wrapper {
-                width: 100%;
-                height: 100%;
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-            }
 
-            .image-wrapper img {
-                /* display: block;   */
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
+        .p-inline {
+            margin-top: 10px;
+        }
 
-            .input-image {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                opacity: 0;
-            }
-        </style>
-    </head>
+        button {
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
 
-    <body>
-        <div class="container" style="width: 1000px">
-            <h2 class="history-heading" style="margin-top: 20px">
-                Install LED Pod Lights on a Off-Road Truck Jeeptall
-            </h2>
-            <div class="contentFLoat" style="float: left; width: 640px">
-                <div style="border: 1px solid #ccc"></div>
-                <div class="tabWrap">
-                    <ul class="tabs">
-                        <li class="tab">
-                            <a
-                                href="./introduction-page.html"
-                                class="tab-link"
-                                id="introductionTab"
-                                data-tab="introduction"
-                                data-url=""
-                                >Introduction</a
-                            >
-                        </li>
+        button:hover {
+            opacity: 0.8;
+        }
 
-                        <li class="tab">
-                            <a
-                                href="/Guide/edit/37588/86292"
-                                class="tab-link active"
-                                id="guidestepsTab"
-                                data-tab="guidesteps"
-                                data-url=""
-                                >Guide Steps</a
-                            >
-                        </li>
-                    </ul>
+        #addBtn {
+            display: block;
+            margin-left: auto;
+            padding: 5px 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: none;
+        }
+
+        #addBtn:hover {
+            background-color: #4b5563;
+            color: white;
+        }
+
+        #saveBtn {
+            display: block;
+            margin: 0;
+            margin-left: auto;
+            padding: 5px 10px;
+            background-color: green;
+            border-radius: 2px;
+            border: none;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Image container */
+        .image-container {
+            position: relative;
+            border: 1px solid #ddd;
+            padding: 7px;
+            margin-bottom: 10px;
+            width: 96px;
+            height: 72px;
+        }
+
+        .image-container#bigStepImage {
+            width: 300px;
+            height: 225px;
+        }
+
+        .image-container .icon {
+            position: absolute;
+            display: grid;
+            place-items: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            font-size: 30px;
+            transition: all 0.4s ease;
+        }
+
+        .image-container:hover {
+            background-color: #95edb6ff;
+        }
+
+        .image-container:hover .icon {
+            color: #7bc797ff;
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .image-wrapper img {
+            /* display: block;   */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .input-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="width: 1000px">
+        <h2 class="history-heading" style="margin-top: 20px">
+            Install LED Pod Lights on a Off-Road Truck Jeeptall
+        </h2>
+        <div class="contentFLoat" style="float: left; width: 640px">
+            <div style="border: 1px solid #ccc"></div>
+            <div class="tabWrap">
+                <ul class="tabs">
+                    <li class="tab">
+                        <a href="./introduction-page.html" class="tab-link" id="introductionTab" data-tab="introduction"
+                            data-url="">Introduction</a>
+                    </li>
+
+                    <li class="tab">
+                        <a href="/Guide/edit/37588/86292" class="tab-link active" id="guidestepsTab"
+                            data-tab="guidesteps" data-url="">Guide Steps</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="step-title-prefix">
+                    <span class="step-title">Editing Step 1 — </span>
                 </div>
+                <div class="step-title-editor">
+                    <span class="step-title muted">
+                        <a class="edit-title-link">
+                            <span title="" class="stepTitleValue">Add a title</span>
+                        </a></span>
 
-                <div>
-                    <div class="step-title-prefix">
-                        <span class="step-title">Editing Step 1 — </span>
-                    </div>
-                    <div class="step-title-editor">
-                        <span class="step-title muted">
-                            <a class="edit-title-link">
-                                <span title="" class="stepTitleValue">Add a title</span>
-                            </a></span
-                        >
-
-                        <div id="editStepTitle" style="display: none">
-                            <input id="editStepTitleInput" maxlength="125" value="" />
-                        </div>
-                    </div>
-                    <div class="clearer"></div>
-                </div>
-
-                <div class="container" style="width: 302px; float: left">
-                    <div class="row">
-                        <div class="col-12 image-container" id="bigStepImage">
-                            <div class="image-wrapper"></div>
-                            <div class="icon"><i class="fa-solid fa-camera"></i></div>
-                            <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4 image-container">
-                            <div class="image-wrapper thumb-wrapper"></div>
-                            <div class="icon"><i class="fa-solid fa-camera"></i></div>
-                            <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
-                        </div>
-                        <div class="col-4 image-container">
-                            <div class="image-wrapper thumb-wrapper"></div>
-                            <div class="icon"><i class="fa-solid fa-camera"></i></div>
-                            <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
-                        </div>
-                        <div class="col-4 image-container">
-                            <div class="image-wrapper thumb-wrapper"></div>
-                            <div class="icon"><i class="fa-solid fa-camera"></i></div>
-                            <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 20px; width: 45%; float: right">
-                    <div class="editContent" id="myEditor">
-                        <p class="p-inline">Your wisdom here</p>
-                    </div>
-
-                    <div class="actionsContainer mb-3">
-                        <button class="btn btn-success" id="addBtn">Add <i class="fa-solid fa-plus"></i></button>
-                    </div>
-
-                    <div class="actionButtons">
-                        <button class="btn btn-primary" id="saveBtn">Save</button>
+                    <div id="editStepTitle" style="display: none">
+                        <input id="editStepTitleInput" maxlength="125" value="" />
                     </div>
                 </div>
+                <div class="clearer"></div>
+            </div>
 
-                <div style="clear: both"></div>
-
-                <div id="guideStepActions" style="margin-top: 20px">
-                    <a class="button button-medium button-delete" id="deleteStep">
-                         <!-- href="/Guide/edit/37588/86292/del" -->
-                        <i class="fa-solid fa-trash-can" style="margin-right: 5px"></i>Delete Step
-                    </a>
-                    <a id="insertStep" class="button button-medium" href="/Guide/edit/37588/new-after/1">
-                        <i class="fa fa-plus"></i>Insert Step
-                    </a>
+            <div class="container" style="width: 302px; float: left">
+                <div class="row">
+                    <div class="col-12 image-container" id="bigStepImage">
+                        <div class="image-wrapper"></div>
+                        <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                        <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
+                    </div>
                 </div>
-
-                <div class="pagination">
-                    <p class="left">
-                        <a href="/Guide/intro/37588" class="prevLink"
-                            ><span class="arrow">«</span> <span class="prevLinkText">Introduction</span></a
-                        >
-                    </p>
-
-                    <p class="middle">&nbsp;</p>
-
-                    <p class="right">
-                        <a href="/Guide/edit/37588/86286" class="nextLink">Next <span class="arrow">»</span></a>
-                    </p>
+                <div class="row">
+                    <div class="col-4 image-container">
+                        <div class="image-wrapper thumb-wrapper"></div>
+                        <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                        <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
+                    </div>
+                    <div class="col-4 image-container">
+                        <div class="image-wrapper thumb-wrapper"></div>
+                        <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                        <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
+                    </div>
+                    <div class="col-4 image-container">
+                        <div class="image-wrapper thumb-wrapper"></div>
+                        <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                        <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
+                    </div>
                 </div>
             </div>
 
-            <div class="sidebarFloat" style="float: right">
-                <div
-                    style="
-                        margin-top: 24px;
-                        border: 1px solid rgb(192, 192, 196);
-                        padding: 10px;
-                        background-color: #f7f9faff;
-                    ">
-                    <h3 class="toggleBar" style="font-size: 15px">
-                        Steps
-                        <span>
-                            <a
-                                href="#reorderSteps"
-                                class="rearrange-steps-button"
-                                style="color: #4b5563; text-decoration: none">
-                                <i class="fa fa-retweet rearrangeBtn"></i> Rearrange
-                            </a>
-                            <div style="display: none" id="saveCancelButtons">
-                                <span id="saveStepsButton">Save</span> or <span id="cancelStepsButton">Cancel</span>
-                            </div>
-                        </span>
-                    </h3>
-                    <div id="draggable-list" style="max-width: 298px">
-                        <div class="draggable-item" data-id="item1">Item 1</div>
-                        <div class="draggable-item" data-id="item2">Item 2</div>
-                        <div class="draggable-item" data-id="item3">Item 3</div>
-                        <div class="draggable-item" data-id="item4">Item 3</div>
-                        <div class="draggable-item" data-id="item5">Item 3</div>
-                        <!-- Add more items as needed -->
-                    </div>
+            <div style="margin-top: 20px; width: 45%; float: right">
+                <div class="editContent" id="myEditor">
+
+                </div>
+
+                <div class="actionsContainer mb-3">
+                    <button class="btn btn-success" id="addBtn">Add <i class="fa-solid fa-plus"></i></button>
+                </div>
+
+                <div class="actionButtons">
+                    <button class="btn btn-primary" id="saveBtn">Save</button>
                 </div>
             </div>
+
             <div style="clear: both"></div>
+
+            <div id="guideStepActions" style="margin-top: 20px">
+                <a class="button button-medium button-delete" id="deleteStep">
+                    <!-- href="/Guide/edit/37588/86292/del" -->
+                    <i class="fa-solid fa-trash-can" style="margin-right: 5px"></i>Delete Step
+                </a>
+                <a id="insertStep" class="button button-medium" href="/Guide/edit/37588/new-after/1">
+                    <i class="fa fa-plus"></i>Insert Step
+                </a>
+            </div>
+
+            <div class="pagination">
+                <p class="left">
+                    <a href="/Guide/intro/37588" class="prevLink"><span class="arrow">«</span> <span
+                            class="prevLinkText">Introduction</span></a>
+                </p>
+
+                <p class="middle">&nbsp;</p>
+
+                <p class="right">
+                    <a href="/Guide/edit/37588/86286" class="nextLink">Next <span class="arrow">»</span></a>
+                </p>
+            </div>
         </div>
 
-        <script
-            src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
-            referrerpolicy="origin"></script>
+        <div class="sidebarFloat" style="float: right">
+            <div style="
+                        margin-top: 24px;
+                        border: 1px solid rgb(192, 192, 196);
+                        padding: 10px 5px;
+                        background-color: #f7f9faff;
+                    ">
+                <h3 class="toggleBar" style="font-size: 15px">
+                    Steps
+                    <span>
+                        <a href="#reorderSteps" class="rearrange-steps-button"
+                            style="color: #4b5563; text-decoration: none">
+                            <i class="fa fa-retweet rearrangeBtn"></i> Rearrange
+                        </a>
+                        <div style="display: none" id="saveCancelButtons">
+                            <span id="saveStepsButton">Save</span> or <span id="cancelStepsButton">Cancel</span>
+                        </div>
+                    </span>
+                </h3>
+                <div id="draggable-list" style="max-width: 312px">
+                    <div class="draggable-item" data-id="item1">Item 1</div>
+                    <div class="draggable-item" data-id="item2">Item 2</div>
+                    <div class="draggable-item" data-id="item3">Item 3</div>
+                    <div class="draggable-item" data-id="item4">Item 3</div>
+                    <div class="draggable-item" data-id="item5">Item 3</div>
+                    <!-- Add more items as needed -->
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
 
-        <script
-            src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
-            referrerpolicy="origin"></script>
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>This is a modal. You clicked on the first div with the class "line".</p>
+            </div>
+        </div>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+    <script src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
 
-        <script src="../controllers/step.js" type ="module"></script>
-        
-        <script>
-            // Editor START
-            function newTextEditor(targetElement) {
-                const editor = tinymce.init({
-                    target: targetElement,
-                    inline: true,
-                    menubar: false,
-                    toolbar: 'undo redo | bold italic underline',
-                    min_height: 100,
-                    resize: true,
-                    plugins: 'autoresize',
-                    statusbar: false,
-                });
+    <script src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+
+    <script>
+
+    </script>
+    <script src="../controllers/step.js" type="module"></script>
+    <script>
+        function newStepId(clickedStepId, blogId) {
+            console.log(clickedStepId)
+            console.log('click new step Id')
+            console.log(blogId)
+
+            const newUrl = `./step-page.html?blog_id=${blogId}&step_id=${clickedStepId}`;
+            history.pushState({}, '', newUrl);
+            location.reload();
+
+        }
+
+    </script>
+    <script>
+        // Editor START
+        function newTextEditor(targetElement) {
+            const editor = tinymce.init({
+                target: targetElement,
+                inline: true,
+                menubar: false,
+                toolbar: 'undo redo | bold italic underline',
+                min_height: 100,
+                resize: true,
+                plugins: 'autoresize',
+                statusbar: false,
+            });
+        }
+
+        document.getElementById('addBtn').addEventListener('click', () => {
+            const lineDiv = document.createElement('div');
+            lineDiv.classList.add('line');
+
+            const paragraph = document.createElement('div');
+            paragraph.classList.add('p-inline');
+            paragraph.innerHTML = 'Your wisdom here';
+
+            lineDiv.insertAdjacentHTML('afterbegin', '<div class="icon fa fa-circle bullet"></div>');
+            lineDiv.appendChild(paragraph);
+            document.getElementById('myEditor').appendChild(lineDiv);
+            if (!paragraph) {
+                return;
             }
+            newTextEditor(paragraph);
+        });
 
-            document.getElementById('addBtn').addEventListener('click', () => {
-                const lineDiv = document.createElement('div');
-                lineDiv.classList.add('line');
 
-                const paragraph = document.createElement('div');
-                paragraph.classList.add('p-inline');
-                paragraph.innerHTML = 'Your wisdom here';
 
-                lineDiv.insertAdjacentHTML('afterbegin', '<div class="icon fa fa-circle bullet"></div>');
-                lineDiv.appendChild(paragraph);
-                document.getElementById('myEditor').appendChild(lineDiv);
-                if (!paragraph) {
-                    return;
-                }
-                newTextEditor(paragraph);
-            });
 
-            document.getElementById('saveBtn').addEventListener('click', () => {
-                const paragraphs = document.querySelectorAll('.p-inline');
-                const paragraphsArray = Array.from(paragraphs);
+    </script>
 
-                const stepContentArray = [];
+    
+</body>
 
-                paragraphsArray.forEach((paragraph, index) => {
-                    const content = paragraph.innerHTML.trim();
-
-                    const stepContentObj = {
-                        content_div_number: index + 1,
-                        content_div: content,
-                    };
-
-                    stepContentArray.push(stepContentObj);
-                });
-
-                const jsonStepContent = {
-                    step_content: stepContentArray,
-                };
-
-                const jsonString = JSON.stringify(jsonStepContent);
-                console.log(jsonString);
-                const apiUrl = `http://localhost:3000/guide/blog/edit/steps/${blogId}`;
-                fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: jsonString,
-                })
-                    .then(response => {
-                        console.log('Data saved successfully');
-                    })
-                    .catch(error => {
-                        console.error('Error occurred:', error);
-                    });
-            });
-            // Editor END
-
-            
-        </script>
-
-        
-    </body>
 </html>
