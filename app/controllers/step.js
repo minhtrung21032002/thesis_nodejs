@@ -1,11 +1,14 @@
 // oke test
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js"
-import { getStorage, ref, getDownloadURL, uploadBytes } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js';
-
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js';
+import {
+    getStorage,
+    ref,
+    getDownloadURL,
+    uploadBytes,
+} from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-storage.js';
 
 let stepsData;
 let stateData;
-// note: Insert
 
 // Get Blog ID and Step ID
 
@@ -15,10 +18,7 @@ var stepId = urlParams.get('step_id');
 
 var prevStepNumber;
 
-
 if (stepId == null) {
-
-
     const parts = blogId.split('/');
 
     prevStepNumber = parts[parts.length - 1];
@@ -40,7 +40,6 @@ function getInsertStepData(prevStepNumber, blogId) {
             return response.json();
         })
         .then(data => {
-
             renderStepsThumbListInsert(data.steps, prevStepNumber);
         })
         .catch(error => {
@@ -50,8 +49,8 @@ function getInsertStepData(prevStepNumber, blogId) {
 }
 
 function newStepId(clickedStepId, blogId) {
-    console.log('click new step Id')
-    console.log(blogId)
+    console.log('click new step Id');
+    console.log(blogId);
     const newUrl = `./step-page.html?blog_id=${blogId}&step_id=${clickedStepId}`;
     history.pushState({}, '', newUrl);
     location.reload();
@@ -59,29 +58,23 @@ function newStepId(clickedStepId, blogId) {
 
 function renderStepsThumbListInsert(steps, prevStepNumber) {
     let stepsHtml = '';
-    console.log('renderStepsThumbListInsert')
+
     steps.splice(prevStepNumber, 0, { step_number: [prevStepNumber + 1] });
-    // /  Handle logic for adding new step
+
     steps.forEach((step, index) => {
         step.step_number[0] = index + 1;
-
     });
     steps.forEach((step, index) => {
-        console.log(step.step_number[0])
         if (step.step_number[0] == parseInt(prevStepNumber) + 1) {
-
             stepsHtml += `
             <div class="draggable-item" data-id="${index + 1}">
                 <img src="https://assets.cdn.ifixit.com/static/images/guide/NoImage_56x42.jpg" alt="" width=56 height=42/>
             </div>
             `;
         } else {
-
-
             stepsHtml += `
             <div class="draggable-item" data-id="${index + 1}">
             <img src="${step.step_imgs[0].img_url}" alt="" onclick="() => {
-                console.log("oke newStepOnClickWork");
                 newStepId('${step.stepId}', '${blogId}'); }"/>
             </div>
             `;
@@ -93,20 +86,18 @@ function renderStepsThumbListInsert(steps, prevStepNumber) {
 
 function renderStepsThumbList(steps) {
     const stepsData = steps;
-    console.log('reach blog id')
-    console.log(blogId)
+    console.log('reach blog id');
+    console.log(blogId);
     let stepsHtml = '';
-    // src="${step.step_imgs[0].img_url}"
     stepsData.forEach(step => {
         stepsHtml += `
         <div class="draggable-item" data-id="${step.step_number[0]}" style="background-image: url('${step.step_imgs[0].img_url}')" onclick="newStepId('${step.stepId}','${blogId}')">
-    </div>                                                                                                              
+        </div>                                                                                                              
     `;
     });
 
     document.querySelector('#draggable-list').innerHTML = stepsHtml;
 }
-
 
 function getStepData() {
     fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
@@ -116,7 +107,6 @@ function getStepData() {
             return response.json();
         })
         .then(data => {
-            console.log(data);
             stepsData = data.steps;
             stateData = data;
             renderStepsThumbList(data.steps);
@@ -128,7 +118,6 @@ function getStepData() {
 }
 
 function handleInsert() {
-
     const stepNumber = stateData.primary_step.step_number[0];
     const newUrl = `./step-page.html?blog_id=${blogId}/new-after/${stepNumber}`;
     history.pushState({}, '', newUrl);
@@ -140,9 +129,6 @@ document.querySelector('#insertStep').addEventListener('click', function (e) {
     handleInsert();
 });
 // Image Input START
-// Upload Single Image with Multiple Input
-// const stepImages = [];
-
 const inputs = document.querySelectorAll('.input-image');
 const imgWrappers = document.querySelectorAll('.image-wrapper.thumb-wrapper');
 const bigStepImage = document.querySelector('#bigStepImage .image-wrapper');
@@ -165,7 +151,6 @@ if (stepImages.length > 0) {
     });
     displayImages(stepImages);
 }
-
 // Upload single image
 inputs.forEach((input, index) => {
     input.addEventListener('change', function () {
@@ -179,9 +164,9 @@ inputs.forEach((input, index) => {
         };
         console.log(newStepImg);
         if (index < 2) {
-            stepImages[0] = newStepImg; // Update the image at index 0 for the first and second inputs
+            stepImages[0] = newStepImg;
         } else {
-            stepImages[index - 1] = newStepImg; // Update the image at the exact position for inputs from 3 onwards
+            stepImages[index - 1] = newStepImg;
         }
         console.log(stepImages);
         displayImages(stepImages);
@@ -189,9 +174,7 @@ inputs.forEach((input, index) => {
 });
 // Image Input END
 
-
 function handleDelete(deleteHref) {
-
     const apiUrl = `http://localhost:3000/guide/blog/edit/steps/delete/${stepId}/${blogId}`;
 
     fetch(apiUrl, {
@@ -219,7 +202,7 @@ function handleDelete(deleteHref) {
 function renderMainContent(blog_info, primary_step, steps) {
     document.querySelector('.history-heading').innerHTML = blog_info.blog_title;
     document.querySelector('.step-title').innerHTML = `Editing Step - ${primary_step.step_number[0]}  `;
-    var currentStepNumber = primary_step.step_number[0]; // stepnumber = 1 => steps[0]
+    var currentStepNumber = primary_step.step_number[0];
     var curentStepId = primary_step.stepId;
     console.log(currentStepNumber);
     steps.forEach(step => {
@@ -246,7 +229,6 @@ function renderMainContent(blog_info, primary_step, steps) {
 
 function renderStepContentDiv(step_content) {
     console.log(step_content);
-
     step_content.forEach(step => {
         console.log(step);
         const lineDiv = document.createElement('div');
@@ -256,65 +238,73 @@ function renderStepContentDiv(step_content) {
         paragraph.innerHTML = step.content_div;
 
         const step_icon = step.icon;
-        if (step_icon == 'black') { lineDiv.insertAdjacentHTML('afterbegin', '<div class="icon fa fa-circle bullet"></div>') }
-        else if (step_icon == 'icon_note') { lineDiv.insertAdjacentHTML('afterbegin', '<div class="icon bullet bullet_note fa-solid fa-circle-info"></div>') }
-        else if (step_icon == 'icon_caution') {
-            lineDiv.insertAdjacentHTML('afterbegin', '<div class="icon bullet bullet_caution fa-solid fa-triangle-exclamation"></div>')
+        if (step_icon == 'icon_note') {
+            lineDiv.insertAdjacentHTML(
+                'afterbegin',
+                '<div class="icon bullet bullet_note fa-solid fa-circle-info"></div>'
+            );
+        } else if (step_icon == 'icon_caution') {
+            lineDiv.insertAdjacentHTML(
+                'afterbegin',
+                '<div class="icon bullet bullet_caution fa-solid fa-triangle-exclamation"></div>'
+            );
         } else if (step_icon == 'icon_reminder') {
-            lineDiv.insertAdjacentHTML('afterbegin', '<div class="icon bullet bullet_reminder fa-solid fa-thumbtack"></div>')
-        } else { lineDiv.insertAdjacentHTML('afterbegin', '<div class="icon bullet bullet_blue"></div>') }
+            lineDiv.insertAdjacentHTML(
+                'afterbegin',
+                '<div class="icon bullet bullet_reminder fa-solid fa-thumbtack"></div>'
+            );
+        } else {
+            lineDiv.insertAdjacentHTML(
+                'afterbegin',
+                `<div class="icon fa fa-circle bullet bullet_${step_icon}"></div>`
+            );
+        }
         lineDiv.appendChild(paragraph);
         document.getElementById('myEditor').appendChild(lineDiv);
         newTextEditor(paragraph);
     });
 
     const contentBullets = document.querySelectorAll('.line .bullet');
-    var modal = document.getElementById("myModal");
-    
-    contentBullets.forEach(contentBullet => {
-        contentBullet.addEventListener("click", function () {
+    var modal = document.getElementById('myModal');
 
-            var closeBtn = document.querySelector(".close");
-            console.log('colse button' + closeBtn)
-            closeBtn.addEventListener("click", function () {
-                modal.style.display = "none";
-                console.log('hellooooo')
+    contentBullets.forEach(contentBullet => {
+        contentBullet.addEventListener('click', function () {
+            var closeBtn = document.querySelector('.close');
+            console.log('colse button' + closeBtn);
+            closeBtn.addEventListener('click', function () {
+                modal.style.display = 'none';
+                console.log('hellooooo');
                 // Remove the hello div if it exists
-                var helloDiv = document.querySelector(".hello");
+                var helloDiv = document.querySelector('.hello');
                 if (helloDiv) {
                     helloDiv.remove();
                 }
             });
-    
-            var helloDiv = document.createElement("div");
-            helloDiv.textContent = "Hello"; // You can set any content for the new div here
-            helloDiv.classList.add("hello"); // Adding class name "hello" to the div
-    
+
+            var helloDiv = document.createElement('div');
+            helloDiv.textContent = 'Hello'; // You can set any content for the new div here
+            helloDiv.classList.add('hello'); // Adding class name "hello" to the div
+
             // Insert the new div next to the contentBullet
             contentBullet.insertAdjacentElement('afterend', helloDiv);
-    
-            modal.style.display = "block";
+
+            modal.style.display = 'block';
         });
     });
-    
 
-    
     // When the user clicks anywhere outside of the modal, close it
-    window.addEventListener("click", function (event) {
+    window.addEventListener('click', function (event) {
         if (event.target == modal) {
-            modal.style.display = "none";
+            modal.style.display = 'none';
         }
     });
-    console.log(modal)
+    console.log(modal);
     console.log(contentBullets);
 }
 // Xử lý hiển thị icon của step content icon =bullet
 // bullet.(class name)
-// classname: red, black, yellow, Icon notice, icon warning , icon 
+// classname: red, black, yellow, Icon notice, icon warning , icon
 // bullet_note, bullet_caution, bullet reminder
-
-
-
 
 function newHrefIntroduction() {
     // Get the link element by its id
@@ -418,30 +408,24 @@ function handleUpdateSteps() {
 
 document.addEventListener('DOMContentLoaded', function () {
     handleUpdateSteps();
-
 });
 
 function saveImageFirebase() {
-
-
     const firebaseConfig = {
-        apiKey: "AIzaSyBXGDpGLkoxPHaMGIG-E6GxviDDssv-97c",
-        authDomain: "thesis-268ea.firebaseapp.com",
-        projectId: "thesis-268ea",
-        storageBucket: "thesis-268ea.appspot.com",
-        messagingSenderId: "1065392850994",
-        appId: "1:1065392850994:web:023a10aca1806650fd142b",
-        measurementId: "G-XHJ0ES966N"
+        apiKey: 'AIzaSyBXGDpGLkoxPHaMGIG-E6GxviDDssv-97c',
+        authDomain: 'thesis-268ea.firebaseapp.com',
+        projectId: 'thesis-268ea',
+        storageBucket: 'thesis-268ea.appspot.com',
+        messagingSenderId: '1065392850994',
+        appId: '1:1065392850994:web:023a10aca1806650fd142b',
+        measurementId: 'G-XHJ0ES966N',
     };
 
-
     const app = initializeApp(firebaseConfig);
-    const storage = getStorage(app, "gs://thesis-268ea.appspot.com");
+    const storage = getStorage(app, 'gs://thesis-268ea.appspot.com');
 
     // Create a storage reference from our storage service
     const storageRef = ref(storage);
-
-
 
     document.getElementById('saveBtn').addEventListener('click', async () => {
         // Paragraph input
@@ -467,11 +451,9 @@ function saveImageFirebase() {
 
         const jsonString = JSON.stringify(jsonStepContent);
 
-
         // Images input
         const fileInputs = document.querySelectorAll('.input-image');
         // Assuming you have a dynamic step ID stored in a variable called 'stepId'
-
 
         try {
             // Create a reference to the 'steps_edit_images/step_id' folder
@@ -498,11 +480,15 @@ function saveImageFirebase() {
                         console.log('Uploaded a blob or file!');
 
                         // Push the promise returned by getDownloadURL() into the promises array
-                        promises.push(getDownloadURL(fileRef).then(url => {
-                            uploadImagesURL.push(url);
-                        }).catch(error => {
-                            console.log('Error getting download URL:', error);
-                        }));
+                        promises.push(
+                            getDownloadURL(fileRef)
+                                .then(url => {
+                                    uploadImagesURL.push(url);
+                                })
+                                .catch(error => {
+                                    console.log('Error getting download URL:', error);
+                                })
+                        );
                     } catch (error) {
                         console.error('Error uploading file:', error);
                     }
@@ -517,21 +503,18 @@ function saveImageFirebase() {
             // After all promises are resolved, call uploadImagesServerInsertStep()
             console.log('Upload images URL:', uploadImagesURL);
             uploadDataServerInsertStep(uploadImagesURL, jsonString);
-
         } catch (error) {
             console.error('Error uploading images:', error);
         }
     });
-
-
 }
 
-saveImageFirebase()
+saveImageFirebase();
 
 function uploadDataServerInsertStep(uploadImagesURL, stepContent) {
     const apiUrl = `http://localhost:3000/guide/blog/edit/steps/${blogId}`;
-    console.log('before sending')
-    console.log(uploadImagesURL)
+    console.log('before sending');
+    console.log(uploadImagesURL);
     fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -552,7 +535,4 @@ function uploadDataServerInsertStep(uploadImagesURL, stepContent) {
         .catch(error => {
             console.error('Error during PATCH request:', error);
         });
-
 }
-
-
