@@ -11,12 +11,15 @@
         "number_of_comments": 2,
         "number_access": 27,
         "number_of_likes": 0,
-        "number_of_completed": 0
+        "number_of_completed": 0,
+        "intro_images": []
     },
     "steps": [
         {
             "stepId": "658bf0e414edd9039ddc7b18",
-            "step_number": [1],
+            "step_number": [
+                1
+            ],
             "step_imgs": [
                 {
                     "img_url": "https://guide-images.cdn.ifixit.com/igi/1vPalD5rfTEehGXY.large",
@@ -47,7 +50,9 @@
         },
         {
             "stepId": "658bf0e414edd9039ddc7b1d",
-            "step_number": [2],
+            "step_number": [
+                2
+            ],
             "step_imgs": [
                 {
                     "img_url": "https://guide-images.cdn.ifixit.com/igi/4B262PsCxKaDZWbF.large",
@@ -78,7 +83,9 @@
         },
         {
             "stepId": "658bf0e414edd9039ddc7b22",
-            "step_number": [3],
+            "step_number": [
+                3
+            ],
             "step_imgs": [
                 {
                     "img_url": "https://guide-images.cdn.ifixit.com/igi/1WSTrMRoYKaWJ6SS.large",
@@ -115,7 +122,9 @@
         },
         {
             "stepId": "658bf0e414edd9039ddc7b28",
-            "step_number": [4],
+            "step_number": [
+                4
+            ],
             "step_imgs": [
                 {
                     "img_url": "https://guide-images.cdn.ifixit.com/igi/EZxV3qTLh6Ou6c1J.large",
@@ -146,7 +155,9 @@
         },
         {
             "stepId": "658bf0e414edd9039ddc7b2d",
-            "step_number": [5],
+            "step_number": [
+                5
+            ],
             "step_imgs": [
                 {
                     "img_url": "https://guide-images.cdn.ifixit.com/igi/kcMOAQZxDFbPCCnP.large",

@@ -1,4 +1,3 @@
-// oke test
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js';
 import {
     getStorage,
@@ -9,7 +8,7 @@ import {
 
 let stepsData;
 let stateData;
-
+let uploadImagesURL = [];
 // Get Blog ID and Step ID
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -40,7 +39,11 @@ function getInsertStepData(prevStepNumber, blogId) {
             return response.json();
         })
         .then(data => {
+
             renderStepsThumbListInsert(data.steps, prevStepNumber);
+            const spanElement = document.querySelector('.toggleBar span');
+            spanElement.style.display = "none";
+            document.querySelector('.step-title').innerHTML = `Editing Step ${parseInt(prevStepNumber) + 1}`
         })
         .catch(error => {
             console.error('Error:', error);
@@ -49,8 +52,6 @@ function getInsertStepData(prevStepNumber, blogId) {
 }
 
 function newStepId(clickedStepId, blogId) {
-    console.log('click new step Id');
-    console.log(blogId);
     const newUrl = `./step-page.html?blog_id=${blogId}&step_id=${clickedStepId}`;
     history.pushState({}, '', newUrl);
     location.reload();
@@ -74,8 +75,8 @@ function renderStepsThumbListInsert(steps, prevStepNumber) {
         } else {
             stepsHtml += `
             <div class="draggable-item" data-id="${index + 1}">
-            <img src="${step.step_imgs[0].img_url}" alt="" onclick="() => {
-                newStepId('${step.stepId}', '${blogId}'); }"/>
+            <img src="${step.step_imgs[0].img_url}" width=56 height=42 alt="" onclick="
+                newStepId('${step.stepId}', '${blogId}')"/>
             </div>
             `;
         }
@@ -86,8 +87,6 @@ function renderStepsThumbListInsert(steps, prevStepNumber) {
 
 function renderStepsThumbList(steps) {
     const stepsData = steps;
-    console.log('reach blog id');
-    console.log(blogId);
     let stepsHtml = '';
     stepsData.forEach(step => {
         stepsHtml += `
@@ -101,15 +100,19 @@ function renderStepsThumbList(steps) {
 
 function getStepData() {
     fetch(`http://localhost:3000/guide/blog/edit/steps/api/${blogId}/${stepId}`)
-        //fetch('../../data/step_edit.json')
         .then(response => {
-            console.log(response);
+
             return response.json();
         })
         .then(data => {
+            console.log(data)
             stepsData = data.steps;
             stateData = data;
-            renderStepsThumbList(data.steps);
+            for (const img_info of data.primary_step.step_imgs) {
+                uploadImagesURL.push(img_info.img_url)
+            }
+
+            renderStepsThumbList(data.steps)
             renderStepContentDiv(data.primary_step.step_content);
             renderMainContent(data.blog_information, data.primary_step, data.steps);
             stepImages = [...data.primary_step.step_imgs];
@@ -123,6 +126,7 @@ function handleInsert() {
     history.pushState({}, '', newUrl);
     location.reload();
 }
+
 
 document.querySelector('#insertStep').addEventListener('click', function (e) {
     e.preventDefault();
@@ -141,28 +145,27 @@ function displayImages(stepImages) {
     });
     bigStepImage.innerHTML = `<img src="${stepImages[0].img_url}" alt=""/>`;
     bigStepImage.nextElementSibling.style.display = 'none';
+    console.log(stepImages)
 }
 
 if (stepImages.length > 0) {
     stepImages.forEach((img, index) => {
-        console.log(imgWrappers[index]);
+     
         imgWrappers[index].innerHTML = `<img src="${img.img_url}" alt=""/>`;
         imgWrappers[index].nextElementSibling.style.display = 'none';
     });
     displayImages(stepImages);
 }
 // Upload single image
+
 inputs.forEach((input, index) => {
     input.addEventListener('change', function () {
         const file = input.files;
-        console.log(URL.createObjectURL(file[0]));
-        console.log(stepImages);
         const newStepImg = {
             img_url: `${URL.createObjectURL(file[0])}`,
             img_number: 1,
-            _id: '658bf0e414edd9039ddc7b19',
         };
-        console.log(newStepImg);
+
         if (index < 2) {
             stepImages[0] = newStepImg;
         } else {
@@ -172,6 +175,7 @@ inputs.forEach((input, index) => {
         displayImages(stepImages);
     });
 });
+
 // Image Input END
 
 function handleDelete(deleteHref) {
@@ -202,11 +206,12 @@ function handleDelete(deleteHref) {
 function renderMainContent(blog_info, primary_step, steps) {
     document.querySelector('.history-heading').innerHTML = blog_info.blog_title;
     document.querySelector('.step-title').innerHTML = `Editing Step - ${primary_step.step_number[0]}  `;
+    document.title = blog_info.blog_title;
     var currentStepNumber = primary_step.step_number[0];
     var curentStepId = primary_step.stepId;
     console.log(currentStepNumber);
     steps.forEach(step => {
-        console.log(step.step_number[0]);
+        
     });
     let newHrefDelete;
 
@@ -228,15 +233,15 @@ function renderMainContent(blog_info, primary_step, steps) {
 }
 
 function renderStepContentDiv(step_content) {
-    console.log(step_content);
+
     step_content.forEach(step => {
-        console.log(step);
+     
         const lineDiv = document.createElement('div');
         lineDiv.classList.add('line');
         const paragraph = document.createElement('div');
         paragraph.classList.add('p-inline');
         paragraph.innerHTML = step.content_div;
-
+        paragraph.dataset.icon = step.icon;
         const step_icon = step.icon;
         if (step_icon == 'icon_note') {
             lineDiv.insertAdjacentHTML(
@@ -262,49 +267,82 @@ function renderStepContentDiv(step_content) {
         lineDiv.appendChild(paragraph);
         document.getElementById('myEditor').appendChild(lineDiv);
         newTextEditor(paragraph);
-    });
 
-    const contentBullets = document.querySelectorAll('.line .bullet');
-    var modal = document.getElementById('myModal');
-
-    contentBullets.forEach(contentBullet => {
-        contentBullet.addEventListener('click', function () {
-            var closeBtn = document.querySelector('.close');
-            console.log('colse button' + closeBtn);
-            closeBtn.addEventListener('click', function () {
-                modal.style.display = 'none';
-                console.log('hellooooo');
-                // Remove the hello div if it exists
-                var helloDiv = document.querySelector('.hello');
-                if (helloDiv) {
-                    helloDiv.remove();
-                }
-            });
-
-            var helloDiv = document.createElement('div');
-            helloDiv.textContent = 'Hello'; // You can set any content for the new div here
-            helloDiv.classList.add('hello'); // Adding class name "hello" to the div
-
-            // Insert the new div next to the contentBullet
-            contentBullet.insertAdjacentElement('afterend', helloDiv);
-
-            modal.style.display = 'block';
+        const bulletIcon = lineDiv.querySelector('.bullet');
+        bulletIcon.addEventListener('click', function (event) {
+            event.stopPropagation();
+            const bulletsPanel = createBulletsPanel(step_icon, lineDiv);
+            togglePanel(bulletsPanel);
         });
     });
+}
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.addEventListener('click', function (event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
+function createBulletsPanel(step_icon, lineDiv) {
+    const bulletsPanel = document.createElement('div');
+    bulletsPanel.classList.add('bullets-panel');
+
+    const icons = [{ name: "black", content: 'blackdot' }, { name: 'thumbtack', content: 'note' }, { name: 'triangle-exclamation', content: "caution" }, {
+        name: 'circle-info', content:
+            "reminder"
+    }];
+    icons.forEach(iconClass => {
+        const iconContainer = document.createElement('h2');
+        iconContainer.insertAdjacentHTML('afterbegin', `<span>${iconClass.content}</span>`)
+        const icon = document.createElement('div');
+        console.log('icon', iconClass.name)
+        if (iconClass.name == 'black') {
+            console.log('have black')
+            icon.classList.add('bullet_black', 'fa', 'fa-circle', 'bullet')
+        } else { icon.classList.add('icon', 'bullet', `fa-solid`, `fa-${iconClass.name}`, `bullet_${iconClass.content}`); }
+
+        iconContainer.addEventListener('click', function () {
+            const bulletIcon = lineDiv.querySelector('.line > .bullet');
+
+
+            bulletIcon.classList.remove('fa-circle', 'bullet_black', `fa-thumbtack`, 'fa-triangle-exclamation', 'fa-circle-info', 'bullet_note', 'bullet_reminder', 'bullet_caution');
+            bulletIcon.classList.add(`fa-${iconClass.name}`);
+            if (iconClass.content == 'note') {
+                bulletIcon.classList.add(`bullet_note`);
+                lineDiv.querySelector('.p-inline').dataset.icon = 'icon_note';
+            }
+            else if (iconClass.content == 'caution') {
+                bulletIcon.classList.add(`bullet_caution`);
+                lineDiv.querySelector('.p-inline').dataset.icon = 'icon_caution';
+            }
+            else if (iconClass.content == 'reminder') {
+                bulletIcon.classList.add('bullet_reminder');
+                lineDiv.querySelector('.p-inline').dataset.icon = 'icon_reminder';
+            }
+            else if (iconClass.content == 'blackdot') {
+                bulletIcon.className += `bullet_black fa-circle`;
+                lineDiv.querySelector('.p-inline').dataset.icon = 'black';
+            }
+        });
+        iconContainer.appendChild(icon);
+        bulletsPanel.appendChild(iconContainer);
+    });
+
+    lineDiv.appendChild(bulletsPanel);
+    return bulletsPanel;
+}
+
+// Add event listener to close the panel when clicking outside
+document.addEventListener('click', function (event) {
+    const panels = document.querySelectorAll('.bullets-panel');
+    panels.forEach(panel => {
+        if (!panel.contains(event.target)) {
+            panel.classList.remove('active');
         }
     });
-    console.log(modal);
-    console.log(contentBullets);
+});
+
+function togglePanel(panel) {
+    if (panel.classList.contains('active')) {
+        panel.classList.remove('active');
+    } else {
+        panel.classList.add('active');
+    }
 }
-// Xử lý hiển thị icon của step content icon =bullet
-// bullet.(class name)
-// classname: red, black, yellow, Icon notice, icon warning , icon
-// bullet_note, bullet_caution, bullet reminder
 
 function newHrefIntroduction() {
     // Get the link element by its id
@@ -314,9 +352,15 @@ function newHrefIntroduction() {
     console.log('Introduction href:', newHref);
 }
 
+function newHrefView() {
+    const viewTab = document.querySelector('#blogLink');
+    const newHref = (viewTab.href = `./blog-page.html?id=${blogId}`);
+    console.log('view href:', newHref);
+}
+newHrefView();
+newHrefIntroduction();
 function handleUpdateSteps() {
     let isDraggingEnabled = false;
-    newHrefIntroduction();
 
     function toggleButtonsVisibility(isDraggingEnabled) {
         const saveCancelButtons = document.getElementById('saveCancelButtons');
@@ -398,7 +442,10 @@ function handleUpdateSteps() {
                 return response.json();
             })
             .then(data => {
-                console.log('Patch request successful:', data);
+                if (data.message === 'Update successful') {
+                    // Reload the page
+                    window.location.reload();
+                }
             })
             .catch(error => {
                 console.error('Error during PATCH request:', error);
@@ -410,7 +457,9 @@ document.addEventListener('DOMContentLoaded', function () {
     handleUpdateSteps();
 });
 
-function saveImageFirebase() {
+
+
+function saveImageAndParagraphFirebase() {
     const firebaseConfig = {
         apiKey: 'AIzaSyBXGDpGLkoxPHaMGIG-E6GxviDDssv-97c',
         authDomain: 'thesis-268ea.firebaseapp.com',
@@ -426,20 +475,23 @@ function saveImageFirebase() {
 
     // Create a storage reference from our storage service
     const storageRef = ref(storage);
-
     document.getElementById('saveBtn').addEventListener('click', async () => {
         // Paragraph input
         const paragraphs = document.querySelectorAll('.p-inline');
-        const paragraphsArray = Array.from(paragraphs);
 
+        const paragraphsArray = Array.from(paragraphs);
+        console.log(paragraphsArray);
         const stepContentArray = [];
 
         paragraphsArray.forEach((paragraph, index) => {
             const content = paragraph.innerHTML.trim();
+            const icon = paragraph.dataset.icon;
+            console.log(icon);
 
             const stepContentObj = {
                 content_div_number: index + 1,
                 content_div: content,
+                icon: icon,
             };
 
             stepContentArray.push(stepContentObj);
@@ -452,24 +504,33 @@ function saveImageFirebase() {
         const jsonString = JSON.stringify(jsonStepContent);
 
         // Images input
+        console.log(stepImages);
         const fileInputs = document.querySelectorAll('.input-image');
-        // Assuming you have a dynamic step ID stored in a variable called 'stepId'
+
 
         try {
-            // Create a reference to the 'steps_edit_images/step_id' folder
-            const stepIdRef = ref(storageRef, `steps_edit_images_/step_insert_${parseInt(prevStepNumber) + 1}`);
-
+            let stepIdRef = ref(storageRef, `steps_edit_images/step_edit_${stepId}`);
+            if (stepId == null) {
+                ref(storageRef, `steps_edit_images/step_insert_${parseInt(prevStepNumber) + 1}`);
+            }
             let uploadedFileCount = 0;
-            let uploadImagesURL = [];
-
-            // Create an array to store promises returned by getDownloadURL()
+            let method;
+            let apiURL;
             const promises = [];
+            let sharedFileName = '';
 
-            for (const input of fileInputs) {
-                const file = input.files[0];
+            for (let i = 0; i < fileInputs.length; i++) {
+                const file = fileInputs[i].files[0];
+                console.log(file)
+
                 if (file !== undefined) {
-                    uploadedFileCount++; // Increment the uploaded file count
-                    const fileName = `/image_${uploadedFileCount}.jpg`; // Use the uploadedFileCount as the index
+
+                    // Increment the uploaded file count
+                    const fileName = i < 2 ? sharedFileName || `/image_${i}.jpg` : `/image_${i}.jpg`;
+
+                    if (i < 2 && sharedFileName === '') {
+                        sharedFileName = fileName;
+                    }
 
                     // Create a reference to the file inside the 'step_id' folder
                     const fileRef = ref(stepIdRef, fileName);
@@ -480,47 +541,64 @@ function saveImageFirebase() {
                         console.log('Uploaded a blob or file!');
 
                         // Push the promise returned by getDownloadURL() into the promises array
-                        promises.push(
-                            getDownloadURL(fileRef)
-                                .then(url => {
-                                    uploadImagesURL.push(url);
-                                })
-                                .catch(error => {
-                                    console.log('Error getting download URL:', error);
-                                })
-                        );
+                        promises.push(getDownloadURL(fileRef).then(url => {
+
+                            if (i === 0 || i === 1) {
+                                uploadImagesURL[0] = url;
+                            } else if (i === 2) {
+                                uploadImagesURL[1] = url;
+                            } else if (i === 3) {
+                                uploadImagesURL[2] = url;
+                            }
+
+
+                            console.log(uploadImagesURL);
+                        }).catch(error => {
+                            console.log('Error getting download URL:', error);
+                        }));
                     } catch (error) {
                         console.error('Error uploading file:', error);
                     }
                 } else {
                     console.log('File is undefined. Skipping upload.');
                 }
+
+                await Promise.all(promises);
+
+
+            }
+            if (stepId == null) { // EDIT WHEN USER CLICK INSERT
+                method = "POST"
+                apiURL = `http://localhost:3000/guide/blog/edit/steps/${blogId}`;
+                console.log('POST')
+                uploadDataServer(uploadImagesURL, jsonString, apiURL, method);
+            } else { // EDIT WHEN USER EDIT AN EXISTING STEP
+                method = "PATCH"
+                apiURL = `http://localhost:3000/guide/blog/edit/steps/${blogId}/${stepId}`;
+                console.log('PATCH')
+                uploadDataServer(uploadImagesURL, jsonString, apiURL, method);
             }
 
-            // Wait for all promises to resolve
-            await Promise.all(promises);
-
-            // After all promises are resolved, call uploadImagesServerInsertStep()
-            console.log('Upload images URL:', uploadImagesURL);
-            uploadDataServerInsertStep(uploadImagesURL, jsonString);
         } catch (error) {
             console.error('Error uploading images:', error);
         }
+
+
+
     });
 }
 
-saveImageFirebase();
-
-function uploadDataServerInsertStep(uploadImagesURL, stepContent) {
-    const apiUrl = `http://localhost:3000/guide/blog/edit/steps/${blogId}`;
-    console.log('before sending');
-    console.log(uploadImagesURL);
-    fetch(apiUrl, {
-        method: 'POST',
+saveImageAndParagraphFirebase();
+function uploadDataServer(stepImages, stepContent, apiURL, method) {
+    const filteredStepImages = stepImages.filter(image => image.img_url !== null);
+    console.log('before submit')
+    console.log(stepContent)
+    fetch(apiURL, {
+        method: method,
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ images: uploadImagesURL, stepContent: stepContent, prevStepNumber: prevStepNumber }),
+        body: JSON.stringify({ images: filteredStepImages, stepContent: stepContent, prevStepNumber: prevStepNumber }),
     })
         .then(response => {
             if (!response.ok) {
@@ -529,10 +607,69 @@ function uploadDataServerInsertStep(uploadImagesURL, stepContent) {
             return response.json();
         })
         .then(data => {
-            console.log('Patch request successful:', data);
-            window.location.href = deleteHref;
+            console.log('Request submit data successful:', data);
+            console.log(data)
+            const newStepId = data.CreatedStepId;
+            const editedStepId = data.EditedStepId;
+            
+            if (newStepId != undefined) {
+                const newUrl = `./step-page.html?blog_id=${blogId}&step_id=${newStepId}`;
+                console.log(newUrl);
+                history.pushState({}, '', newUrl);
+                location.reload();
+            } else {
+                const newUrl = `./step-page.html?blog_id=${blogId}&step_id=${editedStepId}`;
+                history.pushState({}, '', newUrl);
+                location.reload();
+            }
+            
+
+
+
+            //window.location.href = deleteHref;
         })
         .catch(error => {
-            console.error('Error during PATCH request:', error);
+            console.error('Error during submit data request:', error);
         });
 }
+
+
+// Editor START
+function newTextEditor(targetElement) {
+    const editor = tinymce.init({
+        target: targetElement,
+        inline: true,
+        menubar: false,
+        toolbar: 'undo redo bold italic underline',
+        min_height: 100,
+        resize: true,
+        plugins: 'autoresize',
+        statusbar: false,
+    });
+}
+
+document.getElementById('addBtn').addEventListener('click', () => {
+    const lineDiv = document.createElement('div');
+    lineDiv.classList.add('line');
+    lineDiv.insertAdjacentHTML('afterbegin', '<div class="icon fa fa-circle bullet bullet_black"></div>');
+    const paragraph = document.createElement('div');
+    paragraph.classList.add('p-inline');
+    paragraph.innerHTML = 'Your wisdom here';
+    paragraph.dataset.icon = 'black';
+    lineDiv.appendChild(paragraph);
+
+    const bulletIcon = lineDiv.querySelector('.bullet');
+    bulletIcon.addEventListener('click', function (event) {
+        event.stopPropagation();
+        const bulletsPanel = createBulletsPanel('black', lineDiv);
+        togglePanel(bulletsPanel);
+    });
+
+
+    document.getElementById('myEditor').appendChild(lineDiv);
+    if (!paragraph) {
+        return;
+    }
+    newTextEditor(paragraph);
+});
+// Editor End

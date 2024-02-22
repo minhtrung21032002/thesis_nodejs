@@ -1,7 +1,7 @@
 let dataGlo;
 function loadBlogData(blogId) {
     fetch(`http://localhost:3000/guide/blog/api/${blogId}`)
-    //fetch('../../data/blog_data.json')
+        //fetch('../../data/blog_data.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Network response was not ok (Status: ${response.status})`);
@@ -11,7 +11,7 @@ function loadBlogData(blogId) {
         .then(data => {
             console.log(data);
             dataGlo = data;
-            const { _id: user_id, member_since, password, user_name, total_guides } = data.user_information;
+            const { _id: user_id, member_since, password, user_name, total_guides, user_img } = data.user_information;
             const {
                 _id: blogId,
                 blog_title,
@@ -25,10 +25,17 @@ function loadBlogData(blogId) {
             // Update the content of the blogContent div
             document.querySelector('.guide-title').innerHTML = `
             ${blog_title} 
-        `;
+            `;
             document.querySelector('.guide-author').innerHTML = `
             ${user_name}
-        `;
+
+            `;
+            document.querySelector('.author-date').innerHTML = `
+            ${last_updated}
+            `;
+
+            document.querySelector('.author-avatar__img').setAttribute('src', user_img);
+
             console.log(data.steps[0].step_imgs[0])
             document.querySelector('.thumbnail').src = `${data.steps[0].step_imgs[0].img_url}`;
 
@@ -39,34 +46,64 @@ function loadBlogData(blogId) {
                 day: 'numeric',
                 year: 'numeric',
             }).format(new Date(last_updated));
+            const formattedTime = Math.floor(time / 60);
+
             document.querySelector('.author-date').innerHTML = `Last updated ${formattedDate}`;
 
             document.querySelector('.difficulty').insertAdjacentText('beforeend', `${difficulty}`);
 
-            document.querySelector('.time').insertAdjacentText('beforeend', `${time}`);
+            document.querySelector('.time').insertAdjacentText('beforeend', `${formattedTime} minutes`);
 
-            document.querySelector('.guide-intro-main h2').insertAdjacentHTML('afterend', `${introduction}`);
 
+            //document.querySelector('.guide-intro-main').insertAdjacentHTML('beforeend', `${introduction}`)
+            document.querySelector('.guide-intro-main').insertAdjacentHTML('beforeend', introduction)
+            document.querySelector('#conclusionText').innerHTML = conclusion;
+            console.log(introduction)
             data.steps.forEach(step => {
                 renderStep(step, user_id);
             });
-
+            renderBlogAuthor(data.user_information);
             renderComments(data.summary_comments);
+
+            handleConclusionUI()
         })
         .catch(error => console.error(`Error fetching blog data: ${error.message}`, error));
 }
 //loadBlogData();
 
-function renderStep(step, user_id) {
-    console.log('user_id');
-    console.log(user_id);
+function renderBlogAuthor(user_information) {
+    console.log(user_information);
 
-    console.log(step.stepId);
+    // Get the author photo URL
+    var authorPhotoElement = document.querySelector('.author-photo img');
+    authorPhotoElement.setAttribute('src', user_information.user_img);
+
+    var authorNameElement = document.querySelector('.author-info h4 a');
+    authorNameElement.textContent = user_information.user_name;
+
+    // Get the member since date
+    var memberSinceElement = document.querySelector('#author .author-info p:nth-of-type(1)');
+    memberSinceElement.textContent = "Member since: " + user_information.member_since;
+
+    // Get the reputation
+    var reputationElement = document.querySelector('#author .author-info p:nth-of-type(2)');
+    reputationElement.textContent = "Points: " + user_information.points;
+
+    // Get the number of guides authored
+    var guidesAuthoredElement = document.querySelector('#author .author-info p:nth-of-type(3)');
+    guidesAuthoredElement.textContent = "Total Guides: " + user_information.total_guides;
+
+
+
+}
+
+function renderStep(step, user_id) {
+
     const stepList = document.getElementById('steps-container');
     const stepItem = document.createElement('li');
     stepItem.classList.add('step', 'step-wrapper');
     stepItem.innerHTML = `
-        <div class="step-title">Step ${step.step_number[0]}: Identify the problem</div>
+        <div class="step-title">Step ${step.step_number[0]}</div>
         <div class="image-container">
         <div class="fotorama"
              data-width="100%" 
@@ -137,7 +174,9 @@ function renderContent(content) {
 // Function to render comments
 function renderComments(comments) {
     const commentsContainer = document.querySelector('.comments-container');
+    const commentsCount = comments.length;
 
+    document.querySelector('.comments-container h3').innerHTML = commentsCount + " Comments";
     let content = '';
 
     comments.forEach(comment => {
@@ -199,7 +238,7 @@ function toggleComments(button) {
 
 function postComment(button, step_id, user_id) {
     var commentInputContainer = button.closest('.comment-input');
-    
+
     var commentTextarea = commentInputContainer.querySelector('textarea');
     // /guide/blog/comment/step/:step_id/:user_id
     var commentText = commentTextarea.value.trim();
@@ -214,7 +253,7 @@ function postComment(button, step_id, user_id) {
         // localhost:3000/guide/blog/comment/step/658bf0e414edd9039ddc7b18/658e8240bcdfd9edfeeabd2e
         // Make the fetch POST request
 
-       
+
         fetch(`http://localhost:3000/guide/blog/comment/step/${step_id}/${user_id}`, {
             method: 'POST',
             headers: {
@@ -241,11 +280,11 @@ function postComment(button, step_id, user_id) {
     }
 }
 
-function postSummaryComment(button){
+function postSummaryComment(button) {
 
 
-    const { _id: user_id} = dataGlo.user_information;
-    const { _id: blog_id,} = dataGlo.blog_information;
+    const { _id: user_id } = dataGlo.user_information;
+    const { _id: blog_id, } = dataGlo.blog_information;
     console.log('post summary comment')
     var commentInputContainer = button.closest('.comment-input');
     var textarea = commentInputContainer.querySelector('textarea');
@@ -262,7 +301,7 @@ function postSummaryComment(button){
         // localhost:3000/guide/blog/comment/step/658bf0e414edd9039ddc7b18/658e8240bcdfd9edfeeabd2e
         // Make the fetch POST request
 
-       
+
         fetch(`http://localhost:3000/guide/blog/comment/summary/${blog_id}/${user_id}`, {
             method: 'POST',
             headers: {
@@ -319,7 +358,7 @@ if (blogId) {
 
 
 
-function editPageHref(blogId){
+function editPageHref(blogId) {
 
     const blogEditBtn = document.getElementsByClassName('blog-edit-btn')[0];
     console.log('blog id: ' + blogId);
@@ -331,3 +370,17 @@ function editPageHref(blogId){
     console.log(blogEditBtn.href);
 }
 
+function handleConclusionUI() {
+    const conclusionTextElement = document.querySelector('#conclusionText');
+
+
+    if (conclusionTextElement && conclusionTextElement.innerHTML.trim() !== '') {
+
+        const conclusionHeading = document.querySelector('#conclusion h3');
+
+
+        conclusionHeading.style.marginBottom = '15px'; conclusionTextElement.style.marginBottom = '15px';
+    }
+
+
+}
